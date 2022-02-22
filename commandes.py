@@ -29,7 +29,9 @@ class Quizz:
                             "Dans Majora's Mask 3D, combien il y a-t-il de flacons ? 🔴",
                             "Dans Wind Waker HD, combien il y a-t-il d'îles ? 🔴",
                             "Dans Minish Cap, où obtient-on le bouclier miroir ? 🔴",
-                            "Dans Breath of the Wild, quel est le nom de notre premier sanctuaire ? 🔴"]
+                            "Dans Breath of the Wild, quel est le nom de notre premier sanctuaire ? 🔴",
+                            "Dans Twilight Princess, comment s'appelle le Dieu qui vit près de Toal ? 🟢",
+                            "Qui a composé les musiques du jeu Link's Awakening ? 🔴"]
 
         self.__reponses = {0 : ["1️⃣ OOT", "2️⃣ ALTTP", "3️⃣ ALBW", "4️⃣ LA"],
                            1 : ["1️⃣ Link", "2️⃣ Zelda", "3️⃣ Tingle", "4️⃣ Linkle"],
@@ -44,7 +46,8 @@ class Quizz:
                            10 : ["1️⃣ 7", "2️⃣ 6", "3️⃣ 8", "4️⃣ 5"],
                            11 : ["1️⃣ 45", "2️⃣ 49", "3️⃣ 50", "4️⃣ 38"],
                            12 : ["1️⃣ Par un Zora", "2️⃣ Dans un donjon", "3️⃣ Par un Goron", "4️⃣ Par un marchand"],
-                           13 : ["1️⃣ Gu'Achitoh", "2️⃣ Moa'Kishito", "3️⃣ Ma'Ohnu", "4️⃣ Shora'Ha"]}
+                           13 : ["1️⃣ Gu'Achitoh", "2️⃣ Moa'Kishito", "3️⃣ Ma'Ohnu", "4️⃣ Shora'Ha"],
+                           14 : ["1️⃣ Lanelle", "2️⃣ Ordin", "3️⃣ Latouane", "4️⃣ Firone"]}
 
         self.__bonneReponse = ["2️⃣ ALTTP",
                                "1️⃣ Link",
@@ -59,7 +62,8 @@ class Quizz:
                                "1️⃣ 7",
                                "2️⃣ 49",
                                "3️⃣ Par un Goron",
-                               "3️⃣ Ma'Ohnu"]
+                               "3️⃣ Ma'Ohnu",
+                               "3️⃣ Latouane"]
 
         self.__tab = ['1️⃣' , '2️⃣', '3️⃣', '4️⃣', '❌']
         self.__lancer = False
@@ -106,6 +110,14 @@ class Joueur:
 
     def setPointsToUser(self, pt):
         self.points += pt
+
+    def rmPointsToUser(self):
+        test = self.points - 1
+        if test < 0:
+            self.points = 0
+        else:
+            self.points = test
+        return test
 
     def setJouer(self):
         self.jouer += 1
@@ -155,13 +167,13 @@ class Classement:
     def getTabClassement(self):
         return self.tabClassement
 
-    def getPlaceJoueurClassement(self, joueur):
+    def getPlaceJoueurClassementEtPoints(self, joueur):
         j = 0
         for i in self.tabClassement:
             j+=1
             if i.getUser() == joueur:
-                return j
-        return 0
+                return j, i.getPoints()
+        return 0,0
 
 
 '''
