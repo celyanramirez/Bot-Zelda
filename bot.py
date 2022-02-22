@@ -320,7 +320,7 @@ async def lancer(ctx):
         await asyncio.sleep(1)
         for i in cl.getTabJoueursObjet():
             vieuxPoints.append(i.getPoints())
-        for i in range(10):
+        for i in range(5): #Nombre de questions
             alea = random.randint(0,len(q.getQuestions())-1)   
 
             rep = ""
@@ -336,7 +336,7 @@ async def lancer(ctx):
                 message = await ctx.send(embed=embed)
             except Exception as e:
                 print(e)
-            for j in range(5):
+            for j in range(5): #Nombres de réponses (4 + 1 pour skip)
                 emo = q.getTab()[j]
                 await message.add_reaction(emo)
             
@@ -412,14 +412,13 @@ async def lancer(ctx):
 
     else:
         await ctx.send("Vous devez lancer un quizz avec la commande $quizz pour accéder à cette commande.")
+    
+    classementBot()
     q.setLancer(False)
 
-
-@bot.command()
-async def classement(ctx):
+def classementBot():
     tab = []
     cl.resetClassement()
-    valeur = ""
     save = ""
     try:
         for i in range(len(cl.getTabJoueursObjet())):
@@ -430,21 +429,46 @@ async def classement(ctx):
         print(e)
     try:
         for i in range(len(cl.getTabClassement())):
-            valeur = valeur + (f"**{i+1}** : `{cl.getTabClassement()[i].getUser()}` avec {cl.getTabClassement()[i].getPoints()} points.\n")
             save = save + (f"{cl.getTabClassement()[i]} : {cl.getTabClassement()[i].getUser()} : {cl.getTabClassement()[i].getPoints()}\n")
         file1 = open("classement.txt", "w")
         file1.write(save)
         file1.close()
-        embed=discord.Embed(title="**Classement du Quizz**",color=0xfffef2)
-        embed.add_field(name=f"{len(cl.getTabClassement())} joueurs inscrits", value=valeur, inline=True)
-        await ctx.send(embed=embed)
+
     except Exception as e:
         print(e)
 
 @bot.command()
+async def classement(ctx):
+    valeur = ""
+    try:
+        for i in range(len(cl.getTabClassement())):
+            valeur = valeur + (f"**{i+1}** : `{cl.getTabClassement()[i].getUser()}` avec {cl.getTabClassement()[i].getPoints()} points.\n")
+        embed=discord.Embed(title="**Classement du Quizz**",color=0xfffef2)
+        embed.add_field(name=f"{len(cl.getTabClassement())} joueurs inscrits", value=valeur, inline=True)
+        await ctx.send(embed=embed)
+    except:
+        embed=discord.Embed(title="**Classement du Quizz**",color=0xfffef2)
+        embed.add_field(name=f"0 joueur inscrit", value="Aucune personne n'est dans le classement", inline=True)
+        await ctx.send(embed=embed)
+
+
+
+@bot.command()
 async def place(ctx):
-    j = cl.getPlaceJoueurClassement(user)
-    await ctx.send(f"{user.name} tu à la place {j} du classement !")
+    print(ctx.message.author.name)
+    j = cl.getPlaceJoueurClassement(ctx.message.author.name)
+    if j==1:
+        embed=discord.Embed(color=0xfffef2)
+        embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu es {j}er(e) du classement !", inline=True)
+        await ctx.send(embed=embed)
+    elif j < 1:
+        embed=discord.Embed(color=0xfffef2)
+        embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu n'es pas classé. Il faut avoir un score positif pour être classé <:ptdr:864804743498039307>", inline=True)
+        await ctx.send(embed=embed)
+    else:
+        embed=discord.Embed(color=0xfffef2)
+        embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu es {j}ème du classement !", inline=True)
+        await ctx.send(embed=embed)
 
 
 #####################################################################Blindtest
