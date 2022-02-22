@@ -402,8 +402,6 @@ async def lancer(ctx):
                     await ctx.send(f"{cl.getTabJoueursObjet()[i].getUser()} a perdu {(vieuxPoints[i] - cl.getTabJoueursObjet()[i].getPoints())} points !")
                 elif vieuxPoints[i] < cl.getTabJoueursObjet()[i].getPoints():
                     await ctx.send(f"{cl.getTabJoueursObjet()[i].getUser()} a gagné {(cl.getTabJoueursObjet()[i].getPoints() - vieuxPoints[i])} points !")
-                else:
-                    await ctx.send(f"{cl.getTabJoueursObjet()[i].getUser()} reste au même stade !")
             await ctx.send("Fin du Quizz !")
             await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
         except Exception as e:
@@ -414,10 +412,10 @@ async def lancer(ctx):
     else:
         await ctx.send("Vous devez lancer un quizz avec la commande $quizz pour accéder à cette commande.")
     
-    classementBot()
+    initialiserClassement()
     q.setLancer(False)
 
-def classementBot():
+def initialiserClassement():
     tab = []
     cl.resetClassement()
     save = ""
