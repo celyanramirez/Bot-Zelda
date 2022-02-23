@@ -320,7 +320,7 @@ async def lancer(ctx):
         await asyncio.sleep(1)
         for i in cl.getTabJoueursObjet():
             vieuxPoints.append(i.getPoints())
-        for i in range(10):
+        for i in range(1):
             alea = random.randint(0,len(q.getQuestions())-1)   
 
             rep = ""
@@ -443,8 +443,12 @@ async def classement(ctx):
 
 @bot.command()
 async def place(ctx):
-    j = cl.getPlaceJoueurClassement(user)
-    await ctx.send(f"{user.name} tu à la place {j} du classement !")
+    print(ctx.message.author.name)
+    try:
+        j = cl.getPlaceJoueurClassement(ctx.message.author.name))
+    except Exception as e:
+        print(e)
+    await ctx.send(f"{ctx.message.author.name} tu a la place {j} du classement !")
 
 
 #####################################################################Blindtest

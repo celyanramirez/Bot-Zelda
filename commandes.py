@@ -159,7 +159,7 @@ class Classement:
         j = 0
         for i in self.tabClassement:
             j+=1
-            if i.getUser() == joueur.getUser():
+            if i.getUser() == joueur:
                 return j
         return 0
 
