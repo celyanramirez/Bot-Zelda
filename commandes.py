@@ -24,7 +24,7 @@ class Quizz:
                             "En quelle année est sortie The Adventure of Link ? 🟠",
                             "En quelle année est sortie Oracle of Seasons ? 🟠",
                             "En quel mois et année est sortie TriForce Heroes ? 🔴",
-                            "Quel est le bon ordre (chronologiquement) des différents jeux ? 🔴",
+                            "Quel est le bon ordre (chronologiquement) de ces différents jeux ? 🔴",
                             "Dans Majora's Mask 3D, où est installé le banquier ? 🟠",
                             "Dans Majora's Mask 3D, combien il y a-t-il de flacons ? 🔴",
                             "Dans Wind Waker HD, combien il y a-t-il d'îles ? 🔴",
@@ -32,7 +32,20 @@ class Quizz:
                             "Dans Breath of the Wild, quel est le nom de notre premier sanctuaire ? 🔴",
                             "Dans Twilight Princess, comment s'appelle le Dieu qui vit près de Toal ? 🟢",
                             "Qui a composé les musiques du jeu Link's Awakening ? 🔴",
-                            "Dans Link's Awakening, parmis ces 4 emplacements de téléporteur 1 n'existe pas, lequel c'est ? 🔴"]
+                            "Dans Link's Awakening, parmis ces 4 emplacements de téléporteur 1 n'existe pas, lequel c'est ? 🔴",
+                            "Au début de Wind Waker, qui enlève la petite soeur de Link ? 🟢",
+                            "Dans Wind Waker, sur quel île ne se trouve pas de blob bleu ? 🔴",
+                            "Dans Wind Waker (NGC), comment obtient-on la plus grande barre de magie ? 🟠",
+                            "Dans Wind Waker (NGC), où obtient-on la voile rapide ? 🟢",
+                            "Dans Wind Waker HD, où obtient-on la voile rapide ? 🟢",
+                            "Dans Breath of the Wild, combien existe-t-il de catégories différentes de flèches ? 🟠",
+                            "Dans Super Smash Bros Ultimate, combien il y a-t-il de Link ? 🟠",
+                            "Dans Super Smash Bros Ultimate, combien il y a-t-il de personnages de Zelda ? 🟠",
+                            "Dans Breath of the Wild, que trouve-t-on dans le coffre de fin des labyrinthes d'Edale ? 🟠",
+                            "Dans Breath of the Wild, quel est le pouvoir le plus rapide à se charger ? 🟠",
+                            "Dans Breath of the Wild, quel est le pouvoir le plus long à se charger ? 🟠",
+                            "Dans quel Zelda apparaît le boss Odolwa ?",
+                            "Dans quel Zelda apparaît le boss Kaskhirma ?"]
 
         self.__reponses = {0 : ["1️⃣ OOT", "2️⃣ ALTTP", "3️⃣ ALBW", "4️⃣ LA"],
                            1 : ["1️⃣ Link", "2️⃣ Zelda", "3️⃣ Tingle", "4️⃣ Linkle"],
@@ -50,7 +63,20 @@ class Quizz:
                            13 : ["1️⃣ Gu'Achitoh", "2️⃣ Moa'Kishito", "3️⃣ Ma'Ohnu", "4️⃣ Shora'Ha"],
                            14 : ["1️⃣ Lanelle", "2️⃣ Ordin", "3️⃣ Latouane", "4️⃣ Firone"],
                            15 : ["1️⃣ Satoru Iwata", "2️⃣ Minako Hamano", "3️⃣ Kazumi Totaka", "4️⃣ Shigefumi Hino"],
-                           16 : ["1️⃣ Au Nord du village des Animaux", "2️⃣ A l'Est du village des Mouettes", "3️⃣ Au Sud de l'Abîme du poisson", "4️⃣ Dans le plateau Tartare Ouest"]}
+                           16 : ["1️⃣ Au Nord du village des Animaux", "2️⃣ A l'Est du village des Mouettes", "3️⃣ Au Sud de l'Abîme du poisson", "4️⃣ Dans le plateau Tartare Ouest"],
+                           17 : ["1️⃣ Ganondorf", "2️⃣ Roi Cuirasse", "3️⃣ Tetra", "4️⃣ Des pirates"],
+                           18 : ["1️⃣ L'île étoilée", "2️⃣ L'île du croissant", "3️⃣ L'île de la rocaille", "4️⃣ L'île de Link"],
+                           19 : ["1️⃣ Grâce à une grande fée", "2️⃣ Grâce à une quête secondaire", "3️⃣ En éliminant un Kalamar", "4️⃣ Grâce à Tingle"],
+                           20 : ["1️⃣En l'achetant en magasin", "2️⃣ En gagnant aux enchères", "3️⃣ En battant un boss", "4️⃣ Il n'y en a pas"],
+                           21 : ["1️⃣En l'achetant en magasin", "2️⃣ En gagnant aux enchères", "3️⃣ En battant un boss", "4️⃣ Il n'y en a pas"],
+                           22 : ["1️⃣ 6", "2️⃣ 5", "3️⃣ 7", "4️⃣ 4"],
+                           23 : ["1️⃣ 4", "2️⃣ 3", "3️⃣ 1", "4️⃣ 5"],
+                           24 : ["1️⃣ 5", "2️⃣ 4", "3️⃣ 6", "4️⃣ 7"],
+                           25 : ["1️⃣ La tenue barbare", "2️⃣ La tenue isolante", "3️⃣ La tenue nox", "4️⃣ La tenue archéonique"],
+                           26 : ["1️⃣ Le pouvoir de Mipha", "2️⃣ Le pouvoir de Revali", "3️⃣ Le pouvoir de Urbosa", "4️⃣ Le pouvoir de Daruk"],
+                           27 : ["1️⃣ Le pouvoir de Daruk", "2️⃣ Le pouvoir de Revali", "3️⃣ Le pouvoir de Urbosa", "4️⃣ Le pouvoir de Mipha"],
+                           28 : ["1️⃣ Majora's Mask", "2️⃣ Twilight Princess", "3️⃣ Oracle of Seasons", "4️⃣ Aucun d'entre eux"],
+                           29 : ["1️⃣ Oracle of Ages", "2️⃣ Oracle of Seasons", "3️⃣Four Sword Adventures", "4️⃣ Aucun d'entre eux"]}
 
         self.__bonneReponse = ["2️⃣ ALTTP",
                                "1️⃣ Link",
@@ -68,7 +94,20 @@ class Quizz:
                                "3️⃣ Ma'Ohnu",
                                "3️⃣ Latouane",
                                "2️⃣ Minako Hamano",
-                               "1️⃣ Au Nord du village des Animaux"]
+                               "1️⃣ Au Nord du village des Animaux",
+                               "2️⃣ Roi Cuirasse",
+                               "4️⃣ L'île de Link",
+                               "3️⃣ En éliminant un Kalamar",
+                               "4️⃣ Il n'y en a pas",
+                               "2️⃣ En gagnant aux enchères",
+                               "1️⃣ 6",
+                               "2️⃣ 3",
+                               "3️⃣ 6",
+                               "1️⃣ La tenue barbare",
+                               "2️⃣ Le pouvoir de Revali",
+                               "4️⃣ Le pouvoir de Mipha",
+                               "1️⃣ Majora's Mask",
+                               "4️⃣ Aucun d'entre eux"]
 
         self.__tab = ['1️⃣' , '2️⃣', '3️⃣', '4️⃣', '❌']
         self.__lancer = False

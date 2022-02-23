@@ -1,2 +1,1 @@
-<commandes.Joueur object at 0x000002202DCD7490> : -Skyflooze- : 5
-<commandes.Joueur object at 0x000002202DCAF730> : RainbowWish : 1
+<commandes.Joueur object at 0x0000020F59A3EFA0> : -Skyflooze- : 9
