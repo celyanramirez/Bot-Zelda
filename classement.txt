@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 <commandes.Joueur object at 0x7f56b16e2a90> : -Skyflooze- : 8
+=======
+<commandes.Joueur object at 0x000002202DCD7490> : -Skyflooze- : 5
+<commandes.Joueur object at 0x000002202DCAF730> : RainbowWish : 1
+>>>>>>> 9c453e2f199579380950c3793dad1a1e6d2d5e1c
