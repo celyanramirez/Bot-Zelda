@@ -1,1 +1,0 @@
-<commandes.Joueur object at 0x0000020F59A3EFA0> : -Skyflooze- : 9

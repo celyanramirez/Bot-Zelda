@@ -44,8 +44,9 @@ class Quizz:
                             "Dans Breath of the Wild, que trouve-t-on dans le coffre de fin des labyrinthes d'Edale ? 🟠",
                             "Dans Breath of the Wild, quel est le pouvoir le plus rapide à se charger ? 🟠",
                             "Dans Breath of the Wild, quel est le pouvoir le plus long à se charger ? 🟠",
-                            "Dans quel Zelda apparaît le boss Odolwa ?",
-                            "Dans quel Zelda apparaît le boss Kaskhirma ?"]
+                            "Dans quel Zelda apparaît le boss Odolwa ? 🟢",
+                            "Dans quel Zelda apparaît le boss Kaskhirma ? 🟠",
+                            "Hyrule Warriors fait suite à quel jeu Zelda ? 🟢"]
 
         self.__reponses = {0 : ["1️⃣ OOT", "2️⃣ ALTTP", "3️⃣ ALBW", "4️⃣ LA"],
                            1 : ["1️⃣ Link", "2️⃣ Zelda", "3️⃣ Tingle", "4️⃣ Linkle"],
@@ -76,7 +77,8 @@ class Quizz:
                            26 : ["1️⃣ Le pouvoir de Mipha", "2️⃣ Le pouvoir de Revali", "3️⃣ Le pouvoir de Urbosa", "4️⃣ Le pouvoir de Daruk"],
                            27 : ["1️⃣ Le pouvoir de Daruk", "2️⃣ Le pouvoir de Revali", "3️⃣ Le pouvoir de Urbosa", "4️⃣ Le pouvoir de Mipha"],
                            28 : ["1️⃣ Majora's Mask", "2️⃣ Twilight Princess", "3️⃣ Oracle of Seasons", "4️⃣ Aucun d'entre eux"],
-                           29 : ["1️⃣ Oracle of Ages", "2️⃣ Oracle of Seasons", "3️⃣Four Sword Adventures", "4️⃣ Aucun d'entre eux"]}
+                           29 : ["1️⃣ Oracle of Ages", "2️⃣ Oracle of Seasons", "3️⃣Four Sword Adventures", "4️⃣ Aucun d'entre eux"],
+                           30 : ["1️⃣ Breath of the Wild", "2️⃣ Ocarina of Time", "3️⃣ Twilight Princess", "4️⃣ Aucun jeu"]}
 
         self.__bonneReponse = ["2️⃣ ALTTP",
                                "1️⃣ Link",
@@ -107,7 +109,8 @@ class Quizz:
                                "2️⃣ Le pouvoir de Revali",
                                "4️⃣ Le pouvoir de Mipha",
                                "1️⃣ Majora's Mask",
-                               "4️⃣ Aucun d'entre eux"]
+                               "4️⃣ Aucun d'entre eux",
+                               "4️⃣ Aucun jeu"]
 
         self.__tab = ['1️⃣' , '2️⃣', '3️⃣', '4️⃣', '❌']
         self.__lancer = False
