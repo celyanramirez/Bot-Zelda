@@ -306,22 +306,26 @@ async def baston(ctx, combattant1 , combattant2):
 @bot.command()
 async def quizz(ctx):
     q.setLancer(True)
-    await ctx.send(f"Test : {q.getLancer()}")
+    embed=discord.Embed(title="Le Quizz LonLon Coffee ☕", color=0xfffef2)
+    embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="On vous souhaite bonne chance !", inline=True)
+    message = await ctx.send(embed=embed)
 
 @bot.command()
 async def lancer(ctx):
     if q.getLancer(): #Si true
         tour = 1
         vieuxPoints = []
+        questionsUtilisées = []
 
-        embed=discord.Embed(title="Le Quizz LonLon Coffee ☕", color=0xfffef2)
-        embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="On vous souhaite bonne chance !", inline=True)
-        message = await ctx.send(embed=embed)
         await asyncio.sleep(1)
         for i in cl.getTabJoueursObjet():
             vieuxPoints.append(i.getPoints())
         for i in range(5): #Nombre de questions
-            alea = random.randint(0,len(q.getQuestions())-1)   
+            alea = random.randint(0,len(q.getQuestions())-1) 
+            while(q.getQuestions()[alea] in questionsUtilisées):
+                alea = random.randint(0,len(q.getQuestions())-1)   
+
+            questionsUtilisées.append(q.getQuestions()[alea])
 
             rep = ""
             for i in q.getReponses()[alea]:
