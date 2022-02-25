@@ -46,7 +46,11 @@ class Quizz:
                             "Dans Breath of the Wild, quel est le pouvoir le plus long à se charger ? 🟠",
                             "Dans quel Zelda apparaît le boss Odolwa ? 🟢",
                             "Dans quel Zelda apparaît le boss Kaskhirma ? 🟠",
-                            "Hyrule Warriors fait suite à quel jeu Zelda ? 🟢"]
+                            "Hyrule Warriors fait suite à quel jeu Zelda ? 🟢",
+                            "Combien de morceux de miroir sont à récupérer dans Twilight Princess ? 🟠",
+                            "Combien de souvenirs peut-on trouver dans Breath of the Wild (Sans DLC) ? 🟠",
+                            "Dans quel Zelda peut-on entendre le Totoka's song ? 🔴",
+                            "En combien de temps a été développé Zelda Majora's Mask ? 🔴"]
 
         self.__reponses = {0 : ["1️⃣ OOT", "2️⃣ ALTTP", "3️⃣ ALBW", "4️⃣ LA"],
                            1 : ["1️⃣ Link", "2️⃣ Zelda", "3️⃣ Tingle", "4️⃣ Linkle"],
@@ -78,7 +82,11 @@ class Quizz:
                            27 : ["1️⃣ Le pouvoir de Daruk", "2️⃣ Le pouvoir de Revali", "3️⃣ Le pouvoir de Urbosa", "4️⃣ Le pouvoir de Mipha"],
                            28 : ["1️⃣ Majora's Mask", "2️⃣ Twilight Princess", "3️⃣ Oracle of Seasons", "4️⃣ Aucun d'entre eux"],
                            29 : ["1️⃣ Oracle of Ages", "2️⃣ Oracle of Seasons", "3️⃣Four Sword Adventures", "4️⃣ Aucun d'entre eux"],
-                           30 : ["1️⃣ Breath of the Wild", "2️⃣ Ocarina of Time", "3️⃣ Twilight Princess", "4️⃣ Aucun jeu"]}
+                           30 : ["1️⃣ Breath of the Wild", "2️⃣ Ocarina of Time", "3️⃣ Twilight Princess", "4️⃣ Aucun jeu"],
+                           31 : ["1️⃣ 2", "2️⃣ 4", "3️⃣ 3", "4️⃣ 5"],
+                           32 : ["1️⃣ 12", "2️⃣ 13", "3️⃣ 14", "4️⃣ 15"],
+                           33 : ["1️⃣ The Adventure of Link", "2️⃣ Oracle of Ages", "3️⃣ Link's Awakening", "4️⃣ A Link Between Worlds"],
+                           34 : ["1️⃣ 1 an et 5 mois", "2️⃣ 2 ans et 6 mois", "3️⃣ 1 an et 2 mois", "4️⃣ 2 ans et 1 mois"]
 
         self.__bonneReponse = ["2️⃣ ALTTP",
                                "1️⃣ Link",
@@ -110,7 +118,11 @@ class Quizz:
                                "4️⃣ Le pouvoir de Mipha",
                                "1️⃣ Majora's Mask",
                                "4️⃣ Aucun d'entre eux",
-                               "4️⃣ Aucun jeu"]
+                               "4️⃣ Aucun jeu",
+                               "3️⃣ 3",
+                               "2️⃣ 13",
+                               "3️⃣ Link's Awakening",
+                               "1️⃣ 1 an et 5 mois"]
 
         self.__tab = ['1️⃣' , '2️⃣', '3️⃣', '4️⃣', '❌']
         self.__lancer = False
