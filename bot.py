@@ -257,7 +257,7 @@ async def staff(ctx):
     embed.set_author(name="Hyrule's Folders", icon_url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
     embed.add_field(name="**__LEADER__**", value="**•Wolfka**", inline=True)
-    embed.add_field(name="**__MODÉRATEUR__**", value="**•Frabin**\n **•Shenrael**\n **•Skyflooze**\n **•Wild**", inline=True)
+    embed.add_field(name="**__MODÉRATEUR__**", value="**•Skyflooze**\n **•Wild**\n**•Nayru**", inline=True)
     await ctx.send(embed=embed)
 
 
@@ -269,7 +269,9 @@ async def aide(ctx):
     valeurs = """$**zelda** -> Vous renvoie la liste des jeux Zelda
     $**staff** -> Vous renvoie la liste des personnes du staff
     $**grades** -> Vous renvoie la liste des grades par niveaux
-    $**baston @pseudo @pseudo2** -> ... A vous de tester."""
+    $**baston @pseudo @pseudo2** -> ... A vous de tester.
+    $**quizz** -> Lancer un quizz
+    $**helpquizz** -> Aide pour le quizz"""
     embed.add_field(name="**__Commandes Hylia__**", value= valeurs, inline=True)
     embed.add_field(name="**__Commandes Asarim__**", value="!**help** -> Vous renvoie les commandes nécessaire à la compréhension de Asarim", inline=True)
     await ctx.send(embed=embed)
@@ -290,7 +292,7 @@ async def grades(ctx):
      """
     embed.add_field(name="**Grades:**", value = valeurs, inline=True)
     await ctx.send(embed=embed)
-"1️⃣ Au Nord du village des Animaux"
+
 @bot.command()
 async def baston(ctx, combattant1 , combattant2):
     tablo = [combattant1, combattant2]
@@ -303,21 +305,29 @@ async def baston(ctx, combattant1 , combattant2):
     await asyncio.sleep(1)
     await ctx.send(f"BOUM ! C'est {tablo[aléa]} qui gagne le combat !")
 
+
+############################################################QUIZZ#######################################################################
+
+
 @bot.command()
 async def quizz(ctx):
-    q.setLancer(True)
-    embed=discord.Embed(title="Le Quizz LonLon Coffee ☕", color=0xfffef2)
-    embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="On vous souhaite bonne chance !", inline=True)
-    message = await ctx.send(embed=embed)
+    if q.getQuizzEnCours() == False:
+        q.setLancer(True)
+        q.setQuizzEnCours(True)
+        embed=discord.Embed(title="Le Quizz LonLon Coffee ☕", color=0xfffef2)
+        embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="Pour lancer une partie, tapez $lancer. On vous souhaite bonne chance !", inline=True)
+        message = await ctx.send(embed=embed)
+    else:
+        await ctx.send("Un quizz est déjà en cours.")
 
 @bot.command()
 async def lancer(ctx):
     if q.getLancer(): #Si true
+        q.setLancer(False)
         tour = 1
         vieuxPoints = []
         questionsUtilisées = []
 
-        await asyncio.sleep(1)
         for i in cl.getTabJoueursObjet():
             vieuxPoints.append(i.getPoints())
         for i in range(5): #Nombre de questions
@@ -355,6 +365,8 @@ async def lancer(ctx):
             var = False
             tabJoueurs = []  #Tablo des noms de joueurs qui est remit à 0 à chaque tour
             while(var == False):
+                if q.getQuizzEnCours() == False:  #stop le quizz après $stopquizz
+                    break
                 verrou = False
 
                 reaction, user = await bot.wait_for('reaction_add' ,check=check)
@@ -381,7 +393,7 @@ async def lancer(ctx):
                     joueur.rmPointsToUser()
                     await ctx.send(f"Question skipée, {user.name} tu perds un point !")
                     for i in cl.getTabJoueursObjet():
-                        i.restartJouer()"1️⃣ Au Nord du village des Animaux"
+                        i.restartJouer()
                     print(Joueur(user).getPoints())
 
                 elif(joueur.getJouer() > 0):
@@ -414,10 +426,11 @@ async def lancer(ctx):
             await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
 
     else:
-        await ctx.send("Vous devez lancer un quizz avec la commande $quizz pour accéder à cette commande.")
+        await ctx.send("Vous devez lancer un quizz avec la commande $quizz pour accéder à cette commande. Utilisez $quizzhelp pour plus d'infos.")
     
     initialiserClassement()
     q.setLancer(False)
+    q.setQuizzEnCours(False)
 
 def initialiserClassement():
     tab = []
@@ -472,6 +485,21 @@ async def place(ctx):
         embed=discord.Embed(color=0xfffef2)
         embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu es {j}ème du classement avec {point} points !", inline=True)
         await ctx.send(embed=embed)
+
+
+@bot.command()
+async def stopquizz(ctx):
+    if q.getQuizzEnCours() == True:
+        q.setLancer(False)
+        q.setQuizzEnCours(False)
+        await ctx.send("Quizz arrêté")
+
+
+@bot.command()
+async def helpquizz(ctx):
+    embed=discord.Embed(color=0xfffef2)
+    embed.add_field(name="Commandes pour le fonctionnement du Quizz LonLon Coffee", value="`Pour lancer le quizz` : $quizz\n`Pour commencer le quizz` : $lancer\n`Pour arrêter le système du quizz` (A UTILISER EN CAS DE GROS PROBLEMES, NE PAS UTILISER SINON) : $stopquizz", inline=True)
+    await ctx.send(embed=embed)
 
 
 #####################################################################Blindtest

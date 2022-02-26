@@ -47,10 +47,27 @@ class Quizz:
                             "Dans quel Zelda apparaît le boss Odolwa ? 🟢",
                             "Dans quel Zelda apparaît le boss Kaskhirma ? 🟠",
                             "Hyrule Warriors fait suite à quel jeu Zelda ? 🟢",
-                            "Combien de morceux de miroir sont à récupérer dans Twilight Princess ? 🟠",
+                            "Combien de morceaux de miroir sont à récupérer dans Twilight Princess ? 🟠",
                             "Combien de souvenirs peut-on trouver dans Breath of the Wild (Sans DLC) ? 🟠",
                             "Dans quel Zelda peut-on entendre le Totoka's song ? 🔴",
-                            "En combien de temps a été développé Zelda Majora's Mask ? 🔴"]
+                            "En combien de temps a été développé Zelda Majora's Mask ? 🔴",
+                            "Comment Fay appelle-t-elle le robot Récupix ? 🔴",
+                            "Dans la Raffinerie de Skyward Sword, que voit-on sur un tableau sur un mur ? 🔴",
+                            "Combien existe-t-il de jeux Tingle ? 🟠",
+                            "Dans Twilight Princess, combien il y a-t-il de quart de coeurs ? 🟠",
+                            "Dans Twilight Princess, comment se nomme le deuxième boss du jeu ? 🟠",
+                            "Dans Twilight Princess, la première phase du boss final c'est... 🟢",
+                            "Dans Twilight Princess, où se déroule la troisième phase du boss final ? 🟢",
+                            "En quelle année est sortie Twilight Princess HD ? 🟠",
+                            "Dans Twilight Princess HD, où peut-on trouver le tampon de Midona Surprise ? 🔴",
+                            "Dans Twilight Princess, en quoi Link peut se transformer ? 🟢",
+                            "Comment s'appelle la fée qui nous suit dans Phantom Hourglass ? 🟢",
+                            "Dans Phantom Hourglass, quel est le nom du marin qui nous accompagne ? 🟢",
+                            "Dans Phantom Hourglass, combien il y a-t-il d'îles ? 🔴",
+                            "Dans Breath of the Wild, combien il y a-t-il de Korogu ? 🟢",
+                            "Dans A Link Between Worlds, combien il y a-t-il de Ti'Gornaux ? 🟠",
+                            "Que dit la princesse Hilda à chaque fois que l'on arrive dans une nouvelle contrée de Lorule ? 🔴",
+                            "Dans A Link Between Worlds, comment se prénomme la jeune sorcière qui décide de veiller sur toi ? 🟠"]
 
         self.__reponses = {0 : ["1️⃣ OOT", "2️⃣ ALTTP", "3️⃣ ALBW", "4️⃣ LA"],
                            1 : ["1️⃣ Link", "2️⃣ Zelda", "3️⃣ Tingle", "4️⃣ Linkle"],
@@ -86,7 +103,24 @@ class Quizz:
                            31 : ["1️⃣ 2", "2️⃣ 4", "3️⃣ 3", "4️⃣ 5"],
                            32 : ["1️⃣ 12", "2️⃣ 13", "3️⃣ 14", "4️⃣ 15"],
                            33 : ["1️⃣ The Adventure of Link", "2️⃣ Oracle of Ages", "3️⃣ Link's Awakening", "4️⃣ A Link Between Worlds"],
-                           34 : ["1️⃣ 1 an et 5 mois", "2️⃣ 2 ans et 6 mois", "3️⃣ 1 an et 2 mois", "4️⃣ 2 ans et 1 mois"]
+                           34 : ["1️⃣ 1 an et 5 mois", "2️⃣ 2 ans et 6 mois", "3️⃣ 1 an et 2 mois", "4️⃣ 2 ans et 1 mois"],
+                           35 : ["1️⃣ Par ondes spirituelles", "2️⃣ Par télépathie", "3️⃣ Par ondes psychiques", "4️⃣ Par message"],
+                           36 : ["1️⃣ Un schéma de la salle aux tapis roulants", "2️⃣ 3 petits robots", "3️⃣ 2 statues Armos", "4️⃣ Une photo de robot"],
+                           37 : ["1️⃣ 2","2️⃣ 3","3️⃣ 4","4️⃣ 5"],
+                           38 : ["1️⃣ 46", "2️⃣ 38", "3️⃣ 50", "4️⃣ 0"],
+                           39 : ["1️⃣ Magolor", "2️⃣ Magmaudit", "3️⃣ Magrock", "4️⃣ Magmalor"],
+                           40 : ["1️⃣ Le combat contre Zelda", "2️⃣ Le combat contre Ganon", "3️⃣ Le combat à cheval", "4️⃣ Le combat contre Ganondorf"],
+                           41 : ["1️⃣ Dans le château d'Hyrule", "2️⃣ Dans la plaine d'Hyrule", "3️⃣ Dans Toal", "4️⃣ Au crépuscule"],
+                           42 : ["1️⃣ 2014", "2️⃣ 2015", "3️⃣ 2016", "4️⃣ 2017"],
+                           43 : ["1️⃣ Dans le palais du Crépuscule", "2️⃣ Dans la tour du jugement", "3️⃣ Dans le Désert Gerudo", "4️⃣ La rivière Zora"],
+                           44 : ["1️⃣ En lapin", "2️⃣ En lion", "3️⃣ En loup", "4️⃣ En chien"],
+                           45 : ["1️⃣ Navi", "2️⃣ Taya", "3️⃣ Proxie", "4️⃣ Ciela"],
+                           46 : ["1️⃣ Bellum", "2️⃣ Linebeck", "3️⃣ Martin", "4️⃣ Hergo"],
+                           47 : ["1️⃣ 14", "2️⃣ 15", "3️⃣ 16", "4️⃣ 17"],
+                           48 : ["1️⃣ 900", "2️⃣ 800", "3️⃣ 950", "4️⃣ 1000"],
+                           49 : ["1️⃣ 50", "2️⃣ 80", "3️⃣ 90", "4️⃣ 100"],
+                           50 : ["1️⃣ Je t'en supplie, sauve Lorule", "2️⃣ Sais-tu où se trouve le lapin ?", "3️⃣ N'oublie pas, je suis Hilda de Lorule", "4️⃣ Je suis Hilda"],
+                           51 : ["1️⃣ Aëline", "2️⃣ Maple", "3️⃣ Syrup", "4️⃣ Sabrina"]}
 
         self.__bonneReponse = ["2️⃣ ALTTP",
                                "1️⃣ Link",
@@ -122,11 +156,29 @@ class Quizz:
                                "3️⃣ 3",
                                "2️⃣ 13",
                                "3️⃣ Link's Awakening",
-                               "1️⃣ 1 an et 5 mois"]
+                               "1️⃣ 1 an et 5 mois",
+                               "3️⃣ Par ondes psychiques",
+                               "2️⃣ 3 petits robots",
+                               "3️⃣ 4",
+                               "4️⃣ 0",
+                               "2️⃣ Magmaudit",
+                               "1️⃣ Le combat contre Zelda",
+                               "2️⃣ Dans la plaine d'Hyrule",
+                               "3️⃣ 2016",
+                               "2️⃣ Dans la tour du jugement",
+                               "3️⃣ En loup",
+                               "4️⃣ Ciela",
+                               "2️⃣ Linebeck",
+                               "3️⃣ 16",
+                               "1️⃣ 900",
+                               "4️⃣ 100",
+                               "3️⃣ N'oublie pas, je suis Hilda de Lorule",
+                               "1️⃣ Aëline"]
 
         self.__tab = ['1️⃣' , '2️⃣', '3️⃣', '4️⃣', '❌']
         self.__lancer = False
         self.place = 0
+        self.quizzEnCours = False
 
     def getQuestions(self):
         return self.__questions
@@ -152,6 +204,13 @@ class Quizz:
 
     def setPlace(self,x):
         self.place = x
+
+    def setQuizzEnCours(self, boolean):
+        assert boolean in [True,False]
+        self.quizzEnCours = boolean
+
+    def getQuizzEnCours(self):
+        return self.quizzEnCours
 
 
 class Joueur:
