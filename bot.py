@@ -314,7 +314,7 @@ async def quizz(ctx):
     if q.getQuizzEnCours() == False:
         q.setLancer(True)
         q.setQuizzEnCours(True)
-        embed=discord.Embed(title="Le Quizz LonLon Coffee ☕", color=0xfffef2)
+        embed=discord.Embed(title="Le Quizz LonLon Coffee <:lonloncoffee:945743720173670480>", color=0xfffef2)
         embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="Pour lancer une partie, tapez $lancer. On vous souhaite bonne chance !", inline=True)
         message = await ctx.send(embed=embed)
     else:
@@ -377,7 +377,7 @@ async def lancer(ctx):
                 try:
                     reaction, user = await bot.wait_for('reaction_add', timeout=15.0 ,check=check)
                 except asyncio.TimeoutError :
-                    await ctx.send("Vous avez pris trop de temps ! Question skipée.")
+                    await ctx.send(f"Vous avez pris trop de temps ! Question {w} skipée.")
                     break
 
                 if Joueur(user).getUser() in tabJoueurs: #Si le joueur a déjà joué CE TOUR, on passe
@@ -400,17 +400,17 @@ async def lancer(ctx):
                 if str(reaction.emoji) == (q.getTab()[4]):
                     var = True
                     joueur.rmPointsToUser()
-                    await ctx.send(f"Question skipée, {user.name} tu perds un point !")
+                    await ctx.send(f"Question skipée, `{user.name}` tu perds un point !")
                     for i in cl.getTabJoueursObjet():
                         i.restartJouer()
                     print(Joueur(user).getPoints())
                     await message.delete()
 
                 elif(joueur.getJouer() > 0):
-                    await ctx.send(f"Tu as déjà répondu {user.name} ")
+                    await ctx.send(f"Tu as déjà répondu `{user.name}` ")
 
                 elif str(reaction.emoji) == (q.getTab()[q.getPlace()]):
-                    await ctx.send(f"Bien joué {user.name} tu as trouvé la bonne réponse pour la **question {w+1}** !")
+                    await ctx.send(f"Bien joué `{user.name}` tu as trouvé la bonne réponse pour la **question {w+1}** !")
                     var = True
                     joueur.setPointsToUser(1)
                     for i in cl.getTabJoueursObjet():
@@ -419,7 +419,7 @@ async def lancer(ctx):
                     await message.delete()
 
                 else:
-                    await ctx.send(f"Mauvaise réponse {user.name} !")
+                    await ctx.send(f"Mauvaise réponse `{user.name}` !")
                     joueur.rmPointsToUser()
                     joueur.setJouer()
 
