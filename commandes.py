@@ -16,6 +16,7 @@ class Botdisc:
 class Quizz:
     
     def __init__(self):
+        
         self.__questions = ["Quel est le nom du 3e jeu Zelda ? 🟢",
                             "Quel est le nom du personnage principal ? 🟢",
                             "Dans Twilight Princess, quel est le nom du 6ème donjon ? 🟠",
@@ -67,7 +68,15 @@ class Quizz:
                             "Dans Breath of the Wild, combien il y a-t-il de Korogu ? 🟢",
                             "Dans A Link Between Worlds, combien il y a-t-il de Ti'Gornaux ? 🟠",
                             "Que dit la princesse Hilda à chaque fois que l'on arrive dans une nouvelle contrée de Lorule ? 🔴",
-                            "Dans A Link Between Worlds, comment se prénomme la jeune sorcière qui décide de veiller sur toi ? 🟠"]
+                            "Dans A Link Between Worlds, comment se prénomme la jeune sorcière qui décide de veiller sur toi ? 🟠",
+                            "Dans Wind Waker, quel est le boss à battre pour obtenir la perle de Nayru ? 🟠",
+                            "Dans Wind Waker, comment s'appelle la soeur de Link ? 🟢",
+                            "Dans Breath of the Wild, la monture alpha est-elle enregistrable ? 🟠",
+                            "Dans Wind Waker HD, peut-on avoir une photo de Jabu Jabu ? 🟠",
+                            "Parmi cette liste, quel personnage n'existe pas ? 🔴",
+                            "Parmi cette liste, quel boss n'existe pas ? 🔴",
+                            "Dans Breath of the Wild, que peut-on trouver sur la tour Sylvestre ? 🟠",
+                            "Dans Ocarina of Time, Malon porte un médaillon, à quoi ressemble-t-il ? 🟠"]
 
         self.__reponses = {0 : ["1️⃣ OOT", "2️⃣ ALTTP", "3️⃣ ALBW", "4️⃣ LA"],
                            1 : ["1️⃣ Link", "2️⃣ Zelda", "3️⃣ Tingle", "4️⃣ Linkle"],
@@ -120,7 +129,15 @@ class Quizz:
                            48 : ["1️⃣ 900", "2️⃣ 800", "3️⃣ 950", "4️⃣ 1000"],
                            49 : ["1️⃣ 50", "2️⃣ 80", "3️⃣ 90", "4️⃣ 100"],
                            50 : ["1️⃣ Je t'en supplie, sauve Lorule", "2️⃣ Sais-tu où se trouve le lapin ?", "3️⃣ N'oublie pas, je suis Hilda de Lorule", "4️⃣ Je suis Hilda"],
-                           51 : ["1️⃣ Aëline", "2️⃣ Maple", "3️⃣ Syrup", "4️⃣ Sabrina"]}
+                           51 : ["1️⃣ Aëline", "2️⃣ Maple", "3️⃣ Syrup", "4️⃣ Sabrina"],
+                           52 : ["1️⃣ Jabu Jabu", "2️⃣ Goldias", "3️⃣ La bâteau fantome", "4️⃣ Aucun"],
+                           53 : ["1️⃣ Ariel", "2️⃣ Anna", "3️⃣ Tetra", "4️⃣ Iria"],
+                           54 : ["1️⃣ Oui, dans un relais spécifique", "2️⃣ Oui, mais si on a déjà attrapé 10 chevaux", "3️⃣ Oui, avec un amiibo", "4️⃣ Non"],
+                           55 : ["1️⃣ Oui, en le prenant en photo au moment opportun", "2️⃣ Oui, en l'achetant", "3️⃣ Oui, en l'obtenant sur une île", "4️⃣ Non"],
+                           56 : ["1️⃣ Bill les Mains d'Or", "2️⃣ Henriko", "3️⃣ Martha", "4️⃣ Monique la Lunatique"],
+                           57 : ["1️⃣ Armoghoma", "2️⃣ Eyesoar", "3️⃣ Malkanadus", "4️⃣ Manhandla"],
+                           58 : ["1️⃣ Un espadon royal", "2️⃣ Un coffre", "3️⃣ Une épée de chevalier", "4️⃣ Rien"],
+                           59 : ["1️⃣ À la Triforce", "2️⃣ À son père", "3️⃣ À un Goron", "4️⃣ À Bowser"]}
 
         self.__bonneReponse = ["2️⃣ ALTTP",
                                "1️⃣ Link",
@@ -173,7 +190,15 @@ class Quizz:
                                "1️⃣ 900",
                                "4️⃣ 100",
                                "3️⃣ N'oublie pas, je suis Hilda de Lorule",
-                               "1️⃣ Aëline"]
+                               "1️⃣ Aëline",
+                               "4️⃣ Aucun",
+                               "1️⃣ Ariel",
+                               "4️⃣ Non",
+                               "2️⃣ Oui, en l'achetant",
+                               "2️⃣ Henriko",
+                               "3️⃣ Malkanadus",
+                               "1️⃣ Un espadon royal",
+                               "4️⃣ À Bowser"]
 
         self.__tab = ['1️⃣' , '2️⃣', '3️⃣', '4️⃣', '❌']
         self.__lancer = False
@@ -211,6 +236,7 @@ class Quizz:
 
     def getQuizzEnCours(self):
         return self.quizzEnCours
+
 
 
 class Joueur:

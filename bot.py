@@ -327,15 +327,18 @@ async def lancer(ctx):
         tour = 1
         vieuxPoints = []
         questionsUtilisées = []
+        questionsUtiliséesIndex = []
 
         for i in cl.getTabJoueursObjet():
             vieuxPoints.append(i.getPoints())
-        for i in range(5): #Nombre de questions
+        for w in range(5): #Nombre de questions
+            #################################################POSE LA QUESTION
             alea = random.randint(0,len(q.getQuestions())-1) 
             while(q.getQuestions()[alea] in questionsUtilisées):
                 alea = random.randint(0,len(q.getQuestions())-1)   
 
             questionsUtilisées.append(q.getQuestions()[alea])
+            questionsUtiliséesIndex.append(alea) #Sert pour l'historique des questions posées à la fin.
 
             rep = ""
             for i in q.getReponses()[alea]:
@@ -354,6 +357,8 @@ async def lancer(ctx):
                 emo = q.getTab()[j]
                 await message.add_reaction(emo)
             
+            #################################################FIN DE POSE LA QUESTION
+
             def check(reaction, user):
                 for br in q.getReponses()[alea]:
                     if br == q.getBonneReponse()[alea]:
@@ -369,7 +374,11 @@ async def lancer(ctx):
                     break
                 verrou = False
 
-                reaction, user = await bot.wait_for('reaction_add' ,check=check)
+                try:
+                    reaction, user = await bot.wait_for('reaction_add', timeout=15.0 ,check=check)
+                except asyncio.TimeoutError :
+                    await ctx.send("Vous avez pris trop de temps ! Question skipée.")
+                    break
 
                 if Joueur(user).getUser() in tabJoueurs: #Si le joueur a déjà joué CE TOUR, on passe
                     pass
@@ -395,34 +404,44 @@ async def lancer(ctx):
                     for i in cl.getTabJoueursObjet():
                         i.restartJouer()
                     print(Joueur(user).getPoints())
+                    await message.delete()
 
                 elif(joueur.getJouer() > 0):
                     await ctx.send(f"Tu as déjà répondu {user.name} ")
 
                 elif str(reaction.emoji) == (q.getTab()[q.getPlace()]):
-                    await ctx.send(f"Bien joué {user.name} tu as trouvé la bonne réponse !")
+                    await ctx.send(f"Bien joué {user.name} tu as trouvé la bonne réponse pour la **question {w+1}** !")
                     var = True
                     joueur.setPointsToUser(1)
                     for i in cl.getTabJoueursObjet():
                         i.restartJouer()
                     tour+=1
+                    await message.delete()
 
                 else:
                     await ctx.send(f"Mauvaise réponse {user.name} !")
                     joueur.rmPointsToUser()
                     joueur.setJouer()
 
+        rep = ""
+        for i in range(len(questionsUtilisées)):
+            rep = rep + f"**Question {i+1}** : {questionsUtilisées[i]}\n**Réponse** : {q.getBonneReponse()[questionsUtiliséesIndex[i]]}\n" + "\n"
+        embed=discord.Embed(color=0xfffef2)
+        embed.add_field(name=f"Historique des questions", value=f"{rep}", inline=True)
         try:
+            assert vieuxPoints[0]
+            await ctx.send("Fin du Quizz !")
+            historique = await ctx.send(embed=embed)
             for i in range(len(cl.getTabJoueursObjet())):
                 if vieuxPoints[i] > cl.getTabJoueursObjet()[i].getPoints():
                     await ctx.send(f"{cl.getTabJoueursObjet()[i].getUser()} a perdu {(vieuxPoints[i] - cl.getTabJoueursObjet()[i].getPoints())} points !")
                 elif vieuxPoints[i] < cl.getTabJoueursObjet()[i].getPoints():
                     await ctx.send(f"{cl.getTabJoueursObjet()[i].getUser()} a gagné {(cl.getTabJoueursObjet()[i].getPoints() - vieuxPoints[i])} points !")
-            await ctx.send("Fin du Quizz !")
             await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
         except Exception as e:
-            #print(e)
+            print(e)
             await ctx.send("Fin du Quizz !")
+            historique = await ctx.send(embed=embed)
             await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
 
     else:
