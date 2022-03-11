@@ -76,131 +76,143 @@ class Quizz:
                             "Parmi cette liste, quel personnage n'existe pas ? 🔴",
                             "Parmi cette liste, quel boss n'existe pas ? 🔴",
                             "Dans Breath of the Wild, que peut-on trouver sur la tour Sylvestre ? 🟠",
-                            "Dans Ocarina of Time, Malon porte un médaillon, à quoi ressemble-t-il ? 🟠"]
+                            "Dans Ocarina of Time, Malon porte un médaillon, à quoi ressemble-t-il ? 🟠",
+                            "Dans Majora's Mask, combien de masque change votre corps/apparence ? 🟠",
+                            "Dans Majora's Mask, qu'est-ce que les aliens veulent enlever au Ranch ? 🟢",
+                            "Dans Four Swords, qu'est-ce qui se passe au tout début du jeu ? 🟢",
+                            "Dans Link's Awakening HD, combien il y a-t-il de figurine Mario ? 🔴"]
 
-        self.__reponses = {0 : ["1️⃣ OOT", "2️⃣ ALTTP", "3️⃣ ALBW", "4️⃣ LA"],
-                           1 : ["1️⃣ Link", "2️⃣ Zelda", "3️⃣ Tingle", "4️⃣ Linkle"],
-                           2 : ["1️⃣ Tour du Jugement", "2️⃣ Château des Pics Blancs", "3️⃣ Célestia", "4️⃣ Ruines des Pics Blancs"],
-                           3 : ["1️⃣ Timeline de la défaite", "2️⃣ Timeline de l'enfance", "3️⃣ Timeline de Link Adulte", "4️⃣ Début de la légende"],
-                           4 : ["1️⃣ Romanie","2️⃣ Melodie", "3️⃣ Elwing", "4️⃣ Medolie"],
-                           5 : ["1️⃣ 1986", "2️⃣ 1987", "3️⃣ 1985", "4️⃣ 1988"],
-                           6 : ["1️⃣ 1999", "2️⃣ 1989", "3️⃣ 2003", "4️⃣ 2001"],
-                           7 : ["1️⃣ Août 2015", "2️⃣ Janvier 2016", "3️⃣ Octobre 2015", "4️⃣ Novembre 2015"],
-                           8 : ["1️⃣ SS-MC-FS-OOT", "2️⃣ SS-FS-MC-OOT", "3️⃣ SS-OOT-MC-FS", "4️⃣ SS-OOT-FS-MC"],
-                           9 : ["1️⃣ A l'Ouest de Bourg-Clocher", "2️⃣ A l'Est de Bourg-Clocher", "3️⃣ Derrière la tour de l'Horloge", "4️⃣ Devant la tour de l'Horloge"],
-                           10 : ["1️⃣ 7", "2️⃣ 6", "3️⃣ 8", "4️⃣ 5"],
-                           11 : ["1️⃣ 45", "2️⃣ 49", "3️⃣ 50", "4️⃣ 38"],
-                           12 : ["1️⃣ Par un Zora", "2️⃣ Dans un donjon", "3️⃣ Par un Goron", "4️⃣ Par un marchand"],
-                           13 : ["1️⃣ Gu'Achitoh", "2️⃣ Moa'Kishito", "3️⃣ Ma'Ohnu", "4️⃣ Shora'Ha"],
-                           14 : ["1️⃣ Lanelle", "2️⃣ Ordin", "3️⃣ Latouane", "4️⃣ Firone"],
-                           15 : ["1️⃣ Satoru Iwata", "2️⃣ Minako Hamano", "3️⃣ Kazumi Totaka", "4️⃣ Shigefumi Hino"],
-                           16 : ["1️⃣ Au Nord du village des Animaux", "2️⃣ A l'Est du village des Mouettes", "3️⃣ Au Sud de l'Abîme du poisson", "4️⃣ Dans le plateau Tartare Ouest"],
-                           17 : ["1️⃣ Ganondorf", "2️⃣ Roi Cuirasse", "3️⃣ Tetra", "4️⃣ Des pirates"],
-                           18 : ["1️⃣ L'île étoilée", "2️⃣ L'île du croissant", "3️⃣ L'île de la rocaille", "4️⃣ L'île de Link"],
-                           19 : ["1️⃣ Grâce à une grande fée", "2️⃣ Grâce à une quête secondaire", "3️⃣ En éliminant un Kalamar", "4️⃣ Grâce à Tingle"],
-                           20 : ["1️⃣En l'achetant en magasin", "2️⃣ En gagnant aux enchères", "3️⃣ En battant un boss", "4️⃣ Il n'y en a pas"],
-                           21 : ["1️⃣En l'achetant en magasin", "2️⃣ En gagnant aux enchères", "3️⃣ En battant un boss", "4️⃣ Il n'y en a pas"],
-                           22 : ["1️⃣ 6", "2️⃣ 5", "3️⃣ 7", "4️⃣ 4"],
-                           23 : ["1️⃣ 4", "2️⃣ 3", "3️⃣ 1", "4️⃣ 5"],
-                           24 : ["1️⃣ 5", "2️⃣ 4", "3️⃣ 6", "4️⃣ 7"],
-                           25 : ["1️⃣ La tenue barbare", "2️⃣ La tenue isolante", "3️⃣ La tenue nox", "4️⃣ La tenue archéonique"],
-                           26 : ["1️⃣ Le pouvoir de Mipha", "2️⃣ Le pouvoir de Revali", "3️⃣ Le pouvoir de Urbosa", "4️⃣ Le pouvoir de Daruk"],
-                           27 : ["1️⃣ Le pouvoir de Daruk", "2️⃣ Le pouvoir de Revali", "3️⃣ Le pouvoir de Urbosa", "4️⃣ Le pouvoir de Mipha"],
-                           28 : ["1️⃣ Majora's Mask", "2️⃣ Twilight Princess", "3️⃣ Oracle of Seasons", "4️⃣ Aucun d'entre eux"],
-                           29 : ["1️⃣ Oracle of Ages", "2️⃣ Oracle of Seasons", "3️⃣Four Sword Adventures", "4️⃣ Aucun d'entre eux"],
-                           30 : ["1️⃣ Breath of the Wild", "2️⃣ Ocarina of Time", "3️⃣ Twilight Princess", "4️⃣ Aucun jeu"],
-                           31 : ["1️⃣ 2", "2️⃣ 4", "3️⃣ 3", "4️⃣ 5"],
-                           32 : ["1️⃣ 12", "2️⃣ 13", "3️⃣ 14", "4️⃣ 15"],
-                           33 : ["1️⃣ The Adventure of Link", "2️⃣ Oracle of Ages", "3️⃣ Link's Awakening", "4️⃣ A Link Between Worlds"],
-                           34 : ["1️⃣ 1 an et 5 mois", "2️⃣ 2 ans et 6 mois", "3️⃣ 1 an et 2 mois", "4️⃣ 2 ans et 1 mois"],
-                           35 : ["1️⃣ Par ondes spirituelles", "2️⃣ Par télépathie", "3️⃣ Par ondes psychiques", "4️⃣ Par message"],
-                           36 : ["1️⃣ Un schéma de la salle aux tapis roulants", "2️⃣ 3 petits robots", "3️⃣ 2 statues Armos", "4️⃣ Une photo de robot"],
-                           37 : ["1️⃣ 2","2️⃣ 3","3️⃣ 4","4️⃣ 5"],
-                           38 : ["1️⃣ 46", "2️⃣ 38", "3️⃣ 50", "4️⃣ 0"],
-                           39 : ["1️⃣ Magolor", "2️⃣ Magmaudit", "3️⃣ Magrock", "4️⃣ Magmalor"],
-                           40 : ["1️⃣ Le combat contre Zelda", "2️⃣ Le combat contre Ganon", "3️⃣ Le combat à cheval", "4️⃣ Le combat contre Ganondorf"],
-                           41 : ["1️⃣ Dans le château d'Hyrule", "2️⃣ Dans la plaine d'Hyrule", "3️⃣ Dans Toal", "4️⃣ Au crépuscule"],
-                           42 : ["1️⃣ 2014", "2️⃣ 2015", "3️⃣ 2016", "4️⃣ 2017"],
-                           43 : ["1️⃣ Dans le palais du Crépuscule", "2️⃣ Dans la tour du jugement", "3️⃣ Dans le Désert Gerudo", "4️⃣ La rivière Zora"],
-                           44 : ["1️⃣ En lapin", "2️⃣ En lion", "3️⃣ En loup", "4️⃣ En chien"],
-                           45 : ["1️⃣ Navi", "2️⃣ Taya", "3️⃣ Proxie", "4️⃣ Ciela"],
-                           46 : ["1️⃣ Bellum", "2️⃣ Linebeck", "3️⃣ Martin", "4️⃣ Hergo"],
-                           47 : ["1️⃣ 14", "2️⃣ 15", "3️⃣ 16", "4️⃣ 17"],
-                           48 : ["1️⃣ 900", "2️⃣ 800", "3️⃣ 950", "4️⃣ 1000"],
-                           49 : ["1️⃣ 50", "2️⃣ 80", "3️⃣ 90", "4️⃣ 100"],
-                           50 : ["1️⃣ Je t'en supplie, sauve Lorule", "2️⃣ Sais-tu où se trouve le lapin ?", "3️⃣ N'oublie pas, je suis Hilda de Lorule", "4️⃣ Je suis Hilda"],
-                           51 : ["1️⃣ Aëline", "2️⃣ Maple", "3️⃣ Syrup", "4️⃣ Sabrina"],
-                           52 : ["1️⃣ Jabu Jabu", "2️⃣ Goldias", "3️⃣ La bâteau fantome", "4️⃣ Aucun"],
-                           53 : ["1️⃣ Ariel", "2️⃣ Anna", "3️⃣ Tetra", "4️⃣ Iria"],
-                           54 : ["1️⃣ Oui, dans un relais spécifique", "2️⃣ Oui, mais si on a déjà attrapé 10 chevaux", "3️⃣ Oui, avec un amiibo", "4️⃣ Non"],
-                           55 : ["1️⃣ Oui, en le prenant en photo au moment opportun", "2️⃣ Oui, en l'achetant", "3️⃣ Oui, en l'obtenant sur une île", "4️⃣ Non"],
-                           56 : ["1️⃣ Bill les Mains d'Or", "2️⃣ Henriko", "3️⃣ Martha", "4️⃣ Monique la Lunatique"],
-                           57 : ["1️⃣ Armoghoma", "2️⃣ Eyesoar", "3️⃣ Malkanadus", "4️⃣ Manhandla"],
-                           58 : ["1️⃣ Un espadon royal", "2️⃣ Un coffre", "3️⃣ Une épée de chevalier", "4️⃣ Rien"],
-                           59 : ["1️⃣ À la Triforce", "2️⃣ À son père", "3️⃣ À un Goron", "4️⃣ À Bowser"]}
+        self.__reponses = {0 : ["<:AAA:949033966848049223> OOT", "<:BBB:949032944134148176> ALTTP", "<:CCC:949032944121573467> ALBW", "<:DDD:949032944125747279> LA"],
+                           1 : ["<:AAA:949033966848049223> Link", "<:BBB:949032944134148176> Zelda", "<:CCC:949032944121573467> Tingle", "<:DDD:949032944125747279> Linkle"],
+                           2 : ["<:AAA:949033966848049223> Tour du Jugement", "<:BBB:949032944134148176> Château des Pics Blancs", "<:CCC:949032944121573467> Célestia", "<:DDD:949032944125747279> Ruines des Pics Blancs"],
+                           3 : ["<:AAA:949033966848049223> Timeline de la défaite", "<:BBB:949032944134148176> Timeline de l'enfance", "<:CCC:949032944121573467> Timeline de Link Adulte", "<:DDD:949032944125747279> Début de la légende"],
+                           4 : ["<:AAA:949033966848049223> Romanie","<:BBB:949032944134148176> Melodie", "<:CCC:949032944121573467> Elwing", "<:DDD:949032944125747279> Medolie"],
+                           5 : ["<:AAA:949033966848049223> 1986", "<:BBB:949032944134148176> 1987", "<:CCC:949032944121573467> 1985", "<:DDD:949032944125747279> 1988"],
+                           6 : ["<:AAA:949033966848049223> 1999", "<:BBB:949032944134148176> 1989", "<:CCC:949032944121573467> 2003", "<:DDD:949032944125747279> 2001"],
+                           7 : ["<:AAA:949033966848049223> Août 2015", "<:BBB:949032944134148176> Janvier 2016", "<:CCC:949032944121573467> Octobre 2015", "<:DDD:949032944125747279> Novembre 2015"],
+                           8 : ["<:AAA:949033966848049223> SS-MC-FS-OOT", "<:BBB:949032944134148176> SS-FS-MC-OOT", "<:CCC:949032944121573467> SS-OOT-MC-FS", "<:DDD:949032944125747279> SS-OOT-FS-MC"],
+                           9 : ["<:AAA:949033966848049223> A l'Ouest de Bourg-Clocher", "<:BBB:949032944134148176> A l'Est de Bourg-Clocher", "<:CCC:949032944121573467> Derrière la tour de l'Horloge", "<:DDD:949032944125747279> Devant la tour de l'Horloge"],
+                           10 : ["<:AAA:949033966848049223> 7", "<:BBB:949032944134148176> 6", "<:CCC:949032944121573467> 8", "<:DDD:949032944125747279> 5"],
+                           11 : ["<:AAA:949033966848049223> 45", "<:BBB:949032944134148176> 49", "<:CCC:949032944121573467> 50", "<:DDD:949032944125747279> 38"],
+                           12 : ["<:AAA:949033966848049223> Par un Zora", "<:BBB:949032944134148176> Dans un donjon", "<:CCC:949032944121573467> Par un Goron", "<:DDD:949032944125747279> Par un marchand"],
+                           13 : ["<:AAA:949033966848049223> Gu'Achitoh", "<:BBB:949032944134148176> Moa'Kishito", "<:CCC:949032944121573467> Ma'Ohnu", "<:DDD:949032944125747279> Shora'Ha"],
+                           14 : ["<:AAA:949033966848049223> Lanelle", "<:BBB:949032944134148176> Ordin", "<:CCC:949032944121573467> Latouane", "<:DDD:949032944125747279> Firone"],
+                           15 : ["<:AAA:949033966848049223> Satoru Iwata", "<:BBB:949032944134148176> Minako Hamano", "<:CCC:949032944121573467> Kazumi Totaka", "<:DDD:949032944125747279> Shigefumi Hino"],
+                           16 : ["<:AAA:949033966848049223> Au Nord du village des Animaux", "<:BBB:949032944134148176> A l'Est du village des Mouettes", "<:CCC:949032944121573467> Au Sud de l'Abîme du poisson", "<:DDD:949032944125747279> Dans le plateau Tartare Ouest"],
+                           17 : ["<:AAA:949033966848049223> Ganondorf", "<:BBB:949032944134148176> Roi Cuirasse", "<:CCC:949032944121573467> Tetra", "<:DDD:949032944125747279> Des pirates"],
+                           18 : ["<:AAA:949033966848049223> L'île étoilée", "<:BBB:949032944134148176> L'île du croissant", "<:CCC:949032944121573467> L'île de la rocaille", "<:DDD:949032944125747279> L'île de Link"],
+                           19 : ["<:AAA:949033966848049223> Grâce à une grande fée", "<:BBB:949032944134148176> Grâce à une quête secondaire", "<:CCC:949032944121573467> En éliminant un Kalamar", "<:DDD:949032944125747279> Grâce à Tingle"],
+                           20 : ["<:AAA:949033966848049223>En l'achetant en magasin", "<:BBB:949032944134148176> En gagnant aux enchères", "<:CCC:949032944121573467> En battant un boss", "<:DDD:949032944125747279> Il n'y en a pas"],
+                           21 : ["<:AAA:949033966848049223>En l'achetant en magasin", "<:BBB:949032944134148176> En gagnant aux enchères", "<:CCC:949032944121573467> En battant un boss", "<:DDD:949032944125747279> Il n'y en a pas"],
+                           22 : ["<:AAA:949033966848049223> 6", "<:BBB:949032944134148176> 5", "<:CCC:949032944121573467> 7", "<:DDD:949032944125747279> 4"],
+                           23 : ["<:AAA:949033966848049223> 4", "<:BBB:949032944134148176> 3", "<:CCC:949032944121573467> 1", "<:DDD:949032944125747279> 5"],
+                           24 : ["<:AAA:949033966848049223> 5", "<:BBB:949032944134148176> 4", "<:CCC:949032944121573467> 6", "<:DDD:949032944125747279> 7"],
+                           25 : ["<:AAA:949033966848049223> La tenue barbare", "<:BBB:949032944134148176> La tenue isolante", "<:CCC:949032944121573467> La tenue nox", "<:DDD:949032944125747279> La tenue archéonique"],
+                           26 : ["<:AAA:949033966848049223> Le pouvoir de Mipha", "<:BBB:949032944134148176> Le pouvoir de Revali", "<:CCC:949032944121573467> Le pouvoir de Urbosa", "<:DDD:949032944125747279> Le pouvoir de Daruk"],
+                           27 : ["<:AAA:949033966848049223> Le pouvoir de Daruk", "<:BBB:949032944134148176> Le pouvoir de Revali", "<:CCC:949032944121573467> Le pouvoir de Urbosa", "<:DDD:949032944125747279> Le pouvoir de Mipha"],
+                           28 : ["<:AAA:949033966848049223> Majora's Mask", "<:BBB:949032944134148176> Twilight Princess", "<:CCC:949032944121573467> Oracle of Seasons", "<:DDD:949032944125747279> Aucun d'entre eux"],
+                           29 : ["<:AAA:949033966848049223> Oracle of Ages", "<:BBB:949032944134148176> Oracle of Seasons", "<:CCC:949032944121573467>Four Sword Adventures", "<:DDD:949032944125747279> Aucun d'entre eux"],
+                           30 : ["<:AAA:949033966848049223> Breath of the Wild", "<:BBB:949032944134148176> Ocarina of Time", "<:CCC:949032944121573467> Twilight Princess", "<:DDD:949032944125747279> Aucun jeu"],
+                           31 : ["<:AAA:949033966848049223> 2", "<:BBB:949032944134148176> 4", "<:CCC:949032944121573467> 3", "<:DDD:949032944125747279> 5"],
+                           32 : ["<:AAA:949033966848049223> 12", "<:BBB:949032944134148176> 13", "<:CCC:949032944121573467> 14", "<:DDD:949032944125747279> 15"],
+                           33 : ["<:AAA:949033966848049223> The Adventure of Link", "<:BBB:949032944134148176> Oracle of Ages", "<:CCC:949032944121573467> Link's Awakening", "<:DDD:949032944125747279> A Link Between Worlds"],
+                           34 : ["<:AAA:949033966848049223> 1 an et 5 mois", "<:BBB:949032944134148176> 2 ans et 6 mois", "<:CCC:949032944121573467> 1 an et 2 mois", "<:DDD:949032944125747279> 2 ans et 1 mois"],
+                           35 : ["<:AAA:949033966848049223> Par ondes spirituelles", "<:BBB:949032944134148176> Par télépathie", "<:CCC:949032944121573467> Par ondes psychiques", "<:DDD:949032944125747279> Par message"],
+                           36 : ["<:AAA:949033966848049223> Un schéma de la salle aux tapis roulants", "<:BBB:949032944134148176> 3 petits robots", "<:CCC:949032944121573467> 2 statues Armos", "<:DDD:949032944125747279> Une photo de robot"],
+                           37 : ["<:AAA:949033966848049223> 2","<:BBB:949032944134148176> 3","<:CCC:949032944121573467> 4","<:DDD:949032944125747279> 5"],
+                           38 : ["<:AAA:949033966848049223> 46", "<:BBB:949032944134148176> 38", "<:CCC:949032944121573467> 50", "<:DDD:949032944125747279> 0"],
+                           39 : ["<:AAA:949033966848049223> Magolor", "<:BBB:949032944134148176> Magmaudit", "<:CCC:949032944121573467> Magrock", "<:DDD:949032944125747279> Magmalor"],
+                           40 : ["<:AAA:949033966848049223> Le combat contre Zelda", "<:BBB:949032944134148176> Le combat contre Ganon", "<:CCC:949032944121573467> Le combat à cheval", "<:DDD:949032944125747279> Le combat contre Ganondorf"],
+                           41 : ["<:AAA:949033966848049223> Dans le château d'Hyrule", "<:BBB:949032944134148176> Dans la plaine d'Hyrule", "<:CCC:949032944121573467> Dans Toal", "<:DDD:949032944125747279> Au crépuscule"],
+                           42 : ["<:AAA:949033966848049223> 2014", "<:BBB:949032944134148176> 2015", "<:CCC:949032944121573467> 2016", "<:DDD:949032944125747279> 2017"],
+                           43 : ["<:AAA:949033966848049223> Dans le palais du Crépuscule", "<:BBB:949032944134148176> Dans la tour du jugement", "<:CCC:949032944121573467> Dans le Désert Gerudo", "<:DDD:949032944125747279> La rivière Zora"],
+                           44 : ["<:AAA:949033966848049223> En lapin", "<:BBB:949032944134148176> En lion", "<:CCC:949032944121573467> En loup", "<:DDD:949032944125747279> En chien"],
+                           45 : ["<:AAA:949033966848049223> Navi", "<:BBB:949032944134148176> Taya", "<:CCC:949032944121573467> Proxie", "<:DDD:949032944125747279> Ciela"],
+                           46 : ["<:AAA:949033966848049223> Bellum", "<:BBB:949032944134148176> Linebeck", "<:CCC:949032944121573467> Martin", "<:DDD:949032944125747279> Hergo"],
+                           47 : ["<:AAA:949033966848049223> 14", "<:BBB:949032944134148176> 15", "<:CCC:949032944121573467> 16", "<:DDD:949032944125747279> 17"],
+                           48 : ["<:AAA:949033966848049223> 900", "<:BBB:949032944134148176> 800", "<:CCC:949032944121573467> 950", "<:DDD:949032944125747279> 1000"],
+                           49 : ["<:AAA:949033966848049223> 50", "<:BBB:949032944134148176> 80", "<:CCC:949032944121573467> 90", "<:DDD:949032944125747279> 100"],
+                           50 : ["<:AAA:949033966848049223> Je t'en supplie, sauve Lorule", "<:BBB:949032944134148176> Sais-tu où se trouve le lapin ?", "<:CCC:949032944121573467> N'oublie pas, je suis Hilda de Lorule", "<:DDD:949032944125747279> Je suis Hilda"],
+                           51 : ["<:AAA:949033966848049223> Aëline", "<:BBB:949032944134148176> Maple", "<:CCC:949032944121573467> Syrup", "<:DDD:949032944125747279> Sabrina"],
+                           52 : ["<:AAA:949033966848049223> Jabu Jabu", "<:BBB:949032944134148176> Goldias", "<:CCC:949032944121573467> La bâteau fantome", "<:DDD:949032944125747279> Aucun"],
+                           53 : ["<:AAA:949033966848049223> Ariel", "<:BBB:949032944134148176> Anna", "<:CCC:949032944121573467> Tetra", "<:DDD:949032944125747279> Iria"],
+                           54 : ["<:AAA:949033966848049223> Oui, dans un relais spécifique", "<:BBB:949032944134148176> Oui, mais si on a déjà attrapé 10 chevaux", "<:CCC:949032944121573467> Oui, avec un amiibo", "<:DDD:949032944125747279> Non"],
+                           55 : ["<:AAA:949033966848049223> Oui, en le prenant en photo au moment opportun", "<:BBB:949032944134148176> Oui, en l'achetant", "<:CCC:949032944121573467> Oui, en l'obtenant sur une île", "<:DDD:949032944125747279> Non"],
+                           56 : ["<:AAA:949033966848049223> Bill les Mains d'Or", "<:BBB:949032944134148176> Henriko", "<:CCC:949032944121573467> Martha", "<:DDD:949032944125747279> Monique la Lunatique"],
+                           57 : ["<:AAA:949033966848049223> Armoghoma", "<:BBB:949032944134148176> Eyesoar", "<:CCC:949032944121573467> Malkanadus", "<:DDD:949032944125747279> Manhandla"],
+                           58 : ["<:AAA:949033966848049223> Un espadon royal", "<:BBB:949032944134148176> Un coffre", "<:CCC:949032944121573467> Une épée de chevalier", "<:DDD:949032944125747279> Rien"],
+                           59 : ["<:AAA:949033966848049223> À la Triforce", "<:BBB:949032944134148176> À son père", "<:CCC:949032944121573467> À un Goron", "<:DDD:949032944125747279> À Bowser"],
+                           60 : ["<:AAA:949033966848049223> 3", "<:BBB:949032944134148176> 4", "<:CCC:949032944121573467> 5", "<:DDD:949032944125747279> 6"],
+                           61 : ["<:AAA:949033966848049223> Les habitants", "<:BBB:949032944134148176> Du lait", "<:CCC:949032944121573467> Romani", "<:DDD:949032944125747279> Les vaches"],
+                           62 : ["<:AAA:949033966848049223> Des bandits s'introduisent dans une maison", "<:BBB:949032944134148176> Zelda est capturée par Vaati", "<:CCC:949032944121573467> Link est mangé par Vaati", "<:DDD:949032944125747279> Link dort"],
+                           63 : ["<:AAA:949033966848049223> 8", "<:BBB:949032944134148176> 10", "<:CCC:949032944121573467> 12", "<:DDD:949032944125747279> 15"]}
 
-        self.__bonneReponse = ["2️⃣ ALTTP",
-                               "1️⃣ Link",
-                               "4️⃣ Ruines des Pics Blancs",
-                               "1️⃣ Timeline de la défaite",
-                               "4️⃣ Medolie",
-                               "2️⃣ 1987",
-                               "4️⃣ 2001",
-                               "3️⃣ Octobre 2015",
-                               "1️⃣ SS-MC-FS-OOT",
-                               "3️⃣ Derrière la tour de l'Horloge",
-                               "1️⃣ 7",
-                               "2️⃣ 49",
-                               "3️⃣ Par un Goron",
-                               "3️⃣ Ma'Ohnu",
-                               "3️⃣ Latouane",
-                               "2️⃣ Minako Hamano",
-                               "1️⃣ Au Nord du village des Animaux",
-                               "2️⃣ Roi Cuirasse",
-                               "4️⃣ L'île de Link",
-                               "3️⃣ En éliminant un Kalamar",
-                               "4️⃣ Il n'y en a pas",
-                               "2️⃣ En gagnant aux enchères",
-                               "1️⃣ 6",
-                               "2️⃣ 3",
-                               "3️⃣ 6",
-                               "1️⃣ La tenue barbare",
-                               "2️⃣ Le pouvoir de Revali",
-                               "4️⃣ Le pouvoir de Mipha",
-                               "1️⃣ Majora's Mask",
-                               "4️⃣ Aucun d'entre eux",
-                               "4️⃣ Aucun jeu",
-                               "3️⃣ 3",
-                               "2️⃣ 13",
-                               "3️⃣ Link's Awakening",
-                               "1️⃣ 1 an et 5 mois",
-                               "3️⃣ Par ondes psychiques",
-                               "2️⃣ 3 petits robots",
-                               "3️⃣ 4",
-                               "4️⃣ 0",
-                               "2️⃣ Magmaudit",
-                               "1️⃣ Le combat contre Zelda",
-                               "2️⃣ Dans la plaine d'Hyrule",
-                               "3️⃣ 2016",
-                               "2️⃣ Dans la tour du jugement",
-                               "3️⃣ En loup",
-                               "4️⃣ Ciela",
-                               "2️⃣ Linebeck",
-                               "3️⃣ 16",
-                               "1️⃣ 900",
-                               "4️⃣ 100",
-                               "3️⃣ N'oublie pas, je suis Hilda de Lorule",
-                               "1️⃣ Aëline",
-                               "4️⃣ Aucun",
-                               "1️⃣ Ariel",
-                               "4️⃣ Non",
-                               "2️⃣ Oui, en l'achetant",
-                               "2️⃣ Henriko",
-                               "3️⃣ Malkanadus",
-                               "1️⃣ Un espadon royal",
-                               "4️⃣ À Bowser"]
+        self.__bonneReponse = ["<:BBB:949032944134148176> ALTTP",
+                               "<:AAA:949033966848049223> Link",
+                               "<:DDD:949032944125747279> Ruines des Pics Blancs",
+                               "<:AAA:949033966848049223> Timeline de la défaite",
+                               "<:DDD:949032944125747279> Medolie",
+                               "<:BBB:949032944134148176> 1987",
+                               "<:DDD:949032944125747279> 2001",
+                               "<:CCC:949032944121573467> Octobre 2015",
+                               "<:AAA:949033966848049223> SS-MC-FS-OOT",
+                               "<:CCC:949032944121573467> Derrière la tour de l'Horloge",
+                               "<:AAA:949033966848049223> 7",
+                               "<:BBB:949032944134148176> 49",
+                               "<:CCC:949032944121573467> Par un Goron",
+                               "<:CCC:949032944121573467> Ma'Ohnu",
+                               "<:CCC:949032944121573467> Latouane",
+                               "<:BBB:949032944134148176> Minako Hamano",
+                               "<:AAA:949033966848049223> Au Nord du village des Animaux",
+                               "<:BBB:949032944134148176> Roi Cuirasse",
+                               "<:DDD:949032944125747279> L'île de Link",
+                               "<:CCC:949032944121573467> En éliminant un Kalamar",
+                               "<:DDD:949032944125747279> Il n'y en a pas",
+                               "<:BBB:949032944134148176> En gagnant aux enchères",
+                               "<:AAA:949033966848049223> 6",
+                               "<:BBB:949032944134148176> 3",
+                               "<:CCC:949032944121573467> 6",
+                               "<:AAA:949033966848049223> La tenue barbare",
+                               "<:BBB:949032944134148176> Le pouvoir de Revali",
+                               "<:DDD:949032944125747279> Le pouvoir de Mipha",
+                               "<:AAA:949033966848049223> Majora's Mask",
+                               "<:DDD:949032944125747279> Aucun d'entre eux",
+                               "<:DDD:949032944125747279> Aucun jeu",
+                               "<:CCC:949032944121573467> 3",
+                               "<:BBB:949032944134148176> 13",
+                               "<:CCC:949032944121573467> Link's Awakening",
+                               "<:AAA:949033966848049223> 1 an et 5 mois",
+                               "<:CCC:949032944121573467> Par ondes psychiques",
+                               "<:BBB:949032944134148176> 3 petits robots",
+                               "<:CCC:949032944121573467> 4",
+                               "<:DDD:949032944125747279> 0",
+                               "<:BBB:949032944134148176> Magmaudit",
+                               "<:AAA:949033966848049223> Le combat contre Zelda",
+                               "<:BBB:949032944134148176> Dans la plaine d'Hyrule",
+                               "<:CCC:949032944121573467> 2016",
+                               "<:BBB:949032944134148176> Dans la tour du jugement",
+                               "<:CCC:949032944121573467> En loup",
+                               "<:DDD:949032944125747279> Ciela",
+                               "<:BBB:949032944134148176> Linebeck",
+                               "<:CCC:949032944121573467> 16",
+                               "<:AAA:949033966848049223> 900",
+                               "<:DDD:949032944125747279> 100",
+                               "<:CCC:949032944121573467> N'oublie pas, je suis Hilda de Lorule",
+                               "<:AAA:949033966848049223> Aëline",
+                               "<:DDD:949032944125747279> Aucun",
+                               "<:AAA:949033966848049223> Ariel",
+                               "<:DDD:949032944125747279> Non",
+                               "<:BBB:949032944134148176> Oui, en l'achetant",
+                               "<:BBB:949032944134148176> Henriko",
+                               "<:CCC:949032944121573467> Malkanadus",
+                               "<:AAA:949033966848049223> Un espadon royal",
+                               "<:DDD:949032944125747279> À Bowser",
+                               "<:CCC:949032944121573467> 5",
+                               "<:DDD:949032944125747279> Les vaches",
+                               "<:BBB:949032944134148176> Zelda est capturée par Vaati",
+                               "<:BBB:949032944134148176> 10"]
 
-        self.__tab = ['1️⃣' , '2️⃣', '3️⃣', '4️⃣', '❌']
+        self.__tab = ['<:AAA:949033966848049223>' , '<:BBB:949032944134148176>', '<:CCC:949032944121573467>', '<:DDD:949032944125747279>', '❌']
         self.__lancer = False
         self.place = 0
         self.quizzEnCours = False
@@ -245,6 +257,7 @@ class Joueur:
         self.user = user
         self.points = 0
         self.jouer = 0
+        self.aPerduPoint = False
 
     def getUser(self):
         return self.user.name
@@ -271,6 +284,16 @@ class Joueur:
 
     def getJouer(self):
         return self.jouer
+
+    def donnerNombrePoint(self,x):
+        self.points = x
+
+    def setAPerduPoint(self, x):
+        assert x in [True,False]
+        self.aPerduPoint = x
+
+    def getAPerduPoint(self):
+        return self.aPerduPoint
     
 
 class Classement:
@@ -278,6 +301,7 @@ class Classement:
     def __init__(self):
         self.tabJoueursObjet = [] #Tableau de "Joueur"
         self.tabClassement = []
+        self.tabJoueursId = []
 
     def ajouterJoueurs(self, joueur):
         self.tabJoueursObjet.append(joueur)
@@ -295,18 +319,18 @@ class Classement:
             max = 0
             tab = []
 
-            for i in range(len(self.tabJoueursObjet)):
-                tab.append(self.tabJoueursObjet[i])
-
             joueurMax = Joueur
             for i in liste:
                 if max < i.getPoints():
                     max = i.getPoints()
                     joueurMax = i
-            tab.remove(joueurMax)
-            print(joueurMax.getUser())
-            self.tabClassement.append(joueurMax)
-            return tab
+            if len(liste) > 1 and joueurMax != Joueur: #Je vérifie si joueurMax != Joueur car sinon si dans la liste
+                liste.remove(joueurMax)                #il y a un joueur qui a 0 point, il sera considéré juste comme "Joueur"
+                self.tabClassement.append(joueurMax)   #et n'aura donc pas de self. Ce qui fait crash le classement.
+            elif joueurMax != Joueur:
+                self.tabClassement.append(joueurMax)
+                liste = self.tabJoueursObjet
+            return liste
 
     def getTabClassement(self):
         return self.tabClassement
@@ -318,6 +342,12 @@ class Classement:
             if i.getUser() == joueur:
                 return j, i.getPoints()
         return 0,0
+
+    def getTabJoueursId(self):
+        return self.tabJoueursId
+    
+    def ajouterJoueursId(self, id:int):
+        self.tabJoueursId.append(id)
 
 
 '''

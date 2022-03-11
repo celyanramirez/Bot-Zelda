@@ -1,5 +1,6 @@
 #from msilib.schema import Class
 from sqlite3 import Time
+import string
 from this import d
 from typing import Any
 import typing
@@ -9,6 +10,7 @@ import random
 import time
 from commandes import *
 from discord.ext import commands
+import ast
 
 client = discord.Client()
 disc = Botdisc()
@@ -377,7 +379,8 @@ async def lancer(ctx):
                 try:
                     reaction, user = await bot.wait_for('reaction_add', timeout=15.0 ,check=check)
                 except asyncio.TimeoutError :
-                    await ctx.send(f"Vous avez pris trop de temps ! Question {w} skipée.")
+                    await ctx.send(f"Vous avez pris trop de temps ! **Question {w+1}** skipée.")
+                    await message.delete();
                     break
 
                 if Joueur(user).getUser() in tabJoueurs: #Si le joueur a déjà joué CE TOUR, on passe
@@ -385,7 +388,7 @@ async def lancer(ctx):
                 else:                                       #Sinon, on créé un nouveau joueur
                     for i in cl.getTabJoueursObjet():               #Si le joueur a déjà joué auparavant, alors son pseudo est juste mit dans la liste tabJoueurs, mais il n'est pas nouvel inscrit
                         if i.getUser() == Joueur(user).getUser():
-                            print(f"je suis la {Joueur(user).getUser()}")
+                            #print(f"je suis la {Joueur(user).getUser()}")
                             tabJoueurs.append(Joueur(user).getUser())
                             joueur = i
                             verrou = True
@@ -393,17 +396,23 @@ async def lancer(ctx):
                         joueur = Joueur(user)
                         print(f"{Joueur(user).getUser()} est inscrit")
                         cl.ajouterJoueurs(joueur)
+                        cl.ajouterJoueursId(user.id)
+                        print(user.id)
                         tabJoueurs.append(joueur.getUser())
                 #print(tabJoueurs)
                 #print(cl.getTabJoueursObjet())
 
                 if str(reaction.emoji) == (q.getTab()[4]):
                     var = True
-                    joueur.rmPointsToUser()
-                    await ctx.send(f"Question skipée, `{user.name}` tu perds un point !")
+                    print(joueur.getAPerduPoint())
+                    if joueur.getAPerduPoint() == False:
+                        joueur.rmPointsToUser()
+                        await ctx.send(f"**Question {w+1}** skipée, `{user.name}` tu perds un point !")
+                    elif joueur.getAPerduPoint() == True:
+                        await ctx.send(f"**Question {w+1}** skipée.")
                     for i in cl.getTabJoueursObjet():
                         i.restartJouer()
-                    print(Joueur(user).getPoints())
+                        i.setAPerduPoint(False)
                     await message.delete()
 
                 elif(joueur.getJouer() > 0):
@@ -421,6 +430,7 @@ async def lancer(ctx):
                 else:
                     await ctx.send(f"Mauvaise réponse `{user.name}` !")
                     joueur.rmPointsToUser()
+                    joueur.setAPerduPoint(True)
                     joueur.setJouer()
 
         rep = ""
@@ -429,14 +439,14 @@ async def lancer(ctx):
         embed=discord.Embed(color=0xfffef2)
         embed.add_field(name=f"Historique des questions", value=f"{rep}", inline=True)
         try:
-            assert vieuxPoints[0]
+            assert vieuxPoints[0] #Si crash (ce qui veut dire qu'on est au premier lancement) -> except
             await ctx.send("Fin du Quizz !")
             historique = await ctx.send(embed=embed)
             for i in range(len(cl.getTabJoueursObjet())):
                 if vieuxPoints[i] > cl.getTabJoueursObjet()[i].getPoints():
-                    await ctx.send(f"{cl.getTabJoueursObjet()[i].getUser()} a perdu {(vieuxPoints[i] - cl.getTabJoueursObjet()[i].getPoints())} points !")
+                    await ctx.send(f"`{cl.getTabJoueursObjet()[i].getUser()}` a perdu {(vieuxPoints[i] - cl.getTabJoueursObjet()[i].getPoints())} points !")
                 elif vieuxPoints[i] < cl.getTabJoueursObjet()[i].getPoints():
-                    await ctx.send(f"{cl.getTabJoueursObjet()[i].getUser()} a gagné {(cl.getTabJoueursObjet()[i].getPoints() - vieuxPoints[i])} points !")
+                    await ctx.send(f"`{cl.getTabJoueursObjet()[i].getUser()}` a gagné {(cl.getTabJoueursObjet()[i].getPoints() - vieuxPoints[i])} points !")
             await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
         except Exception as e:
             print(e)
@@ -459,13 +469,22 @@ def initialiserClassement():
         for i in range(len(cl.getTabJoueursObjet())):
             tab.append(cl.getTabJoueursObjet()[i])
         for i in range(len(cl.getTabJoueursObjet())):
-            tab = cl.ajoutMaxAListe(tab)
+            print(f"x avant : {tab}")
+            x = cl.ajoutMaxAListe(tab)
+            print(f"x : {x}")
+            tab = x
+        
+        print(f"OUAIS : {cl.getTabJoueursObjet()}")
+        print(f"TABLO : {tab}")
+        for i in tab:
+            print(i.getUser())
+        print(cl.getTabClassement())
     except Exception as e:
         print(e)
     try:
         for i in range(len(cl.getTabClassement())):
-            save = save + (f"{cl.getTabClassement()[i]} : {cl.getTabClassement()[i].getUser()} : {cl.getTabClassement()[i].getPoints()}\n")
-        file1 = open("classement.txt", "w")
+            save = save + (f"{cl.getTabJoueursId()[i]}:{cl.getTabClassement()[i].getUser()}:{cl.getTabClassement()[i].getPoints()}\n")
+        file1 = open("classement.txt", "w", encoding="utf-8")
         file1.write(save)
         file1.close()
 
@@ -519,6 +538,52 @@ async def helpquizz(ctx):
     embed=discord.Embed(color=0xfffef2)
     embed.add_field(name="Commandes pour le fonctionnement du Quizz LonLon Coffee", value="`Pour lancer le quizz` : $quizz\n`Pour commencer le quizz` : $lancer\n`Pour arrêter le système du quizz` (A UTILISER EN CAS DE GROS PROBLEMES, NE PAS UTILISER SINON) : $stopquizz", inline=True)
     await ctx.send(embed=embed)
+
+@bot.command()
+@commands.has_permissions(kick_members = True)
+async def addpoint(ctx, user:discord.User, point : int):
+    tabJoueur = []
+
+    for i in cl.getTabJoueursObjet():
+        tabJoueur.append(i.getUser())
+    if user.name not in tabJoueur:
+        joueur = Joueur(user)
+        joueur.setPointsToUser(point)
+        cl.ajouterJoueurs(joueur)
+        cl.ajouterJoueursId(user.id)
+    else:
+        for i in cl.getTabJoueursObjet():
+            if i.getUser()==user.name:
+                i.setPointsToUser(point)
+    initialiserClassement()
+
+
+@bot.command()
+@commands.has_permissions(kick_members = True)
+async def setclassement(ctx):
+    tab = []
+    with open("classement.txt", "r", encoding="utf-8") as f:
+        for ligne in f:
+            x = ligne.split(":")
+
+            cl.ajouterJoueursId(int(x[0]))
+
+            user = await bot.fetch_user(int(x[0]))
+            
+            cl.ajouterJoueurs(Joueur(user))
+
+            tab.append(int(x[2])) #tablo des points de chaque joueur
+
+            try:
+                j=0
+                for i in cl.getTabJoueursObjet():   
+                    i.donnerNombrePoint(tab[j])
+                    j+=1
+            except Exception as e:
+                print(e)
+            print(cl.getTabJoueursObjet())
+            initialiserClassement()
+
 
 
 #####################################################################Blindtest
