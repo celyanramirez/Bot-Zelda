@@ -94,7 +94,20 @@ class Quizz:
                             "Dans Breath of the Wild, combien il y a-t-il de sanctuaire (DLC inclus) ? 🔴",
                             "Dans Majora's Mask, que gagnons-nous en arrivant premier à la course Goron ? 🟠",
                             "Dans Breath of the Wild, où se trouve le bouclier d'Hylia ? 🟠",
-                            "Dans combien de jeu TLOZ Ganondorf/Ganon n'est pas le vilain principal ? 🔴"]
+                            "Dans combien de jeu TLOZ Ganondorf/Ganon n'est pas le vilain principal ? 🔴",
+                            "Dans Zelda I, le vieux monsieur vous donne au début du jeu... 🟢",
+                            "De quel jeu Zelda vient cette phrase mythique : 'It's dangerous to go alone, take this !' 🟢",
+                            "Dans Breath of the Wild, où sont situé les fameux 'Spectacle Rock', rochers emblématiques de la saga ? 🔴",
+                            "Parmi ces items, lequel est achetable chez Terry dans Skyward Sword ? 🔴",
+                            "Parmi ces instruments, duquel d'entre eux ne s'est jamais servi Link ? 🟠",
+                            "Dans lequel de ces opus notre héros ne voyage-t-il pas dans les cieux ? 🟠",
+                            "Dans la chronologie OFFICIELLE Zelda, à partir dequel jeu celle-ci se divise en plusieurs partie ? 🟢",
+                            "Dans la chronologie OFFICIELLE Zelda, quel jeu clôture la timeline de l'enfance ? 🟠",
+                            "Comment s'appelle le monde où se déroule Link's Awakening ? 🟢",
+                            "Dans Link's Awakening, quel animal dit à Link de réveiller le Poisson Rêve ? 🟠",
+                            "Dans lequel de ces jeux Link n'apparaît pas ? 🔴",
+                            "Combien il y a-t-il de grenouilles dorées dans Phantom Hourglass ? 🔴",
+                            "Dans Phantom Hourglass, combien il y a-t-il de type d'équipements de bateau ? (Ex : Démon, Or...) 🔴"]
 
         self.__reponses = {0 : ["🇦 OOT", "🇧 ALTTP", "🇨 ALBW", "🇩 LA"],
                            1 : ["🇦 Link", "🇧 Zelda", "🇨 Tingle", "🇩 Linkle"],
@@ -116,8 +129,8 @@ class Quizz:
                            17 : ["🇦 Ganondorf", "🇧 Roi Cuirasse", "🇨 Tetra", "🇩 Des pirates"],
                            18 : ["🇦 L'île étoilée", "🇧 L'île du croissant", "🇨 L'île de la rocaille", "🇩 L'île de Link"],
                            19 : ["🇦 Grâce à une grande fée", "🇧 Grâce à une quête secondaire", "🇨 En éliminant un Kalamar", "🇩 Grâce à Tingle"],
-                           20 : ["🇦En l'achetant en magasin", "🇧 En gagnant aux enchères", "🇨 En battant un boss", "🇩 Il n'y en a pas"],
-                           21 : ["🇦En l'achetant en magasin", "🇧 En gagnant aux enchères", "🇨 En battant un boss", "🇩 Il n'y en a pas"],
+                           20 : ["🇦 En l'achetant en magasin", "🇧 En gagnant aux enchères", "🇨 En battant un boss", "🇩 Il n'y en a pas"],
+                           21 : ["🇦 En l'achetant en magasin", "🇧 En gagnant aux enchères", "🇨 En battant un boss", "🇩 Il n'y en a pas"],
                            22 : ["🇦 6", "🇧 5", "🇨 7", "🇩 4"],
                            23 : ["🇦 4", "🇧 3", "🇨 1", "🇩 5"],
                            24 : ["🇦 5", "🇧 4", "🇨 6", "🇩 7"],
@@ -173,7 +186,20 @@ class Quizz:
                            74 : ["🇦 128", "🇧 135", "🇨 136", "🇩 130"],
                            75 : ["🇦 De la poudre dorée", "🇧 Une épée améliorée", "🇨 Le Monocle de Vérité", "🇩 Un quart de coeur"],
                            76 : ["🇦 Au pied d'un dragon", "🇧 Dans les chambres du château d'Hyrule", "🇨 Dans les geôles du château d'Hyrule", "🇩 Au sommet du château d'Hyrule"],
-                           77 : ["🇦 8", "🇧 9", "🇨 10", "🇩 11"]}
+                           77 : ["🇦 8", "🇧 9", "🇨 10", "🇩 11"],
+                           78 : ["🇦 Un conseil", "🇧 Un bouclier", "🇨 Une clé", "🇩 Une épée"],
+                           79 : ["🇦 Zelda I", "🇧 A Link to The Past", "🇨 Ocarina of Time", "🇩 Zelda II"],
+                           80 : ["🇦 Au plateau du Prélude", "🇧 Dans la région Gerudo", "🇨 Dans la région d'Akkala", "🇩 Dans la région d'Elimith"],
+                           81 : ["🇦 La Jar Magique", "🇧 Une bourse annexe (x3)", "🇨 Une médaille rubis", "🇩 Une bourse annexe (x2)"],
+                           82 : ["🇦 Le tambour", "🇧 La guitare", "🇨 La harpe", "🇩 La flûte à pan"],
+                           83 : ["🇦 Twilight Princess", "🇧 The Minish Cap", "🇨 Skyward Sword", "🇩 The Adventure of Link"],
+                           84 : ["🇦 The Minish Cap", "🇧 Ocarina of Time", "🇨 Twilight Princess", "🇩 Skyward Sword"],
+                           85 : ["🇦 Four Swords Adventures", "🇧 Majora's Mask", "🇨 Spirit Tracks", "🇩 Link's Awakening"],
+                           86 : ["🇦 Dreamworld", "🇧 Hyrule", "🇨 Termina", "🇩 Koholint Island"],
+                           87 : ["🇦 Un chien", "🇧 Un hibou", "🇨 Un poisson", "🇩 Un corbeau"],
+                           88 : ["🇦 Super Mario Maker 2", "🇧 Tingle's Rosy Rupeeland", "🇨 Soulcalibur II", "🇩 Mario Kart 8"],
+                           89 : ["🇦 6", "🇧 7", "🇨 5", "🇩 8"],
+                           90 : ["🇦 10", "🇧 8", "🇨 7", "🇩 9"]}
                            
         self.__bonneReponse = ["🇧 ALTTP",
                                "🇦 Link",
@@ -252,7 +278,20 @@ class Quizz:
                                "🇨 136",
                                "🇦 De la poudre dorée",
                                "🇨 Dans les geôles du château d'Hyrule",
-                               "🇨 10"]
+                               "🇨 10",
+                               "🇩 Une épée",
+                               "🇦 Zelda I",
+                               "🇧 Dans la région Gerudo",
+                               "🇧 Une bourse annexe (x3)",
+                               "🇨 La harpe",
+                               "🇩 The Adventure of Link",
+                               "🇧 Ocarina of Time",
+                               "🇦 Four Swords Adventures",
+                               "🇩 Koholint Island",
+                               "🇧 Un hibou",
+                               "🇧 Tingle's Rosy Rupeeland",
+                               "🇦 6",
+                               "🇩 9"]
 
         self.__tab = ['🇦' , '🇧', '🇨', '🇩', '❌']
         self.__lancer = False
