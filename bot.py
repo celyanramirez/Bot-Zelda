@@ -1,9 +1,11 @@
 #from msilib.schema import Class
+from cgi import test
 from sqlite3 import Time
 import string
 from this import d
 from typing import Any
 import typing
+from unittest import TestCase
 import discord
 import asyncio
 import random
@@ -494,15 +496,27 @@ def initialiserClassement():
 @bot.command()
 async def classement(ctx):
     valeur = ""
+    serverLogo = ctx.guild.icon_url
     try:
-        for i in range(len(cl.getTabClassement())):
-            valeur = valeur + (f"**{i+1}** : `{cl.getTabClassement()[i].getUser()}` avec {cl.getTabClassement()[i].getPoints()} points.\n")
-        embed=discord.Embed(title="**Classement du Quizz**",color=0xfffef2)
-        embed.add_field(name=f"{len(cl.getTabClassement())} joueurs inscrits", value=valeur, inline=True)
-        await ctx.send(embed=embed)
+        if len(cl.getTabClassement()) > 10: #Si il y a plus de 10 joueurs -> TOP 10 uniquement
+            for i in range(10):
+                valeur = valeur + (f"**{i+1}** : `{cl.getTabClassement()[i].getUser()}` avec {cl.getTabClassement()[i].getPoints()} points.\n")
+            valeur = valeur + (f"\nSi vous n'êtes pas dans le TOP 10, utilisez $place pour connaître votre classement !")
+            embed=discord.Embed(title="**Classement du Quizz `(TOP 10)`**",color=0xfffef2)
+            embed.add_field(name=f"{len(cl.getTabClassement())} joueurs inscrits", value=valeur, inline=True)
+            embed.set_thumbnail(url=(serverLogo))
+            await ctx.send(embed=embed)
+        else: #Sinon si c'est en dessous de 10, alors ça sera top len(classement)
+            for i in range(len(cl.getTabClassement())):
+                valeur = valeur + (f"**{i+1}** : `{cl.getTabClassement()[i].getUser()}` avec {cl.getTabClassement()[i].getPoints()} points.\n")
+            embed=discord.Embed(title="**Classement du Quizz**",color=0xfffef2)
+            embed.add_field(name=f"{len(cl.getTabClassement())} joueurs inscrits", value=valeur, inline=True)
+            embed.set_thumbnail(url=(serverLogo))
+            await ctx.send(embed=embed)
     except:
         embed=discord.Embed(title="**Classement du Quizz**",color=0xfffef2)
         embed.add_field(name=f"0 joueur inscrit", value="Aucune personne n'est dans le classement", inline=True)
+        embed.set_thumbnail(url=(serverLogo))
         await ctx.send(embed=embed)
 
 
@@ -510,18 +524,22 @@ async def classement(ctx):
 @bot.command()
 async def place(ctx):
     print(ctx.message.author.name)
-    j, point = cl.getPlaceJoueurClassementEtPoints(ctx.message.author.name)
-    if j==1:
+    placement, point = cl.getPlaceJoueurClassementEtPoints(ctx.message.author.name) #Pour récupérer classement + points
+    pfp = ctx.message.author.avatar_url #Pour récupérer la pdp
+    if placement==1:
         embed=discord.Embed(color=0xfffef2)
-        embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu es {j}er(e) du classement avec {point} points !", inline=True)
+        embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu es {placement}er(e) du classement avec {point} points !", inline=True)
+        embed.set_image(url=(pfp))
         await ctx.send(embed=embed)
-    elif j < 1:
+    elif placement < 1:
         embed=discord.Embed(color=0xfffef2)
         embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu n'es pas classé avec...{point} point. Il faut avoir un score positif pour être classé <:ptdr:864804743498039307>", inline=True)
+        embed.set_image(url=(pfp))
         await ctx.send(embed=embed)
     else:
         embed=discord.Embed(color=0xfffef2)
-        embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu es {j}ème du classement avec {point} points !", inline=True)
+        embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu es {placement}ème du classement avec {point} points !", inline=True)
+        embed.set_image(url=(pfp))
         await ctx.send(embed=embed)
 
 
@@ -536,7 +554,7 @@ async def stopquizz(ctx):
 @bot.command()
 async def helpquizz(ctx):
     embed=discord.Embed(color=0xfffef2)
-    embed.add_field(name="Commandes pour le fonctionnement du Quizz LonLon Coffee", value="`Pour lancer le quizz` : $quizz\n`Pour commencer le quizz` : $lancer\n`Pour arrêter le système du quizz` (A UTILISER EN CAS DE GROS PROBLEMES, NE PAS UTILISER SINON) : $stopquizz", inline=True)
+    embed.add_field(name="Commandes pour le fonctionnement du Quizz LonLon Coffee", value="`Pour lancer le quizz` : $quizz\n`Pour commencer le quizz` : $lancer\n`Pour connaître le classement du quizz`: $quizz\n`Pour connaître votre place dans le classement` : $place\n`Pour arrêter le système du quizz` (A UTILISER EN CAS DE GROS PROBLEMES, NE PAS UTILISER SINON) : $stopquizz", inline=True)
     await ctx.send(embed=embed)
 
 @bot.command()
