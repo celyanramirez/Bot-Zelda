@@ -107,7 +107,16 @@ class Quizz:
                             "Dans Link's Awakening, quel animal dit à Link de réveiller le Poisson Rêve ? 🟠",
                             "Dans lequel de ces jeux Link n'apparaît pas ? 🔴",
                             "Combien il y a-t-il de grenouilles dorées dans Phantom Hourglass ? 🔴",
-                            "Dans Phantom Hourglass, combien il y a-t-il de type d'équipements de bateau ? (Ex : Démon, Or...) 🔴"]
+                            "Dans Phantom Hourglass, combien il y a-t-il de type d'équipements de bateau ? (Ex : Démon, Or...) 🔴",
+                            "Dans Zelda II, où peut-on trouver les bottes permettant de marcher sur l'eau ? 🔴",
+                            "Dans Zelda II, qui est le boss final ? 🟠",
+                            "Dans Triforce Heroes, quel est le nom du boss du Temple du Désert ? 🔴",
+                            "Combien il y a-t-il de mondes différents dans Triforce Heroes ? 🟠",
+                            "Dans Triforce Heroes, quelle est la tunique renforçant l'arc ? 🟠",
+                            "Dans Majora's Mask, qui représente le Masque Mojo ? 🟠",
+                            "Dans Majora's Mask 3D, quel est l'objet principal pour effectuer le bug du 4ème jour ? 🔴",
+                            "Dans Majora's Mask, pourquoi Lulu a-t-elle perdu sa voix ? 🟢",
+                            "Dans Ocarina of Time, quel est le premier donjon du jeu ? 🟢"]
 
         self.__reponses = {0 : ["🇦 OOT", "🇧 ALTTP", "🇨 ALBW", "🇩 LA"],
                            1 : ["🇦 Link", "🇧 Zelda", "🇨 Tingle", "🇩 Linkle"],
@@ -199,7 +208,16 @@ class Quizz:
                            87 : ["🇦 Un chien", "🇧 Un hibou", "🇨 Un poisson", "🇩 Un corbeau"],
                            88 : ["🇦 Super Mario Maker 2", "🇧 Tingle's Rosy Rupeeland", "🇨 Soulcalibur II", "🇩 Mario Kart 8"],
                            89 : ["🇦 6", "🇧 7", "🇨 5", "🇩 8"],
-                           90 : ["🇦 10", "🇧 8", "🇨 7", "🇩 9"]}
+                           90 : ["🇦 10", "🇧 8", "🇨 7", "🇩 9"],
+                           91 : ["🇦 Dans le Palais des Marais", "🇧 Dans le Palais du Labyrinthe", "🇨 Dans le Palais de l'Îlot", "🇩 Dans la ville cachée de Kasuto"],
+                           92 : ["🇦 Ganon", "🇧 Ganondorf", "🇨 Dark Link", "🇩 Thunderbird"],
+                           93 : ["🇦 Champion Stalfos", "🇧 Stalfos Bombardier", "🇨 Grand Stalfos", "🇩 Stalfos du Désert"],
+                           94 : ["🇦 8", "🇧 9", "🇨 7", "🇩 10"],
+                           95 : ["🇦 La Tenue Haute-coupure", "🇧 La Tenue de l'archer", "🇨 La Tenue verte", "🇩 La Tenue Kokiri"],
+                           96 : ["🇦 Le fils du Majordome", "🇧 Le fils du Roi Mojo", "🇨 Une peste Mojo quelconque", "🇩 La princesse Mojo"],
+                           97 : ["🇦 Le masque de Kafei", "🇧 L'arc", "🇨 Le masque de Gibdo", "🇩 Un flacon vide"],
+                           98 : ["🇦 Parce qu'elle s'inquiète pour Mikau", "🇧 Parce que ses oeufs ont été volé", "🇨 Parce qu'elle a trop mangé", "🇩 Parce qu'elle ne peut plus nager"],
+                           99 : ["🇦 Jabu Jabu", "🇧 Le Temple de la forêt", "🇨 L'arbre Mojo", "🇩 La caverne Dodongo"]}
                            
         self.__bonneReponse = ["🇧 ALTTP",
                                "🇦 Link",
@@ -291,7 +309,16 @@ class Quizz:
                                "🇧 Un hibou",
                                "🇧 Tingle's Rosy Rupeeland",
                                "🇦 6",
-                               "🇩 9"]
+                               "🇩 9",
+                               "🇧 Dans le Palais du Labyrinthe",
+                               "🇨 Dark Link",
+                               "🇦 Champion Stalfos",
+                               "🇧 9",
+                               "🇩 La Tenue Kokiri",
+                               "🇦 Le fils du Majordome",
+                               "🇨 Le masque de Gibdo",
+                               "🇧 Parce que ses oeufs ont été volé",
+                               "🇨 L'arbre Mojo"]
 
         self.__tab = ['🇦' , '🇧', '🇨', '🇩', '❌']
         self.__lancer = False
@@ -429,100 +456,3 @@ class Classement:
     
     def ajouterJoueursId(self, id:int):
         self.tabJoueursId.append(id)
-
-
-'''
-@bot.command()
-async def combat(ctx, mec, mec2):
-    attaque = ["Foudre", "Feu", "Attaque standard", "Kamikaze", "bouclier"]
-    dégât = [50, 20, 10, 0, 0]
-    mecvie = 100
-    mec2vie = 100
-    persos = [mec, mec2]
-    rdm = random.randint(0,1)
-    savebouclier = False
-    while mecvie > 0 or mec2vie > 0:
-        if mecvie <= 0:
-            await ctx.send(f"{mec2} gagne !")
-            break
-        elif mec2vie <= 0:
-            await ctx.send(f"{mec} gagne !")
-            break
-        a = persos[rdm]
-        await ctx.send(f"C'est au tour de {a} de jouer !")
-        await asyncio.sleep(1)
-        if a == mec:
-            rdm = random.randint(0,3)
-            attack = attaque[rdm]
-            if attack == "bouclier":
-                await ctx.send(f"{a} utilise bouclier !")
-                await asyncio.sleep(1)
-                savebouclier = True
-                k = 1
-            elif attack == "Kamikaze":
-                await ctx.send(f"{a} attaque avec Kamikaze !...")
-                await ctx.send(f"Ah bah vous êtes tous mort")
-                break
-            else:
-                mec2vie = mec2vie - dégât[rdm]
-                await ctx.send(f"{a} attaque avec {attack} ! {mec2} perd {dégât[rdm]}pv !")
-                await asyncio.sleep(1)
-                k = 1
-        elif a == mec2:
-            rdm = random.randint(0,3)
-            attack = attaque[rdm]
-            if attack == "bouclier":
-                await ctx.send(f"{a} utilise bouclier !")
-                await asyncio.sleep(1)
-                k = 0
-            elif attack == "Kamikaze":
-                await ctx.send(f"{a} attaque avec Kamikaze !...")
-                await ctx.send(f"Ah bah vous êtes tous mort")
-                break
-            else:
-                mecvie = mecvie - dégât[rdm]
-                await ctx.send(f"{a} attaque avec {attack} ! {mec} perd {dégât[rdm]}pv !")
-                await asyncio.sleep(1)
-                k = 0
-        #####################################################Prochain Tour
-        b = persos[k]     
-        await ctx.send(f"C'est au tour de {b} de jouer !")
-        if b == mec:
-            rdm = random.randint(0,3)
-            attack = attaque[rdm]
-            if attack == "bouclier":
-                await ctx.send(f"{b} utilise bouclier !")
-                await asyncio.sleep(1)
-                savebouclier = True
-            elif savebouclier == True:
-                await ctx.send(f"L'adversaire ayant utilisé un bouclier, {b} ne peut pas attaquer !")
-                await asyncio.sleep(1)
-                savebouclier = False
-            elif attack == "Kamikaze":
-                await ctx.send(f"{b} attaque avec Kamikaze !...")
-                await ctx.send(f"Ah bah vous êtes tous mort")
-                break
-            else:
-                mec2vie = mec2vie - dégât[rdm]
-                await ctx.send(f"{b} attaque avec {attack} ! {mec2} perd {dégât[rdm]}pv !")
-                await asyncio.sleep(1)
-        elif b == mec2:
-            rdm = random.randint(0,3)
-            attack = attaque[rdm]
-            if attack == "bouclier":
-                await ctx.send(f"{b} utilise bouclier !")
-                await asyncio.sleep(1)
-                savebouclier = True
-            elif savebouclier == True:
-                await ctx.send(f"L'adversaire ayant utilisé un bouclier, {b} ne peut pas attaquer !")
-                await asyncio.sleep(1)
-                savebouclier = False
-            elif attack == "Kamikaze":
-                await ctx.send(f"{b} attaque avec Kamikaze !...")                
-                await ctx.send(f"Ah bah vous êtes tous mort")
-                break
-            else:
-                mec2vie = mec2vie - dégât[rdm]
-                await ctx.send(f"{b} attaque avec {attack} ! {mec} perd {dégât[rdm]}pv !")
-                await asyncio.sleep(1)
-'''

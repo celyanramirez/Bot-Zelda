@@ -675,4 +675,6 @@ async def gen(ctx):
 async def stream(ctx):
     await ctx.channel.send("<#773658789161074708>")
 '''
+
+
 bot.run("NzczMjQ0MDIwMDg3NzE3OTQ5.X6GZnA.HGvwG3-UW_nfe_y2wXVevcbAc58")
