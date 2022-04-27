@@ -318,7 +318,7 @@ class Quizz:
                                "🇦 Le fils du Majordome",
                                "🇨 Le masque de Gibdo",
                                "🇧 Parce que ses oeufs ont été volé",
-                               "🇨 L'arbre Mojo"]
+                               "🇨 L'arbre Mojo test"]
 
         self.__tab = ['🇦' , '🇧', '🇨', '🇩', '❌']
         self.__lancer = False
