@@ -369,6 +369,9 @@ class Joueur:
 
     def getUser(self):
         return self.user.name
+
+    def getUserId(self):
+        return self.user.id
     
     def getPoints(self):
         return self.points
@@ -454,5 +457,5 @@ class Classement:
     def getTabJoueursId(self):
         return self.tabJoueursId
     
-    def ajouterJoueursId(self, id:int):
+    def ajouterJoueursId(self, id):
         self.tabJoueursId.append(id)

@@ -12,6 +12,8 @@ import random
 import time
 from commandes import *
 from discord.ext import commands
+from discord_slash import ButtonStyle
+from discord_slash.utils.manage_components import *
 import ast
 
 client = discord.Client()
@@ -357,9 +359,12 @@ async def lancer(ctx):
                 message = await ctx.send(embed=embed)
             except Exception as e:
                 print(e)
+
+            
             for j in range(5): #Nombres de réponses (4 + 1 pour skip)
                 emo = q.getTab()[j]
                 await message.add_reaction(emo)
+            
             
             #################################################FIN DE POSE LA QUESTION
 
@@ -485,7 +490,7 @@ def initialiserClassement():
         print(e)
     try:
         for i in range(len(cl.getTabClassement())):
-            save = save + (f"{cl.getTabJoueursId()[i]}:{cl.getTabClassement()[i].getUser()}:{cl.getTabClassement()[i].getPoints()}\n")
+            save = save + (f"{cl.getTabClassement()[i].getUserId()}:{cl.getTabClassement()[i].getUser()}:{cl.getTabClassement()[i].getPoints()}\n")
         file1 = open("classement.txt", "w", encoding="utf-8")
         file1.write(save)
         file1.close()
@@ -582,16 +587,17 @@ async def setclassement(ctx):
     tab = []
     with open("classement.txt", "r", encoding="utf-8") as f:
         for ligne in f:
+
             x = ligne.split(":")
 
-            cl.ajouterJoueursId(int(x[0]))
+            cl.ajouterJoueursId(x[0])
 
-            user = await bot.fetch_user(int(x[0]))
-            
+            user = await bot.fetch_user(x[0])
+
             cl.ajouterJoueurs(Joueur(user))
-
+            
             tab.append(int(x[2])) #tablo des points de chaque joueur
-
+            
             try:
                 j=0
                 for i in cl.getTabJoueursObjet():   
