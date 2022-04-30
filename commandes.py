@@ -147,7 +147,7 @@ class Quizz:
                            26 : ["Le pouvoir de Mipha", "Le pouvoir de Revali", "Le pouvoir de Urbosa", "Le pouvoir de Daruk"],
                            27 : ["Le pouvoir de Daruk", "Le pouvoir de Revali", "Le pouvoir de Urbosa", "Le pouvoir de Mipha"],
                            28 : ["Majora's Mask", "Twilight Princess", "Oracle of Seasons", "Aucun d'entre eux"],
-                           29 : ["Oracle of Ages", "Oracle of Seasons", "<:CC:946480160922828850> <:STX1:946414240699408466> Four Sword Adventures", "Aucun d'entre eux"],
+                           29 : ["Oracle of Ages", "Oracle of Seasons", "Four Sword Adventures", "Aucun d'entre eux"],
                            30 : ["Breath of the Wild", "Ocarina of Time", "Twilight Princess", "Aucun jeu"],
                            31 : ["2", "4", "3", "5"],
                            32 : ["12", "13", "14", "15"],
