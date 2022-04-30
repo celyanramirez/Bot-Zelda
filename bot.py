@@ -12,8 +12,6 @@ import random
 import time
 from commandes import *
 from discord.ext import commands
-from discord_slash import ButtonStyle
-from discord_slash.utils.manage_components import *
 import ast
 
 client = discord.Client()
@@ -347,12 +345,19 @@ async def lancer(ctx):
             questionsUtiliséesIndex.append(alea) #Sert pour l'historique des questions posées à la fin.
 
             rep = ""
+            nb = 0
+            random.shuffle(q.getReponses()[alea])
             for i in q.getReponses()[alea]:
                 print(i)
                 if i == q.getReponses()[alea][len(q.getReponses()[alea])-1]:
-                    rep += "" + i + " ?"
-                else:
-                    rep += i + ",\n"
+                    rep += "\n<:DD:946480161304506428> <:STX1:946414240699408466> "+ i + " ?"
+                elif nb == 0:
+                    rep += "<:AA:946480160830554123> <:STX1:946414240699408466> "+ i +  ","
+                elif nb == 1:
+                    rep += "\n<:BB:946480160763437056> <:STX1:946414240699408466> "+ i +  ","
+                elif nb == 2:
+                    rep += "\n<:CC:946480160922828850> <:STX1:946414240699408466> " + i +  ","
+                nb+=1
             try:
                 embed=discord.Embed(title=q.getQuestions()[alea], color=0xfffef2, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
                 message = await ctx.send(embed=embed)
