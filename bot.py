@@ -350,12 +350,11 @@ async def lancer(ctx):
             for i in q.getReponses()[alea]:
                 print(i)
                 if i == q.getReponses()[alea][len(q.getReponses()[alea])-1]:
-                    rep += " ou " + i + " ?"
+                    rep += "" + i + " ?"
                 else:
-                    rep += i + ", "
+                    rep += i + ",\n"
             try:
-                embed=discord.Embed(title=q.getQuestions()[alea], color=0xfffef2)
-                embed.add_field(name=f"**{rep}**", value="Répondez en cliquant sur les lettres", inline=True)
+                embed=discord.Embed(title=q.getQuestions()[alea], color=0xfffef2, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
                 message = await ctx.send(embed=embed)
             except Exception as e:
                 print(e)
