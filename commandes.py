@@ -116,7 +116,21 @@ class Quizz:
                             "Dans Majora's Mask, qui représente le Masque Mojo ? 🟠",
                             "Dans Majora's Mask 3D, quel est l'objet principal pour effectuer le bug du 4ème jour ? 🔴",
                             "Dans Majora's Mask, pourquoi Lulu a-t-elle perdu sa voix ? 🟢",
-                            "Dans Ocarina of Time, quel est le premier donjon du jeu ? 🟢"]
+                            "Dans Ocarina of Time, quel est le premier donjon du jeu ? 🟢",
+                            "Combien existe-t-il de versions différentes de Twiligt Princess ? 🟢",
+                            "Quel Youtubeur Zelda est à l'origine de la série de vidéo 'Truth of the Wild' ? 🔴",
+                            "En quelle année est sorti le premier jeu Zelda sur console ? 🟠",
+                            "Dans Breath of the Wild, comment s'appelle la tunique représentant le héros du 1er jeu ? 🟠",
+                            "Dans quel jeu Zelda peut-on contrôler la princesse Zelda ? 🟢",
+                            "Quel est le premier jeu Zelda que notre modérateur Wild a fait en live ? 🔴",
+                            "Dans quel jeu Zelda peut-on devenir minuscule ? 🟢",
+                            "Dans Wind Waker, où se situe le vieux royaume d'Hyrule ? 🟢",
+                            "Dans Breath Of The Wild, quel est le nom du Roi d'Hyrule ? 🔴",
+                            "Dans quel jeu Zelda se trouve le Roi Zora XV ? 🔴",
+                            "Quel était l'opus le plus vendu avant la sortie de Breath of the Wild ? 🔴",
+                            "Combien de masque Link peut-il porter dans Majora's Mask ? 🔴",
+                            "Quel est le premier épisode (dans l'ordre de sortie des jeux) à avoir introduit la Master Sword ? 🟠",
+                            "Dans lequel des ces opus l'Épée de Légende ne permet-elle PAS de contrôler le temps (voyager dans le temps, l'arrêter, l'altérer etc.) ? 🔴"]
 
         self.__reponses = {0 : ["OOT", "ALTTP", "ALBW", "LA"],
                            1 : ["Link", "Zelda", "Tingle", "Linkle"],
@@ -217,7 +231,21 @@ class Quizz:
                            96 : ["Le fils du Majordome", "Le fils du Roi Mojo", "Une peste Mojo quelconque", "La princesse Mojo"],
                            97 : ["Le masque de Kafei", "L'arc", "Le masque de Gibdo", "Un flacon vide"],
                            98 : ["Parce qu'elle s'inquiète pour Mikau", "Parce que ses oeufs ont été volé", "Parce qu'elle a trop mangé", "Parce qu'elle ne peut plus nager"],
-                           99 : ["Jabu Jabu", "Le Temple de la forêt", "L'arbre Mojo", "La caverne Dodongo"]}
+                           99 : ["Jabu Jabu", "Le Temple de la forêt", "L'arbre Mojo", "La caverne Dodongo"],
+                           100 : ["3", "4", "2", "1"],
+                           101 : ["Siphano", "Planete Zelda", "Rinkuto", "Aife"],
+                           102 : ["1985", "1986", "1990", "1987"],
+                           103 : ["Tunique des landes", "Tunique du héros", "Tunique verte", "Tunique de la nature"],
+                           104 : ["Spirit Tracks", "Phantom Hourglass", "Wind Waker", "Ocarina of Time"],
+                           105 : ["Skyward Sword", "Breath of the Wild", "Minish Cap", "Majora's Mask"],
+                           106 : ["Minish Cap", "Skyward Sword", "Zelda II", "Oracle of Ages"],
+                           107 : ["Sous la mer", "Dans le ciel", "Sur une île", "Il n'existe pas"],
+                           108 : ["Rauham Bosphoramus Hyrule", "Roham Bosphoramus Hyrule", "Rauham Bausphoramus Hyrule", "Roham Bosphauramus Hyrule"],
+                           109 : ["Ocarina of Time", "Oracle of Ages", "Twilight Princess (défunt avant notre arrivée)", "Breath of the Wild"],
+                           110 : ["Twilight Princess", "A Link to the Past", "Ocarina of Time", "The Legend of Zelda"],
+                           111 : ["24", "28", "18", "20"],
+                           112 : ["A Link to the Past", "Zelda II", "Zelda I", "Ocarina of Time"],
+                           113 : ["A Link Between Worlds", "The Wind Waker", "Twiligt Princess", "Skyward Sword"]}
                            
         self.__bonneReponse = ["ALTTP",
                                "Link",
@@ -318,7 +346,21 @@ class Quizz:
                                "Le fils du Majordome",
                                "Le masque de Gibdo",
                                "Parce que ses oeufs ont été volé",
-                               "L'arbre Mojo"]
+                               "L'arbre Mojo",
+                               "3",
+                               "Rinkuto",
+                               "1986",
+                               "Tunique des landes",
+                               "Spirit Tracks",
+                               "Skyward Sword",
+                               "Minish Cap",
+                               "Sous la mer",
+                               "Roham Bosphoramus Hyrule",
+                               "Ocarina of Time",
+                               "Twilight Princess",
+                               "24",
+                               "A Link to the Past",
+                               "A Link Between Worlds"]
 
         self.__tab = ['<:AA:946480160830554123>' , '<:BB:946480160763437056>', '<:CC:946480160922828850>', '<:DD:946480161304506428>', '❌']
         self.__lancer = False

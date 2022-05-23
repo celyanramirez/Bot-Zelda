@@ -315,6 +315,7 @@ async def baston(ctx, combattant1 , combattant2):
 
 @bot.command()
 async def quizz(ctx):
+    setclassement()
     if q.getQuizzEnCours() == False:
         q.setLancer(True)
         q.setQuizzEnCours(True)
@@ -391,7 +392,9 @@ async def lancer(ctx):
                     reaction, user = await bot.wait_for('reaction_add', timeout=15.0 ,check=check)
                 except asyncio.TimeoutError :
                     await ctx.send(f"Vous avez pris trop de temps ! **Question {w+1}** skipée.")
-                    await message.delete();
+                    for i in cl.getTabJoueursObjet():
+                        i.restartJouer()
+                    await message.delete()
                     break
 
                 if Joueur(user).getUser() in tabJoueurs: #Si le joueur a déjà joué CE TOUR, on passe
@@ -464,13 +467,12 @@ async def lancer(ctx):
             await ctx.send("Fin du Quizz !")
             historique = await ctx.send(embed=embed)
             await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
+        initialiserClassement()
+        q.setLancer(False)
+        q.setQuizzEnCours(False)
 
     else:
         await ctx.send("Vous devez lancer un quizz avec la commande $quizz pour accéder à cette commande. Utilisez $quizzhelp pour plus d'infos.")
-    
-    initialiserClassement()
-    q.setLancer(False)
-    q.setQuizzEnCours(False)
 
 def initialiserClassement():
     tab = []
@@ -552,18 +554,19 @@ async def place(ctx):
         await ctx.send(embed=embed)
 
 
-@bot.command()
+
+'''@bot.command()
 async def stopquizz(ctx):
     if q.getQuizzEnCours() == True:
         q.setLancer(False)
         q.setQuizzEnCours(False)
-        await ctx.send("Quizz arrêté")
+        await ctx.send("Quizz arrêté")'''
 
 
 @bot.command()
 async def helpquizz(ctx):
     embed=discord.Embed(color=0xfffef2)
-    embed.add_field(name="Commandes pour le fonctionnement du Quizz LonLon Coffee", value="`Pour lancer le quizz` : $quizz\n`Pour commencer le quizz` : $lancer\n`Pour connaître le classement du quizz`: $quizz\n`Pour connaître votre place dans le classement` : $place\n`Pour arrêter le système du quizz` (A UTILISER EN CAS DE GROS PROBLEMES, NE PAS UTILISER SINON) : $stopquizz", inline=True)
+    embed.add_field(name="Commandes pour le fonctionnement du Quizz LonLon Coffee", value="`Pour lancer le quizz` : $quizz\n`Pour commencer le quizz` : $lancer\n`Pour connaître le classement du quizz`: $classement\n`Pour connaître votre place dans le classement` : $place\n`Pour arrêter le système du quizz` (A UTILISER EN CAS DE GROS PROBLEMES, NE PAS UTILISER SINON) : $stopquizz", inline=True)
     await ctx.send(embed=embed)
 
 @bot.command()
