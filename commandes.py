@@ -130,7 +130,13 @@ class Quizz:
                             "Quel était l'opus le plus vendu avant la sortie de Breath of the Wild ? 🔴",
                             "Combien de masque Link peut-il porter dans Majora's Mask ? 🔴",
                             "Quel est le premier épisode (dans l'ordre de sortie des jeux) à avoir introduit la Master Sword ? 🟠",
-                            "Dans lequel des ces opus l'Épée de Légende ne permet-elle PAS de contrôler le temps (voyager dans le temps, l'arrêter, l'altérer etc.) ? 🔴"]
+                            "Dans lequel des ces opus l'Épée de Légende ne permet-elle PAS de contrôler le temps (voyager dans le temps, l'arrêter, l'altérer etc.) ? 🔴",
+                            "Comment s'appelle la fille du ranch LonLon dans Ocarina of Time ? 🟢",
+                            "De quel Link est inspiré le Link présent sur la bannière du serveur ? 🟢",
+                            "Dans quel Zelda peut-on utiliser la tablette sheikah ? 🟢",
+                            "Dans quel jeu Zelda Terry fait-il sa première apparition ? 🟠",
+                            "Avec la sortie de quel opus a-t-on appris pour la première fois qu'Hyrule a été créé par trois divinités ? 🔴",
+                            "Combien de vœux ont été exaucés par la Triforce jusqu'à présent dans toute la série ? 🔴"]
 
         self.__reponses = {0 : ["OOT", "ALTTP", "ALBW", "LA"],
                            1 : ["Link", "Zelda", "Tingle", "Linkle"],
@@ -245,7 +251,13 @@ class Quizz:
                            110 : ["Twilight Princess", "A Link to the Past", "Ocarina of Time", "The Legend of Zelda"],
                            111 : ["24", "28", "18", "20"],
                            112 : ["A Link to the Past", "Zelda II", "Zelda I", "Ocarina of Time"],
-                           113 : ["A Link Between Worlds", "The Wind Waker", "Twiligt Princess", "Skyward Sword"]}
+                           113 : ["A Link Between Worlds", "The Wind Waker", "Twiligt Princess", "Skyward Sword"],
+                           114 : ["Malon", "Zelda", "Hilda", "Mélanie"],
+                           115 : ["Celui de Breath of the Wild", "Celui de Wind Waker", "Celui de Twilight Princess", "Celui de Zelda 1"],
+                           116 : ["Breath of the Wild", "Twilight Princess", "Ocarina of Time", "Majora's Mask"],
+                           117 : ["Wind Waker", "Breath of the Wild", "Minish Cap", "Phantom Hourglass"],
+                           118 : ["A Link to the Past", "Ocarina of Time", "Four Swords", "Zelda I"],
+                           119 : ["6", "3", "1", "5"]}
                            
         self.__bonneReponse = ["ALTTP",
                                "Link",
@@ -360,7 +372,13 @@ class Quizz:
                                "Twilight Princess",
                                "24",
                                "A Link to the Past",
-                               "A Link Between Worlds"]
+                               "A Link Between Worlds",
+                               "Malon",
+                               "Celui de Breath of the Wild",
+                               "Breath of the Wild",
+                               "Wind Waker",
+                               "A Link to the Past",
+                               "6"]
 
         self.__tab = ['<:AA:946480160830554123>' , '<:BB:946480160763437056>', '<:CC:946480160922828850>', '<:DD:946480161304506428>', '❌']
         self.__lancer = False

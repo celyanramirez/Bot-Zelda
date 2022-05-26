@@ -456,12 +456,16 @@ async def lancer(ctx):
             assert vieuxPoints[0] #Si crash (ce qui veut dire qu'on est au premier lancement) -> except
             await ctx.send("Fin du Quizz !")
             historique = await ctx.send(embed=embed)
-            for i in range(len(cl.getTabJoueursObjet())):
-                if vieuxPoints[i] > cl.getTabJoueursObjet()[i].getPoints():
-                    await ctx.send(f"`{cl.getTabJoueursObjet()[i].getUser()}` a perdu {(vieuxPoints[i] - cl.getTabJoueursObjet()[i].getPoints())} points !")
-                elif vieuxPoints[i] < cl.getTabJoueursObjet()[i].getPoints():
-                    await ctx.send(f"`{cl.getTabJoueursObjet()[i].getUser()}` a gagné {(cl.getTabJoueursObjet()[i].getPoints() - vieuxPoints[i])} points !")
-            await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
+            if len(cl.getTabJoueursObjet()) == 1 and cl.getTabJoueursObjet()[0].getPoints() <= 0:
+                await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
+            else:
+                for i in range(len(cl.getTabJoueursObjet())):
+                    if vieuxPoints[i] > cl.getTabJoueursObjet()[i].getPoints():
+                        await ctx.send(f"`{cl.getTabJoueursObjet()[i].getUser()}` a perdu {(vieuxPoints[i] - cl.getTabJoueursObjet()[i].getPoints())} points !")
+                    elif vieuxPoints[i] < cl.getTabJoueursObjet()[i].getPoints():
+                        await ctx.send(f"`{cl.getTabJoueursObjet()[i].getUser()}` a gagné {(cl.getTabJoueursObjet()[i].getPoints() - vieuxPoints[i])} points !")
+                    await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
+            
         except Exception as e:
             print(e)
             await ctx.send("Fin du Quizz !")
