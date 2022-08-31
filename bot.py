@@ -13,6 +13,8 @@ import time
 from commandes import *
 from discord.ext import commands
 import ast
+from discord.ext import tasks
+from datetime import date, datetime
 
 client = discord.Client()
 disc = Botdisc()
@@ -62,6 +64,7 @@ def max(tab):
 
 @bot.event
 async def on_ready():
+    check.start()
     print("J'suis prêt !")
 
 async def getMutedRole(ctx):
@@ -310,6 +313,32 @@ async def baston(ctx, combattant1 , combattant2):
     await ctx.send(f"BOUM ! C'est {tablo[aléa]} qui gagne le combat !")
 
 
+
+@tasks.loop(seconds=10)
+async def check():
+    a = datetime.now()
+    if a.hour == 0:
+        await anniv()
+        await asyncio.sleep(3600)
+    
+
+
+async def anniv():
+    today = date.today()
+    mois = today.month
+    jour = today.day
+    channel = bot.get_channel(317633054275272706)
+    if jour == 26 and mois == 2:
+        await channel.send("Aujourd'hui, c'est l'anniversaire du tout premier **The Legend of Zelda** <:loz:929350785903493130> ! C'est pas rien ! On peut même dire que c'est l'anniversaire la saga ! Alors on dit tous :\n 🎂 🎉 **BON ANNIVERSAIRE THE LEGEND OF ZELDA** 🎉 🎂")
+    if jour == 14 and mois == 2:
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Adventure of Link** <:aol:929350843294171166> !\nQu'on l'aime ou non, il mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+    if jour == 21 and mois == 11:
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : A Link to the Past** <:ALTTP:929350867226857492> !\nUn des Zelda les plus appréciés, et qui aura sûrement été le premier pour les plus anciens d'entre-nous !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+    
+
+    #if jour == 1 and mois == 9:
+        #await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : A Link to the Past** <:ALTTP:929350867226857492> !\nUn des Zelda les plus appréciés, et qui aura sûrement été le premier pour les plus anciens d'entre-nous !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+
 ############################################################QUIZZ#######################################################################
 
 
@@ -320,10 +349,21 @@ async def quizz(ctx):
         q.setLancer(True)
         q.setQuizzEnCours(True)
         embed=discord.Embed(title="Le Quizz LonLon Coffee <:lonloncoffee:945743720173670480>", color=0xfffef2)
-        embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="Pour lancer une partie, tapez $lancer. On vous souhaite bonne chance !", inline=True)
+        embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="Pour lancer une partie, tapez $lancer. On vous souhaite bonne chance !\nPS : Si vous êtes coincé, cliquez sur ❌", inline=True)
         message = await ctx.send(embed=embed)
     else:
         await ctx.send("Un quizz est déjà en cours.")
+
+
+def enleverImg(question):
+    if "/img" in question:
+        question = question.replace("/img", "")                  #efface le /img de la question
+        question = question.replace(question[0], "")               #efface cet index de la question
+        q.setContientImage(True)
+    else:
+        return question
+    return question
+
 
 @bot.command()
 async def lancer(ctx):
@@ -337,13 +377,35 @@ async def lancer(ctx):
         for i in cl.getTabJoueursObjet():
             vieuxPoints.append(i.getPoints())
         for w in range(5): #Nombre de questions
+            q.setContientImage(False)
             #################################################POSE LA QUESTION
-            alea = random.randint(0,len(q.getQuestions())-1) 
-            while(q.getQuestions()[alea] in questionsUtilisées):
-                alea = random.randint(0,len(q.getQuestions())-1)   
+            alea = random.randint(0,len(q.getQuestions())-1)
+            #print("QUESTION : ", q.getQuestions()[alea])
+            question = enleverImg(q.getQuestions()[alea])
+            print(questionsUtilisées)
+            while(question in questionsUtilisées):
+                alea = random.randint(0,len(q.getQuestions())-1)
+                question = enleverImg(q.getQuestions()[alea])      
+                if question == enleverImg(q.getQuestions()[alea]): #Debug au cas où la 1ère question contienne /img, qu'elle est déjà dans questionsUtilisées, et que la prochaine ne contienne pas de /img mais que le programme considère qu'elle l'a
+                    q.setContientImage(False)
+            #print("sortie : ", question)
+            
+            questionImageTemporaire = q.getQuestions()[alea]
+            question = enleverImg(questionImageTemporaire)
+            if q.getContientImage() == True:
+                q.setLienImage(q.getImages()[int(questionImageTemporaire[4])])   #récupère le lien de l'image grâce à l'index présent au début de la question
 
-            questionsUtilisées.append(q.getQuestions()[alea])
-            questionsUtiliséesIndex.append(alea) #Sert pour l'historique des questions posées à la fin.
+            if q.getContientImage() == True:
+                questionsUtilisées.append(question)
+                questionsUtiliséesIndex.append(alea)
+            else:
+                questionsUtilisées.append(q.getQuestions()[alea])
+                questionsUtiliséesIndex.append(alea) #Sert pour l'historique des questions posées à la fin.
+
+            if q.getContientImage() == True:
+                with open(q.getLienImage(), "rb") as fh:
+                    f = discord.File(fh, filename=q.getLienImage())
+                image = await ctx.send(file=f)
 
             rep = ""
             nb = 0
@@ -358,13 +420,19 @@ async def lancer(ctx):
                     rep += "\n<:BB:946480160763437056> <:STX1:946414240699408466> "+ i +  ","
                 elif nb == 2:
                     rep += "\n<:CC:946480160922828850> <:STX1:946414240699408466> " + i +  ","
-                nb+=1
+                nb+=1 
             try:
-                embed=discord.Embed(title=q.getQuestions()[alea], color=0xfffef2, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
-                message = await ctx.send(embed=embed)
+                if q.getContientImage() == True: 
+                    questionImageTemp = questionImageTemporaire
+                    questionImageTemp = enleverImg(questionImageTemp)
+                    
+                    embed=discord.Embed(title=questionImageTemp, color=0xfffef2, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
+                    message = await ctx.send(embed=embed)
+                else:
+                    embed=discord.Embed(title=q.getQuestions()[alea], color=0xfffef2, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
+                    message = await ctx.send(embed=embed)
             except Exception as e:
                 print(e)
-
             
             for j in range(5): #Nombres de réponses (4 + 1 pour skip)
                 emo = q.getTab()[j]
@@ -389,12 +457,14 @@ async def lancer(ctx):
                 verrou = False
 
                 try:
-                    reaction, user = await bot.wait_for('reaction_add', timeout=15.0 ,check=check)
+                    reaction, user = await bot.wait_for('reaction_add', timeout=20.0 ,check=check)
                 except asyncio.TimeoutError :
                     await ctx.send(f"Vous avez pris trop de temps ! **Question {w+1}** skipée.")
                     for i in cl.getTabJoueursObjet():
                         i.restartJouer()
                     await message.delete()
+                    if q.getContientImage() == True:
+                        await image.delete()
                     break
 
                 if Joueur(user).getUser() in tabJoueurs: #Si le joueur a déjà joué CE TOUR, on passe
@@ -413,8 +483,6 @@ async def lancer(ctx):
                         cl.ajouterJoueursId(user.id)
                         print(user.id)
                         tabJoueurs.append(joueur.getUser())
-                #print(tabJoueurs)
-                #print(cl.getTabJoueursObjet())
 
                 if str(reaction.emoji) == (q.getTab()[4]):
                     var = True
@@ -428,6 +496,8 @@ async def lancer(ctx):
                         i.restartJouer()
                         i.setAPerduPoint(False)
                     await message.delete()
+                    if q.getContientImage() == True:
+                        await image.delete()
 
                 elif(joueur.getJouer() > 0):
                     await ctx.send(f"Tu as déjà répondu `{user.name}` ")
@@ -440,6 +510,8 @@ async def lancer(ctx):
                         i.restartJouer()
                     tour+=1
                     await message.delete()
+                    if q.getContientImage() == True:
+                        await image.delete()
 
                 else:
                     await ctx.send(f"Mauvaise réponse `{user.name}` !")
@@ -451,26 +523,35 @@ async def lancer(ctx):
         for i in range(len(questionsUtilisées)):
             rep = rep + f"**Question {i+1}** : {questionsUtilisées[i]}\n**Réponse** : {q.getBonneReponse()[questionsUtiliséesIndex[i]]}\n" + "\n"
         embed=discord.Embed(color=0xfffef2)
+        '''
+        if q.getContientImage() == True:
+            repImage = []
+            for i in range(len(questionsUtilisées)):
+                repImage[i] = questionsUtilisées[i]
+            for i in range(len(repImage)):
+                enleverImg(repImage[i])
+            embed.add_field(name=f"Historique des questions", value=f"{repImage}", inline=True)
+        '''
         embed.add_field(name=f"Historique des questions", value=f"{rep}", inline=True)
         try:
             assert vieuxPoints[0] #Si crash (ce qui veut dire qu'on est au premier lancement) -> except
             await ctx.send("Fin du Quizz !")
             historique = await ctx.send(embed=embed)
-            if len(cl.getTabJoueursObjet()) == 1 and cl.getTabJoueursObjet()[0].getPoints() <= 0:
-                await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
+            if len(cl.getTabJoueursObjet()) == 1 and cl.getTabJoueursObjet()[0].getPoints() <= 0: #Si joueur gagne juste 0 point solo
+                await ctx.send("Utilisez $classement pour connaître le classement du café sur les quizz !")
             else:
                 for i in range(len(cl.getTabJoueursObjet())):
                     if vieuxPoints[i] > cl.getTabJoueursObjet()[i].getPoints():
                         await ctx.send(f"`{cl.getTabJoueursObjet()[i].getUser()}` a perdu {(vieuxPoints[i] - cl.getTabJoueursObjet()[i].getPoints())} points !")
                     elif vieuxPoints[i] < cl.getTabJoueursObjet()[i].getPoints():
                         await ctx.send(f"`{cl.getTabJoueursObjet()[i].getUser()}` a gagné {(cl.getTabJoueursObjet()[i].getPoints() - vieuxPoints[i])} points !")
-                    await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
+                await ctx.send("Utilisez $classement pour connaître le classement du café sur les quizz !")
             
         except Exception as e:
             print(e)
             await ctx.send("Fin du Quizz !")
             historique = await ctx.send(embed=embed)
-            await ctx.send("Utilisez $classement pour connaître le classement du serveur sur les quizz !")
+            await ctx.send("Utilisez $classement pour connaître le classement du café sur les quizz !")
         initialiserClassement()
         q.setLancer(False)
         q.setQuizzEnCours(False)
@@ -491,11 +572,11 @@ def initialiserClassement():
             print(f"x : {x}")
             tab = x
         
-        print(f"OUAIS : {cl.getTabJoueursObjet()}")
-        print(f"TABLO : {tab}")
+        #print(f"OUAIS : {cl.getTabJoueursObjet()}")
+        #print(f"TABLO : {tab}")
         for i in tab:
             print(i.getUser())
-        print(cl.getTabClassement())
+        #print(cl.getTabClassement())
     except Exception as e:
         print(e)
     try:
