@@ -19,15 +19,16 @@ from discord.ext import commands
 import ast
 from discord.ext import tasks
 from datetime import date, datetime
+from connection import *
 
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
 disc = Botdisc()
 q = Quizz()
 cl = Classement()
 prefix = "$"
 bot = commands.Bot(command_prefix=prefix, intents=intents)
+
 
 listeZelda = ["-Zelda I\n"
 "-Zelda II, The Adventure of Link\n"
@@ -329,7 +330,7 @@ async def baston(ctx, *args):
 @tasks.loop(seconds=10)
 async def checkReu():
     date = datetime.now()
-    channel = bot.get_chanel(1029657819470889021)
+    channel = bot.get_channel(1029657819470889021)
     if date.hour == 20:
         await channel.send("||@everyone ||\n**Réunion quotidienne**\n\nQu'est-ce que vous avez fait ?\nQu'est-ce que vous allez faire demain ?\nAvez-vous rencontré des problèmes ?")
 
@@ -934,5 +935,5 @@ async def stream(ctx):
     await ctx.channel.send("<#773658789161074708>")
 '''
 
-
-bot.run("NzczMjQ0MDIwMDg3NzE3OTQ5.X6GZnA.HGvwG3-UW_nfe_y2wXVevcbAc58")
+c = Connection()
+c.lancer(bot)
