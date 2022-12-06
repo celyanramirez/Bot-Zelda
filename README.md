@@ -10,4 +10,8 @@ Contient :
 
   -Anniversaire automatique des différents jeux de la série
 
+Prévu :
+ 
+  -Base de données externe pour le classement
+
 ![BANIERRE](https://user-images.githubusercontent.com/74588051/165649734-2fefe961-c8cd-4228-a871-cac5351a27cc.jpg)
