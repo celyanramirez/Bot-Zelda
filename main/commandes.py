@@ -608,3 +608,14 @@ class Classement:
     
     def ajouterJoueursId(self, id):
         self.tabJoueursId.append(id)
+
+class Ping:
+
+    def __init__(self):
+        self.__message = None
+
+    def setMessage(self, message):
+        self.__message = message
+    
+    def getMessage(self):
+        return self.__message

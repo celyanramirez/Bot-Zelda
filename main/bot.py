@@ -20,11 +20,14 @@ import ast
 from discord.ext import tasks
 from datetime import date, datetime
 from connection import *
+from discord.utils import get
 
 intents = discord.Intents.default()
 intents.message_content = True
+client = discord.Client(intents=intents)
 disc = Botdisc()
 q = Quizz()
+p = Ping()
 cl = Classement()
 prefix = "$"
 bot = commands.Bot(command_prefix=prefix, intents=intents)
@@ -73,7 +76,6 @@ def max(tab):
 @bot.event
 async def on_ready():
     check.start()
-    checkReu.start()
     print("J'suis prêt !")
 
 async def getMutedRole(ctx):
@@ -249,7 +251,7 @@ async def zelda(ctx):
     embed=discord.Embed(title="Timelines", color=0xfffef2)
     embed.set_author(name="Hyrule's Folders",icon_url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    embed.add_field(name="Tradition divine & Héros du temps", value="Zelda Skyward Sword\nZelda Minish Cap\nZelda Four Sword\nZelda Ocarina of Time", inline=True)
+    embed.add_field(name="Tradition divine $ Héros du temps", value="Zelda Skyward Sword\nZelda Minish Cap\nZelda Four Sword\nZelda Ocarina of Time", inline=True)
     embed.add_field(name="Branche de l'Héros Adulte", value="Zelda Wind Waker\nZelda Phantom Hourglass\nZelda Spirits Tracks", inline=True)
     embed.add_field(name="Branche de la défaite du Héros", value="Zelda A Link to the Past\nZelda Oracles of Seaons\nZelda Oracles of Ages\nZelda Link's Awaneking\nZelda I\nZelda II", inline=True)
     embed.add_field(name="Branche de l'Héros Enfant", value="Zelda Majora's Mask\nZelda Twiligt Princess\nZelda Four Swords Adventures\n", inline=True)
@@ -327,13 +329,14 @@ async def baston(ctx, *args):
     await asyncio.sleep(1)
     await ctx.send(f"BOUM ! C'est {args[aléa]} qui gagne le combat !")
 
+'''
 @tasks.loop(seconds=10)
 async def checkReu():
     date = datetime.now()
     channel = bot.get_channel(1029657819470889021)
     if date.hour == 20:
         await channel.send("||@everyone ||\n**Réunion quotidienne**\n\nQu'est-ce que vous avez fait ?\nQu'est-ce que vous allez faire demain ?\nAvez-vous rencontré des problèmes ?")
-
+'''
 
 @tasks.loop(seconds=10)
 async def check():
@@ -364,14 +367,16 @@ async def anniv():
    
     if jour == 6 and mois == 6:
         await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening** <:LsA:929350885551783948> !\nUn Zelda à très spécial, avec son monde si particulier et ses références à d'autres univers de jeux-vidéo comme... Mario !\nBref, souhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
-    if jour == 18 and mois == 11:
+    if jour == 1 and mois == 12:
         await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening** <:LsA:929350885551783948> chez nous, en Europe !\nUn Zelda à très spécial, avec son monde si particulier et ses références à d'autres univers de jeux-vidéo comme... Mario !\nBref, souhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 20 and mois == 9:
         await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening HD** <:LsA:929350885551783948> !\nUn superbe remake de l'opus GameBoy ! Qu'on aime ou non son style artistique, il reste très fidèle au jeu original !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
 
     if jour== 21 and mois == 11:
-        await channel.send("Aujorud'hui, c'est l'anniversaire de **The Legend of Zelda : Ocarina of Time** <:OOT:929350904518410280> !\nLe tout premier The Legend of Zelda en 3D ! Il est même considéré par beaucoup comme le meilleur jeu de tous les temps !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")    
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Ocarina of Time** <:OOT:929350904518410280> !\nLe tout premier The Legend of Zelda en 3D ! Il est même considéré par beaucoup comme le meilleur jeu de tous les temps !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+    if jour == 11 and mois == 12:
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Ocarina of Time** <:OOT:929350904518410280> chez nous, en Europe ! Vous avez pu y jouer à sa sortie ?\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 27 and mois == 4:
         await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Majora's Mask** <:MsM:929350924374261800> !\nProbablement le Zelda le plus singulier de la franchise !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
@@ -428,7 +433,7 @@ async def anniv():
     
     if jour == 7 and mois == 12:
         await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Spirit Tracks** <:ST:929351118071402506> !\nLe deuxième épisode sur DS, et la suite à Phantom Hourglass !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
-    if jour == 23 and mois == 12:
+    if jour == 11 and mois == 12:
         await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Spirit Tracks** <:ST:929351118071402506> chez nous, en Europe !\nJe pense que vous êtes un certains nombre à l'avoir reçu pour Noël au vu de la date, non ? 🤭\nEn cette période de fête, on n'oublie pas de lui souhaiter un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 18 and mois == 11:
@@ -514,7 +519,7 @@ def enleverImg(question):
         return question
     return question
 
-
+@bot.command()
 async def lancer(ctx):
     await msgLancer.delete()
     q.setDeuxNombres(False)
@@ -835,38 +840,187 @@ async def addpoint(ctx, user:discord.User, point : int):
 @bot.command()
 @commands.has_permissions(kick_members = True)
 async def setclassement(ctx):
-    cl.resetTabJoueursObjet()
-    tab = []
-    with open("classement.txt", "r", encoding="utf-8") as f:
-        for ligne in f:
+    try:
+        cl.resetTabJoueursObjet()
+        tab = []
+        with open("classement.txt", "r", encoding="utf-8") as f:
+            for ligne in f:
 
-            x = ligne.split(":")
+                x = ligne.split(":")
 
-            cl.ajouterJoueursId(x[0])
+                cl.ajouterJoueursId(x[0])
 
-            user = await bot.fetch_user(x[0])
+                user = await bot.fetch_user(x[0])
 
-            cl.ajouterJoueurs(Joueur(user))
-            
-            tab.append(int(x[2])) #tablo des points de chaque joueur
-            print(f"tab setclassement : {tab}")
-            try:
-                j=0
-                for i in cl.getTabJoueursObjet():   
-                    i.donnerNombrePoint(tab[j])
-                    j+=1
-            except Exception as e:
-                print(f"Erreur dans setclassement : {e}")
-            print(cl.getTabJoueursObjet())
-            print(f"taille : {len(cl.getTabJoueursObjet())}")
-            initialiserClassement()
+                cl.ajouterJoueurs(Joueur(user))
+                
+                tab.append(int(x[2])) #tablo des points de chaque joueur
+                print(f"tab setclassement : {tab}")
+                try:
+                    j=0
+                    for i in cl.getTabJoueursObjet():   
+                        i.donnerNombrePoint(tab[j])
+                        j+=1
+                except Exception as e:
+                    print(f"Erreur dans setclassement : {e}")
+                print(cl.getTabJoueursObjet())
+                print(f"taille : {len(cl.getTabJoueursObjet())}")
+                initialiserClassement()
+    except Exception as e:
+        print(e)
 
 
 
-#####################################################################Blindtest
+#####################################################################Ping
+
+@bot.command()
+async def ping(ctx):
+    channelName = str(ctx.channel)
+    channel = get(ctx.guild.channels, name=channelName)
+    tab = {1059825385149321226 : 928401913182035999, #tloz (channel : role)
+            1059825536395903016 : 928402198138863636, #aol
+            1059825936608018552 : 928402618403942411, #alttp
+            1059827532758790164 : 928402815943061634, #la
+            1059827792537190430 : 928403095510196274, #oot
+            1059828105822347304 : 928403211591778315, #mm
+            1059831103298478200 : 928403296576757780, #ooa
+            1059831316050366474 : 928403472477458482, #oos
+            1059834770709819485 : 928403712693637151, #tww
+            1059836385441353868 : 928403912195711066, #tmc
+            #no FS
+            1059841852351709234 : 928404096287924244, #fsa
+            1059847618190135378 : 928404790336184380, #tp
+            1059848574277533761 : 928404946729189378, #ph
+            1059852802962239648 : 928405048931782676, #st
+            1059853901731483720 : 928405127029751820, #ss
+            1059857316859625592 : 928405234747838485, #albw
+            1059858427909787739 : 928405518404423740, #tfh
+            1059971869400387654 : 928405583432937483, #botw
+            1060238945016893472 : 928405741121982524, #hw
+            1060243138263928913 : 928406210925977651, #aoc
+            }
+    
+    for i,j in tab.items():
+        if(int(channel.id) == int(i)):
+            searched_role = get(ctx.guild.roles, id=j)
+            print(searched_role)
+            await ctx.send(f"{searched_role.mention}")
+
+@bot.event
+async def on_message(message):
+    roles = ["$ping", "$tloz", "$aol", "$alttp", "$la", "$oot", "$mm", "$ooa", "$oos", "$tww", "$fs", "$fsa", "$tp", "$ph", "$st", "$ss", "$albw", "$tfh", "$botw", "$hw", "$aoc", "$coh"]
+    if(str(message.content) in roles):
+        await message.delete()
+    await bot.process_commands(message)
+
+
+@bot.command()
+async def tloz(ctx):
+    role = get(ctx.guild.roles, id=928401913182035999)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def aol(ctx):
+    role = get(ctx.guild.roles, id=928402198138863636)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def alttp(ctx):
+    role = get(ctx.guild.roles, id=928402618403942411)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def la(ctx):
+    role = get(ctx.guild.roles, id=928402815943061634)
+    await ctx.send(f"{role.mention}")   
+
+@bot.command()
+async def oot(ctx):
+    role = get(ctx.guild.roles, id=928403095510196274)
+    await ctx.send(f"{role.mention}")       
+
+@bot.command()
+async def mm(ctx):
+    role = get(ctx.guild.roles, id=928403211591778315)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def ooa(ctx):
+    role = get(ctx.guild.roles, id=928403296576757780)
+    await ctx.send(f"{role.mention}")   
+
+@bot.command()
+async def oos(ctx):
+    role = get(ctx.guild.roles, id=928403472477458482)
+    await ctx.send(f"{role.mention}")  
+
+@bot.command()
+async def tww(ctx):
+    role = get(ctx.guild.roles, id=928403712693637151)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def fs(ctx):
+    role = get(ctx.guild.roles, id=928404319504596993)
+    await ctx.send(f"{role.mention}")  
+
+@bot.command()
+async def fsa(ctx):
+    role = get(ctx.guild.roles, id=928404096287924244)
+    await ctx.send(f"{role.mention}")    
+
+@bot.command()
+async def tp(ctx):
+    role = get(ctx.guild.roles, id=928404790336184380)
+    await ctx.send(f"{role.mention}") 
+
+@bot.command()
+async def ph(ctx):
+    role = get(ctx.guild.roles, id=928404946729189378)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def st(ctx):
+    role = get(ctx.guild.roles, id=928405048931782676)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def ss(ctx):
+    role = get(ctx.guild.roles, id=928405127029751820)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def albw(ctx):
+    role = get(ctx.guild.roles, id=928405234747838485)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def tfh(ctx):
+    role = get(ctx.guild.roles, id=928405518404423740)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def botw(ctx):
+    role = get(ctx.guild.roles, id=928405583432937483)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def hw(ctx):
+    role = get(ctx.guild.roles, id=928405741121982524)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def aoc(ctx):
+    role = get(ctx.guild.roles, id=928406210925977651)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def coh(ctx):
+    role = get(ctx.guild.roles, id=928406339804360764)
+    await ctx.send(f"{role.mention}")
 
 '''
-
+zzz
 @bot.command()
 @commands.has_permissions(kick_members = True)
 async def blindtest(ctx):
