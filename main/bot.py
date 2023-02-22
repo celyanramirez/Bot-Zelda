@@ -350,7 +350,7 @@ async def anniv():
     mois = today.month
     jour = today.day
     channel = bot.get_channel(772462715004387350)
-    if jour == 26 and mois == 2:
+    if jour == 21 and mois == 2:
         await channel.send("Aujourd'hui, c'est l'anniversaire du tout premier **The Legend of Zelda** <:loz:929350785903493130> ! C'est pas rien ! On peut même dire que c'est l'anniversaire la saga ! Alors on dit tous :\n 🎂 🎉 **BON ANNIVERSAIRE THE LEGEND OF ZELDA** 🎉 🎂")
     if jour == 15 and mois == 11:
         await channel.send("Aujourd'hui, c'est l'anniversaire du tout premier **The Legend of Zelda** <:loz:929350785903493130>, en Europe ! En réalité, il est arrivé chez nous (en France) bien plus tard, mais chut. \nOn lui souhaite un 🎂 🎉 **BON ANNIVERSAIRE** 🎉 🎂")
