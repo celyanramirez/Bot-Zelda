@@ -27,7 +27,6 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 disc = Botdisc()
 q = Quizz()
-p = Ping()
 cl = Classement()
 prefix = "$"
 bot = commands.Bot(command_prefix=prefix, intents=intents)
@@ -924,7 +923,10 @@ async def on_message(message):
             elif(word == "[CG-Games-Project:equipe5-blanchet-ghiorghita-rodrigues]"):
                 channel = bot.get_channel(1080496180447948911) #jeu6
                 await channel.send(embed=embed)
-                
+            elif(word == "[CG-Games-Project:equipe4-belhamdi-chuewaye-cornet]"):
+                channel = bot.get_channel(1080496303571746856) #jeu5
+                await channel.send(embed=embed)
+
             elif(word == "[CG-Games-Project:main]"):
                 channel = bot.get_channel(1080496525970509904) #main
                 await channel.send(embed=embed)
