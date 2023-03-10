@@ -926,6 +926,9 @@ async def on_message(message):
             elif(word == "[CG-Games-Project:equipe4-belhamdi-chuewaye-cornet]"):
                 channel = bot.get_channel(1080496303571746856) #jeu5
                 await channel.send(embed=embed)
+            elif(word == "[CG-Games-Project:equipe6-germain-pierrevelcin-vanhove]"):
+                channel = bot.get_channel(1080496085996421180) #jeu7
+                await channel.send(embed=embed)
 
             elif(word == "[CG-Games-Project:main]"):
                 channel = bot.get_channel(1080496525970509904) #main
