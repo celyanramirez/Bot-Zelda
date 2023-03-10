@@ -908,10 +908,36 @@ async def ping(ctx):
 
 @bot.event
 async def on_message(message):
-    roles = ["$ping", "$tloz", "$aol", "$alttp", "$la", "$oot", "$mm", "$ooa", "$oos", "$tww", "$fs", "$fsa", "$tp", "$ph", "$st", "$ss", "$albw", "$tfh", "$botw", "$hw", "$aoc", "$coh"]
-    if(str(message.content) in roles):
-        await message.delete()
-    await bot.process_commands(message)
+    if message.channel.id == 1080091500618194975 and message.author.id == 1080118704366419988:
+        embed = message.embeds[0]
+        msg = embed.title
+        for word in msg.split():
+            if(word == "[CG-Games-Project:equipe2-aubert-brizay-fraile]"):
+                channel = bot.get_channel(1080496366041710594) #tournois
+                await channel.send(embed=embed)
+            elif(word == "[CG-Games-Project:equipe1-kicien-ramirez-reiner]"):
+                channel = bot.get_channel(1080496408248979579) #stats
+                await channel.send(embed=embed)
+            elif(word == "[CG-Games-Project:equipe3-chapuisat-turner-viviers]"):
+                channel = bot.get_channel(1080496332977999892) #param
+                await channel.send(embed=embed)     
+            elif(word == "[CG-Games-Project:equipe5-blanchet-ghiorghita-rodrigues]"):
+                channel = bot.get_channel(1080496180447948911) #jeu6
+                await channel.send(embed=embed)
+                
+            elif(word == "[CG-Games-Project:main]"):
+                channel = bot.get_channel(1080496525970509904) #main
+                await channel.send(embed=embed)
+
+            elif(word == "[SAE-IAMSI/CG-Games-Project]"):
+                channel = bot.get_channel(1080496497054990468) #mergequest
+                await channel.send(embed=embed) 
+            
+    else:
+        roles = ["$ping", "$tloz", "$aol", "$alttp", "$la", "$oot", "$mm", "$ooa", "$oos", "$tww", "$fs", "$fsa", "$tp", "$ph", "$st", "$ss", "$albw", "$tfh", "$botw", "$hw", "$aoc", "$coh"]
+        if(str(message.content) in roles):
+            await message.delete()
+        await bot.process_commands(message)
 
 
 @bot.command()
