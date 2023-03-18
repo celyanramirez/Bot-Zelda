@@ -1,8 +1,10 @@
+from __future__ import annotations
 from discord.ext import commands
 import discord
 import asyncio
 import random
 import time
+import youtube_dl
 
 class Botdisc:
 
@@ -619,3 +621,34 @@ class Ping:
     
     def getMessage(self):
         return self.__message
+    
+
+class Music:
+    __instance = None
+
+    def __init__(self):
+        self.links = []
+
+    @staticmethod
+    def getInstance() -> Music or None:
+        if Music.__instance is None:
+            Music.__instance = Music()
+        return Music.__instance
+        
+    def load(self):
+        with open("music.txt", "r", encoding="utf-8") as file:
+            for ligne in file:
+                x = ligne.split(",")
+                for i in range(len(x)):
+                    self.add(x[i])
+
+    def remove(self, link):
+        if(link in self.links):
+            self.links.remove(link)
+        
+    def add(self, link):
+        self.links.append(link)
+        file = open("music.txt", "w", encoding="utf-8")
+        file.write(f"{link},")
+
+    

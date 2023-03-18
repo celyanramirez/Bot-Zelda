@@ -21,6 +21,8 @@ from discord.ext import tasks
 from datetime import date, datetime
 from connection import *
 from discord.utils import get
+import youtube_dl
+
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -868,6 +870,96 @@ async def setclassement(ctx):
     except Exception as e:
         print(e)
 
+######################################################################Musique
+
+musics = {}
+ytdl = youtube_dl.YoutubeDL()
+
+class Video:
+    def __init__(self, link):
+        video = ytdl.extract_info(link, download=False)
+        video_format = video["formats"][0]
+        self.url = video["webpage_url"]
+        self.stream_url = video_format["url"]
+
+@bot.command()
+async def leave(ctx):
+    client = ctx.guild.voice_client
+    await client.disconnect()
+    musics[ctx.guild] = []
+
+@bot.command()
+async def resume(ctx):
+    client = ctx.guild.voice_client
+    if client.is_paused():
+        client.resume()
+
+
+@bot.command()
+async def pause(ctx):
+    client = ctx.guild.voice_client
+    if not client.is_paused():
+        client.pause()
+
+
+@bot.command()
+async def skip(ctx):
+    client = ctx.guild.voice_client
+    client.stop()
+
+
+def play_song(client, queue, song):
+    source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(executable='C:/ffmpeg/bin/ffmpeg.exe', source=song.stream_url
+        , before_options = "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"))
+
+    def next(_):
+        if len(queue) > 0:
+            new_song = queue[0]
+            del queue[0]
+            play_song(client, queue, new_song)
+        else:
+            asyncio.run_coroutine_threadsafe(client.disconnect(), bot.loop)
+
+    client.play(source, after=next)
+
+@bot.command()
+@commands.has_permissions(kick_members = True)
+async def add(ctx, link):
+    Music.getInstance().add(link)
+
+@bot.command()
+async def play(ctx):
+    try:
+        client = ctx.guild.voice_client
+        Music.getInstance().load()
+        
+        if client and client.channel:
+            for m in Music.getInstance().links:
+                video = Video(m)
+                musics[ctx.guild].append(video)
+        else:
+            for m in Music.getInstance().links:
+                channel = ctx.author.voice.channel
+                video = Video(m)
+                musics[ctx.guild] = []
+                client = await channel.connect()
+                play_song(client, musics[ctx.guild], video)
+    except Exception as e:
+        print(e)
+
+'''
+@bot.command(pass_context = True)
+async def join(ctx):
+    try:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        player = discord.FFmpegPCMAudio(executable='C:/ffmpeg/bin/ffmpeg.exe', source='test.mp3')
+        print(player)
+        voice.play(player)
+    except Exception as e:
+        print(e)
+'''
+
 
 
 #####################################################################Ping
@@ -897,12 +989,13 @@ async def ping(ctx):
             1059971869400387654 : 928405583432937483, #botw
             1060238945016893472 : 928405741121982524, #hw
             1060243138263928913 : 928406210925977651, #aoc
+            774309114763018272 : 928405518404423740,
             }
     
     for i,j in tab.items():
         if(int(channel.id) == int(i)):
+            print("beforeROLE")
             searched_role = get(ctx.guild.roles, id=j)
-            print(searched_role)
             await ctx.send(f"{searched_role.mention}")
 
 @bot.event
