@@ -4,7 +4,7 @@ import discord
 import asyncio
 import random
 import time
-import youtube_dl
+import yt_dlp
 
 class Botdisc:
 
@@ -640,7 +640,7 @@ class Music:
             for ligne in file:
                 x = ligne.split(",")
                 for i in range(len(x)):
-                    self.add(x[i])
+                    self.links.append(x[i])
 
     def remove(self, link):
         if(link in self.links):
@@ -649,6 +649,7 @@ class Music:
     def add(self, link):
         self.links.append(link)
         file = open("music.txt", "w", encoding="utf-8")
-        file.write(f"{link},")
+        file.write(f"{self.links}")
+        file.close()
 
     

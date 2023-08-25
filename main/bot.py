@@ -5,10 +5,8 @@ from email import message
 from imghdr import what
 from multiprocessing import context
 from sqlite3 import Time
-import string
 from this import d
 from typing import Any
-import typing
 from unittest import TestCase
 import discord
 import asyncio
@@ -16,22 +14,26 @@ import random
 import time
 from commandes import *
 from discord.ext import commands
-import ast
 from discord.ext import tasks
 from datetime import date, datetime
 from connection import *
 from discord.utils import get
 import youtube_dl
+import pyttsx3
+import os
+import schedule
 
 
 intents = discord.Intents.default()
 intents.message_content = True
+
+engine = pyttsx3.init()
 client = discord.Client(intents=intents)
 disc = Botdisc()
 q = Quizz()
 cl = Classement()
 prefix = "$"
-bot = commands.Bot(command_prefix=prefix, intents=intents)
+bot = commands.Bot(command_prefix=prefix, intents=intents, help_command=None)
 
 
 listeZelda = ["-Zelda I\n"
@@ -78,6 +80,7 @@ def max(tab):
 async def on_ready():
     check.start()
     print("J'suis prêt !")
+    
 
 async def getMutedRole(ctx):
     roles = ctx.guild.roles
@@ -146,7 +149,7 @@ async def confirm(ctx):
 async def kick(ctx, user : discord.User, *reason):
     reason = " ".join(reason)
     await ctx.guild.kick(user, reason = reason)
-    embed=discord.Embed(title="**Hylian's Court**", description = f"{user} a été expulsé de Hyrule. Raison : {reason}", color=0xfffef2)
+    embed=discord.Embed(title="**Hylian's Court**", description = f"{user} a été expulsé de Hyrule. Raison : {reason}", color=0xC09866)
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
     await ctx.send(embed=embed)
 
@@ -155,7 +158,7 @@ async def kick(ctx, user : discord.User, *reason):
 async def ban(ctx, user : discord.User, *reason):
     reason = " ".join(reason)
     await ctx.guild.ban(user, reason = reason)
-    embed=discord.Embed(title="**Hylian's Court**", description = f"{user} a été banni de Hyrule. Raison : {reason}", color=0xfffef2)
+    embed=discord.Embed(title="**Hylian's Court**", description = f"{user} a été banni de Hyrule. Raison : {reason}", color=0xC09866)
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
     await ctx.send(embed=embed)
 
@@ -182,7 +185,7 @@ async def mute(ctx, member : discord.Member, *, reason = "Aucune raison n'a ét�
         await ctx.send(f"**{member}** n'a déjà plus le droit à la parole.")
     else:
         await member.add_roles(mutedRole, reason = reason)
-        embed=discord.Embed(title="**Hylian's Court**", description = f"Hylia a décidé arbitrairement que **{member}** n'aurait plus le droit à la parole !", color = 0xfffef2)
+        embed=discord.Embed(title="**Hylian's Court**", description = f"Hylia a décidé arbitrairement que **{member}** n'aurait plus le droit à la parole !", color = 0xC09866)
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
         await ctx.send(embed=embed)
 
@@ -192,7 +195,7 @@ async def unmute(ctx, member : discord.Member, *, reason = "Aucune raison n'a é
     mutedRole = await getMutedRole(ctx)
     if mutedRole in member.roles:
         await member.remove_roles(mutedRole, reason = reason)
-        embed=discord.Embed(title="**Hylian's Court**", description = f"Hylia redonne le droit de parole à **{member}**", color = 0xfffef2)
+        embed=discord.Embed(title="**Hylian's Court**", description = f"Hylia redonne le droit de parole à **{member}**", color = 0xC09866)
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
         await ctx.send(embed=embed)
     else:
@@ -209,13 +212,13 @@ async def tempmute(ctx, member : discord.Member, temps : int, *, reason = "Aucun
             durée = temps * 60
             ###########################
             await member.add_roles(mutedRole, reason = reason)
-            embed=discord.Embed(title="**Hylian's Court**", description = f"Hylia a décidé arbitrairement que **{member}** n'aurait plus le droit à la parole pendant {temps} minutes ! Raison = {reason}", color=0xfffef2)
+            embed=discord.Embed(title="**Hylian's Court**", description = f"Hylia a décidé arbitrairement que **{member}** n'aurait plus le droit à la parole pendant {temps} minutes ! Raison = {reason}", color=0xC09866)
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
             await ctx.send(embed=embed)
             await asyncio.sleep(durée)
             ###########################
             await member.remove_roles(mutedRole, reason = reason)
-            embed=discord.Embed(title="**Hylian's Court**", description = f"Hylia redonne la parole à **{member}**.", color=0xfffef2)
+            embed=discord.Embed(title="**Hylian's Court**", description = f"Hylia redonne la parole à **{member}**.", color=0xC09866)
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
             await ctx.send(embed=embed)
     else:
@@ -223,40 +226,8 @@ async def tempmute(ctx, member : discord.Member, temps : int, *, reason = "Aucun
 
 @bot.command()
 async def zelda(ctx):
-    embed=discord.Embed(title="Jeux Zelda", color=0xfffef2)
-    embed.set_author(name="Hyrule's Folders",icon_url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    valeurs="""-Zelda I
-    -Zelda II, The Adventure of Link
-    -The Legend of Zelda : A Link to the Past
-    -The Legend of Zelda : Link's Awakening (1993)
-    -The Legend of Zelda : Ocarina of Time (1998)
-    -The Legend of Zelda : Majora's Mask (2000)
-    -The Legend of Zelda : Oracle of Seasons (2001)
-    -The Legend of Zelda : Oracle of Ages (2001)
-    -The Legend of Zelda : Four Swords (2002)
-    -The Legend of Zelda : The Wind Waker (2002)
-    -The Legend of Zelda : The Minish Cap (2004)
-    -The Legend of Zelda : Four Swords Adventures (2004)
-    -The Legend of Zelda : Twilight Princess (2006)
-    -The Legend of Zelda : Phantom Hourglass (2007)
-    -The Legend of Zelda : Spirit Tracks (2009)
-    -The Legend of Zelda : Skyward Sword (2011)
-    -The Legend of Zelda : A Link Between Worlds (2013)
-    -The Legend of Zelda : Triforces Heroes (2015)
-    -The Legend of Zelda : Breath of the Wild (2017)
-    -The Legend of Zelda : Sequel of the Wild (20XX)
-    -The Legend of Zelda : Skyward Sword HD (2021)"""
-    embed.add_field(name="Liste des jeux Zelda canon : ", value=valeurs, inline=True)
-    await ctx.send(embed=embed)
-    embed=discord.Embed(title="Timelines", color=0xfffef2)
-    embed.set_author(name="Hyrule's Folders",icon_url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    embed.add_field(name="Tradition divine $ Héros du temps", value="Zelda Skyward Sword\nZelda Minish Cap\nZelda Four Sword\nZelda Ocarina of Time", inline=True)
-    embed.add_field(name="Branche de l'Héros Adulte", value="Zelda Wind Waker\nZelda Phantom Hourglass\nZelda Spirits Tracks", inline=True)
-    embed.add_field(name="Branche de la défaite du Héros", value="Zelda A Link to the Past\nZelda Oracles of Seaons\nZelda Oracles of Ages\nZelda Link's Awaneking\nZelda I\nZelda II", inline=True)
-    embed.add_field(name="Branche de l'Héros Enfant", value="Zelda Majora's Mask\nZelda Twiligt Princess\nZelda Four Swords Adventures\n", inline=True)
-    await ctx.send(embed=embed)
+    await ctx.send(file=discord.File("HYLIA_Zelda_I.png"))
+    await ctx.send(file=discord.File("HYLIA_Zelda_II.png"))
 
 
 @bot.command()
@@ -272,45 +243,44 @@ async def modération(ctx):
 
 @bot.command()
 async def staff(ctx):
-    embed=discord.Embed(title="**Staff du Discord The Legend of Zelda Français**", color=0xfffef2)
-    embed.set_author(name="Hyrule's Folders", icon_url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    embed.add_field(name="**__LEADER__**", value="**•Wolfka**", inline=True)
-    embed.add_field(name="**__MODÉRATEUR__**", value="**•Skyflooze**\n **•Wild**\n**•Nayru**", inline=True)
-    await ctx.send(embed=embed)
-
+    await ctx.send(file=discord.File("HYLIA_Organigramme.png"))
 
 @bot.command()
 async def aide(ctx):
-    embed=discord.Embed(title="**Commandes utile pour les Hyruliens**",color=0xfffef2)
-    embed.set_author(name="Hyrule's Folders", icon_url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    valeurs = """$**zelda** -> Vous renvoie la liste des jeux Zelda
-    $**staff** -> Vous renvoie la liste des personnes du staff
+    embed=discord.Embed(title="**Commandes utile pour les Clients du Café**",color=0xC09866)
+    embed.set_author(name="LonLon's Folders", icon_url="https://cdn.discordapp.com/attachments/609434127258746896/1125337609649008640/HYLIA_V2.jpg")
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/609434127258746896/1125337609649008640/HYLIA_V2.jpg")
+    valeurs = """$**zelda** -> Vous renvoie la liste complète des jeux Zelda
+    $**staff** -> Vous renvoie la liste du staff du Café
     $**grades** -> Vous renvoie la liste des grades par niveaux
+    $**oskour** ou $**aled** -> Appelle un Coffee Shield ou un Coffee Waiter pour vous aider !
+    $**goodmorning** -> Lance un son pour vous souhaiter une bonne matinée !
+    $**jingle** -> Lance le son d'obtention d'un objet !
+    $**bravo** -> Lance le son de résolution d'une énigme !
+    $**doriyah** -> Lance un... DORIYAH !
+    $**marine** -> Lance le magnifique chant de Marine !
+    $**meow** -> meow 🐈
     $**baston @pseudo @pseudo2** -> ... A vous de tester.
     $**quizz** -> Lancer un quizz
     $**helpquizz** -> Aide pour le quizz"""
     embed.add_field(name="**__Commandes Hylia__**", value= valeurs, inline=True)
     embed.add_field(name="**__Commandes Asarim__**", value="!**help** -> Vous renvoie les commandes nécessaire à la compréhension de Asarim", inline=True)
+    embed.add_field(name="**__Commandes Radio Asarim__**", value="$**join** -> Si jamais notre cher Asarim n'est pas présent pour jouer de la musique, utilisez cette commande dans le tchat radio, et il apparaîtra !\n$**play** -> Et si jamais ce bon vieux copain ne veux pas jouer sa musique alors qu'il est bien présent dans le vocal, incitez-le à le faire avec cette commande !", inline=True)
     await ctx.send(embed=embed)
+
+
+@bot.command()
+async def help(ctx):
+    ctx.command = bot.get_command("aide")
+    await bot.invoke(ctx)
+
 
 @bot.command()
 async def grades(ctx):
-    embed=discord.Embed(title="**Spécifications des grades par niveaux**",color=0xfffef2)
-    embed.set_author(name="Hyrule's Folders", icon_url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/772462786013691935/774741037947420702/HYLIA.png")
-    valeurs = """***Niveau 0 à 1*** : `Noix Korogu`
-    ***Niveau 2 à 5*** : `Voyageur Intrépide`
-    ***Niveau 6 à 10*** : `Jeune Ecuyer`
-    ***Niveau 11 à 15*** : `Brave Soldat`
-    ***Niveau 16 à 20*** : `Noble Chevalier`
-    ***Niveau 21 à 25*** : `Garde Royal`
-    ***Niveau 26 à 30*** : `Petit Prodiges`
-    ***Niveau 30*** : `Héros ⚔️`
-     """
-    embed.add_field(name="**Grades:**", value = valeurs, inline=True)
-    await ctx.send(embed=embed)
+    await ctx.send(file=discord.File("images/levels/05.png"))
+    await ctx.send(file=discord.File("images/levels/06.png"))
+    await ctx.send(file=discord.File("images/levels/07.png"))
+    await ctx.message.delete()
 
 @bot.command()
 async def baston(ctx, *args):
@@ -498,7 +468,7 @@ async def quizz(ctx):
             view = LancerQuizz()
             q.setLancer(True)
             q.setQuizzEnCours(True)
-            embed=discord.Embed(title="Le Quizz LonLon Coffee <:lonloncoffee:945743720173670480>", color=0xfffef2)
+            embed=discord.Embed(title="Le Quizz LonLon Coffee <:lonloncoffee:945743720173670480>", color=0xC09866)
             embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="Pour lancer une partie, cliquez sur le bouton en-dessous. On vous souhaite bonne chance !\nPS : Si vous êtes coincé, cliquez sur ❌", inline=True)
             message = await ctx.send(embed=embed)
             msgLancer = await ctx.send(view=view)
@@ -595,10 +565,10 @@ async def lancer(ctx):
                     questionImageTemp = questionImageTemporaire
                     questionImageTemp = enleverImg(questionImageTemp)
                     
-                    embed=discord.Embed(title=questionImageTemp, color=0xfffef2, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
+                    embed=discord.Embed(title=questionImageTemp, color=0xC09866, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
                     message = await ctx.send(embed=embed)
                 else:
-                    embed=discord.Embed(title=q.getQuestions()[alea], color=0xfffef2, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
+                    embed=discord.Embed(title=q.getQuestions()[alea], color=0xC09866, description = f"**{rep}**\n\n<:STX5:945700963803611216> Répondez en cliquant sur les lettres")
                     message = await ctx.send(embed=embed)
             except Exception as e:
                 print(e)
@@ -691,7 +661,7 @@ async def lancer(ctx):
         rep = ""
         for i in range(len(questionsUtilisées)):
             rep = rep + f"**Question {i+1}** : {questionsUtilisées[i]}\n**Réponse** : {q.getBonneReponse()[questionsUtiliséesIndex[i]]}\n" + "\n"
-        embed=discord.Embed(color=0xfffef2)
+        embed=discord.Embed(color=0xC09866)
         '''
         if q.getContientImage() == True:
             repImage = []
@@ -767,19 +737,19 @@ async def classement(ctx):
             for i in range(10):
                 valeur = valeur + (f"**{i+1}** : `{cl.getTabClassement()[i].getUser()}` avec {cl.getTabClassement()[i].getPoints()} points.\n")
             valeur = valeur + (f"\nSi vous n'êtes pas dans le TOP 10, utilisez $place pour connaître votre classement !")
-            embed=discord.Embed(title="**Classement du Quizz `(TOP 10)`**",color=0xfffef2)
+            embed=discord.Embed(title="**Classement du Quizz `(TOP 10)`**",color=0xC09866)
             embed.add_field(name=f"{len(cl.getTabClassement())} joueurs inscrits", value=valeur, inline=True)
             embed.set_thumbnail(url=(serverLogo))
             await ctx.send(embed=embed)
         else: #Sinon si c'est en dessous de 10, alors ça sera top len(classement)
             for i in range(len(cl.getTabClassement())):
                 valeur = valeur + (f"**{i+1}** : `{cl.getTabClassement()[i].getUser()}` avec {cl.getTabClassement()[i].getPoints()} points.\n")
-            embed=discord.Embed(title="**Classement du Quizz**",color=0xfffef2)
+            embed=discord.Embed(title="**Classement du Quizz**",color=0xC09866)
             embed.add_field(name=f"{len(cl.getTabClassement())} joueurs inscrits", value=valeur, inline=True)
             embed.set_thumbnail(url=(serverLogo))
             await ctx.send(embed=embed)
     except:
-        embed=discord.Embed(title="**Classement du Quizz**",color=0xfffef2)
+        embed=discord.Embed(title="**Classement du Quizz**",color=0xC09866)
         embed.add_field(name=f"0 joueur inscrit", value="Aucune personne n'est dans le classement", inline=True)
         embed.set_thumbnail(url=(serverLogo))
         await ctx.send(embed=embed)
@@ -791,7 +761,7 @@ async def place(ctx):
     print(ctx.message.author.name)
     placement, point = cl.getPlaceJoueurClassementEtPoints(ctx.message.author.name) #Pour récupérer classement + points
     pfp = ctx.message.author.avatar #Pour récupérer la pdp
-    embed=discord.Embed(color=0xfffef2)
+    embed=discord.Embed(color=0xC09866)
 
     if placement==1:
         embed.add_field(name="Ton classement", value=f"`{ctx.message.author.name}` tu es {placement}er(e) du classement avec {point} points !", inline=True)
@@ -815,7 +785,7 @@ async def stopquizz(ctx):
 
 @bot.command()
 async def helpquizz(ctx):
-    embed=discord.Embed(color=0xfffef2)
+    embed=discord.Embed(color=0xC09866)
     embed.add_field(name="Commandes pour le fonctionnement du Quizz LonLon Coffee", value="`Pour lancer le quizz` : $quizz\n`Pour commencer le quizz` : $lancer\n`Pour connaître le classement du quizz`: $classement\n`Pour connaître votre place dans le classement` : $place\n`Pour arrêter le système du quizz` (A UTILISER EN CAS DE GROS PROBLEMES, NE PAS UTILISER SINON) : $stopquizz", inline=True)
     await ctx.send(embed=embed)
 
@@ -872,95 +842,113 @@ async def setclassement(ctx):
 
 ######################################################################Musique
 
-musics = {}
-ytdl = youtube_dl.YoutubeDL()
+'''
+audio_directory = "musiques"
+audio_files = []
+join_activated = False
 
-class Video:
-    def __init__(self, link):
-        video = ytdl.extract_info(link, download=False)
-        video_format = video["formats"][0]
-        self.url = video["webpage_url"]
-        self.stream_url = video_format["url"]
+async def update_audio_list():
+    global audio_files
+    audio_files = [file for file in os.listdir(audio_directory) if file.endswith(".mp3")]
+
+async def shuffle_audio_list():
+    await update_audio_list()
+    random.shuffle(audio_files)
 
 @bot.command()
+async def join(ctx):
+    try:
+        channel = ctx.message.author.voice.channel
+        join_activated = True
+        await channel.connect()
+    except Exception as e:
+        print(e)
+
+@bot.command()
+@commands.has_permissions(ban_members = True)
 async def leave(ctx):
-    client = ctx.guild.voice_client
-    await client.disconnect()
-    musics[ctx.guild] = []
-
-@bot.command()
-async def resume(ctx):
-    client = ctx.guild.voice_client
-    if client.is_paused():
-        client.resume()
-
-
-@bot.command()
-async def pause(ctx):
-    client = ctx.guild.voice_client
-    if not client.is_paused():
-        client.pause()
-
-
-@bot.command()
-async def skip(ctx):
-    client = ctx.guild.voice_client
-    client.stop()
-
-
-def play_song(client, queue, song):
-    source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(executable='C:/ffmpeg/bin/ffmpeg.exe', source=song.stream_url
-        , before_options = "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5"))
-
-    def next(_):
-        if len(queue) > 0:
-            new_song = queue[0]
-            del queue[0]
-            play_song(client, queue, new_song)
-        else:
-            asyncio.run_coroutine_threadsafe(client.disconnect(), bot.loop)
-
-    client.play(source, after=next)
-
-@bot.command()
-@commands.has_permissions(kick_members = True)
-async def add(ctx, link):
-    Music.getInstance().add(link)
+    if ctx.voice_client:
+        await ctx.voice_client.disconnect()
 
 @bot.command()
 async def play(ctx):
     try:
-        client = ctx.guild.voice_client
-        Music.getInstance().load()
-        
-        if client and client.channel:
-            for m in Music.getInstance().links:
-                video = Video(m)
-                musics[ctx.guild].append(video)
-        else:
-            for m in Music.getInstance().links:
-                channel = ctx.author.voice.channel
-                video = Video(m)
-                musics[ctx.guild] = []
-                client = await channel.connect()
-                play_song(client, musics[ctx.guild], video)
+        if not ctx.voice_client:
+            await ctx.send("Je ne suis pas connecté à un canal vocal. Utilisez la commande $join pour que je rejoigne un canal.")
+            return
+
+        # Vérifier si la liste des fichiers audio n'est pas vide
+        if not audio_files:
+            await ctx.send("La liste des fichiers audio est vide.")
+            return
+
+        while True:
+            for i in range(len(audio_files)):
+                audio_file = os.path.join(audio_directory, audio_files[i])
+
+                # Vérifier si le fichier existe avant de le lire
+                if not os.path.isfile(audio_file):
+                    await ctx.send("Le fichier audio spécifié n'existe pas.")
+                    return
+
+                # Lire le fichier audio avec discord.FFmpegPCMAudio
+                ctx.voice_client.play(discord.FFmpegPCMAudio(executable='ffmpeg/bin/ffmpeg.exe', source=audio_file))
+
+                await ctx.send(f"Je joue maintenant : {audio_files[i]}")
+
+                # Attendre que la lecture soit terminée avant de passer au fichier suivant
+                while ctx.voice_client.is_playing():
+                    await asyncio.sleep(1)
+
     except Exception as e:
         print(e)
 
-'''
-@bot.command(pass_context = True)
-async def join(ctx):
-    try:
-        channel = ctx.message.author.voice.channel
-        voice = await channel.connect()
-        player = discord.FFmpegPCMAudio(executable='C:/ffmpeg/bin/ffmpeg.exe', source='test.mp3')
-        print(player)
-        voice.play(player)
-    except Exception as e:
-        print(e)
-'''
+@bot.command()
+@commands.has_permissions(ban_members = True)
+async def shuffle(ctx):
+    await shuffle_audio_list()
+    await ctx.send("Shuffle effectué avec succès sur la liste des fichiers audio.")
 
+@bot.command()
+@commands.has_permissions(ban_members = True)
+async def list(ctx):
+    if audio_files:
+        file_list = "\n".join(audio_files)
+        await ctx.send(f"Liste des fichiers audio disponibles :\n```\n{file_list}\n```")
+    else:
+        await ctx.send("Aucun fichier audio n'est disponible.")
+'''
+#####################################################################Sounds
 
+@bot.command()
+async def jingle(ctx):
+    await ctx.send(file=discord.File("sons/JINGLE.wav"))
+    await ctx.message.delete()
+
+@bot.command()
+async def bravo(ctx):
+    await ctx.send(file=discord.File("sons/BRAVO.wav"))
+    await ctx.message.delete()
+
+@bot.command()
+async def goodmorning(ctx):
+    await ctx.send(file=discord.File("sons/GOODMORNING.mp3"))
+    await ctx.message.delete()
+
+@bot.command()
+async def doriyah(ctx):
+    await ctx.send(file=discord.File("sons/DORIYAH.mp3"))
+    await ctx.message.delete()
+
+@bot.command()
+async def marine(ctx):
+    await ctx.send(file=discord.File("sons/MARINE.mp3"))
+    await ctx.message.delete()
+
+@bot.command()
+async def meow(ctx):
+    await ctx.send(file=discord.File("sons/MEOW.wav"))
+    await ctx.message.delete()
 
 #####################################################################Ping
 
@@ -1036,7 +1024,6 @@ async def on_message(message):
         if(str(message.content) in roles):
             await message.delete()
         await bot.process_commands(message)
-
 
 @bot.command()
 async def tloz(ctx):
@@ -1142,6 +1129,31 @@ async def aoc(ctx):
 async def coh(ctx):
     role = get(ctx.guild.roles, id=928406339804360764)
     await ctx.send(f"{role.mention}")
+
+
+@bot.command()
+async def modo(ctx):
+    role = get(ctx.guild.roles, id=772462882859778068)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+@commands.has_role('𝐋𝐚 𝐑𝐞𝐝𝐚𝐜𝐭𝐢𝐨𝐧')
+async def post(ctx):
+    role = get(ctx.guild.roles, id=946460804629286932)
+    await ctx.send(f"{role.mention}")
+
+@bot.command()
+async def aled(ctx):
+    role1 = get(ctx.guild.roles, id=772462882859778068)
+    role2 = get(ctx.guild.roles, id=1102946605268746331)
+    await ctx.send(f"{role1.mention} {role2.mention}")
+
+@bot.command()
+async def oskour(ctx):
+    role1 = get(ctx.guild.roles, id=772462882859778068)
+    role2 = get(ctx.guild.roles, id=1102946605268746331)
+    await ctx.send(f"{role1.mention} {role2.mention}")
+
 
 '''
 zzz
