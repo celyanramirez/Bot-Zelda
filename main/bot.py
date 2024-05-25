@@ -101,11 +101,50 @@ def max(tab):
             maximum=i
     return maximum
 
+ROLE_NAME = "Prodige du Savoir"
+
+@tasks.loop(minutes=1)
+async def check_leaderboard():
+    guild = bot.get_guild(772462714491633685)
+    if not guild:
+        print("Le bot n'est connecté à aucun serveur.")
+        return
+
+    # Obtenir le rôle Top 1 Guess
+    role = discord.utils.get(guild.roles, name=ROLE_NAME)
+    if not role:
+        # Crée le rôle si il n'existe pas
+        role = await guild.create_role(name=ROLE_NAME, reason="Création du rôle pour le top 1 du classement Guess")
+
+    # Obtenir le top 1 du classement
+    cursor.execute('SELECT user_id FROM leaderboard ORDER BY points DESC LIMIT 1')
+    result = cursor.fetchone()
+    if not result:
+        print("Aucun joueur trouvé dans le classement.")
+        return
+
+    top1_user_id = result[0]
+    top1_member = guild.get_member(int(top1_user_id))
+
+    if not top1_member:
+        print(f"Le joueur avec l'ID {top1_user_id} n'est pas trouvé dans le serveur.")
+        return
+
+    # Retirer le rôle Top 1 de tous les membres
+    for member in guild.members:
+        if role in member.roles and member != top1_member:
+            await member.remove_roles(role)
+
+    # Donner le rôle Top 1 au top 1 actuel
+    if role not in top1_member.roles:
+        await top1_member.add_roles(role)
+        print(f"{top1_member.name} a été assigné le rôle {ROLE_NAME}.")
 
 @bot.event
 async def on_ready():
     check.start()
     createTables()
+    check_leaderboard.start()
     print("J'suis prêt !")
     
 
@@ -930,9 +969,9 @@ class ClassementSelect(discord.ui.Select):
 
     async def show_guess_classement(self, interaction):
         top_10 = get_guess_top_10()
+        serverLogo = interaction.guild.icon.url
         if top_10:
             valeur = ""
-            serverLogo = interaction.guild.icon.url
             for i, (username, points) in enumerate(top_10, start=1):
                 valeur = valeur + f"**{i}** : `{username}` avec {points} points.\n"
             embed = discord.Embed(title="**Classement du Guess `(TOP 10)`**", color=0xC09866)
