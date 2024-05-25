@@ -101,7 +101,7 @@ def max(tab):
             maximum=i
     return maximum
 
-ROLE_NAME = "Prodige du Savoir"
+ROLE_NAME = "PRODIGE DU SAVOIR"
 
 @tasks.loop(minutes=1)
 async def check_leaderboard():
@@ -690,6 +690,7 @@ async def lancer(ctx):
             vieuxPoints.append(i.getPoints())
         print(f"Vieux : {vieuxPoints}")
         for w in range(5): #Nombre de questions
+            q.setDeuxNombres(False)
             q.setContientImage(False)
             #################################################POSE LA QUESTION
             alea = random.randint(0,len(q.getQuestions())-1)
