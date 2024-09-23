@@ -103,7 +103,7 @@ def max(tab):
 
 ROLE_NAME = "PRODIGE DU SAVOIR"
 
-@tasks.loop(minutes=1)
+@tasks.loop(minutes=2)
 async def check_leaderboard():
     guild = bot.get_guild(772462714491633685)
     if not guild:
@@ -178,8 +178,9 @@ class PointsView(discord.ui.View):
         select = discord.ui.Select(
             placeholder="Choisir un nombre de points",
             options=[
-                discord.SelectOption(label="50 points", value="50"),
                 discord.SelectOption(label="100 points", value="100"),
+                discord.SelectOption(label="50 points", value="50"),
+                discord.SelectOption(label="25 points", value="25"),
             ]
         )
         select.callback = self.set_points_and_select_user
@@ -193,8 +194,9 @@ class PointsView(discord.ui.View):
         select = discord.ui.Select(
             placeholder="Choisir un nombre de points",
             options=[
-                discord.SelectOption(label="50 points", value="50"),
                 discord.SelectOption(label="100 points", value="100"),
+                discord.SelectOption(label="50 points", value="50"),
+                discord.SelectOption(label="25 points", value="25"),
             ]
         )
         select.callback = self.set_points_and_select_user
@@ -507,122 +509,122 @@ async def anniv():
     jour = today.day
     channel = bot.get_channel(772462715004387350)
     if jour == 21 and mois == 2:
-        await channel.send("Aujourd'hui, c'est l'anniversaire du tout premier **The Legend of Zelda** <:loz:929350785903493130> ! C'est pas rien ! On peut même dire que c'est l'anniversaire la saga ! Alors on dit tous :\n 🎂 🎉 **BON ANNIVERSAIRE THE LEGEND OF ZELDA** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire du tout premier **The Legend of Zelda** <:loz:1121786414636482580> ! C'est pas rien ! On peut même dire que c'est l'anniversaire la saga ! Alors on dit tous :\n 🎂 🎉 **BON ANNIVERSAIRE THE LEGEND OF ZELDA** 🎉 🎂")
     if jour == 15 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire du tout premier **The Legend of Zelda** <:loz:929350785903493130>, en Europe ! En réalité, il est arrivé chez nous (en France) bien plus tard, mais chut. \nOn lui souhaite un 🎂 🎉 **BON ANNIVERSAIRE** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire du tout premier **The Legend of Zelda** <:loz:1121786414636482580>, en Europe ! En réalité, il est arrivé chez nous (en France) bien plus tard, mais chut. \nOn lui souhaite un 🎂 🎉 **BON ANNIVERSAIRE** 🎉 🎂")
    
     if jour == 14 and mois == 2:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Adventure of Link** <:aol:929350843294171166> !\nQu'on l'aime ou non, il mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Adventure of Link** <:aol:1121788774188335107> !\nQu'on l'aime ou non, il mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 26 and mois == 9:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Adventure of Link** <:aol:929350843294171166> chez nous, en Europe !\nQu'on l'aime ou non, il mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Adventure of Link** <:aol:1121788774188335107> chez nous, en Europe !\nQu'on l'aime ou non, il mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
     
     if jour == 21 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : A Link to the Past** <:ALTTP:929350867226857492> !\nUn des Zelda les plus appréciés, et qui aura sûrement été le premier pour les plus anciens d'entre-nous !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : A Link to the Past** <:alttp:1121788800838930512> !\nUn des Zelda les plus appréciés, et qui aura sûrement été le premier pour les plus anciens d'entre-nous !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 24 and mois == 9:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : A Link to the Past** <:ALTTP:929350867226857492> chez nous, en Europe !\nQu'avez-vous pensé de ce Zelda, qui est probablement un des plus appréciés de la saga ?\nEt n'oubliez pas de lui souhaiter un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : A Link to the Past** <:alttp:1121788800838930512> chez nous, en Europe !\nQu'avez-vous pensé de ce Zelda, qui est probablement un des plus appréciés de la saga ?\nEt n'oubliez pas de lui souhaiter un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
    
     if jour == 6 and mois == 6:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening** <:LsA:929350885551783948> !\nUn Zelda à très spécial, avec son monde si particulier et ses références à d'autres univers de jeux-vidéo comme... Mario !\nBref, souhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening** <:lsa:1121788870741217301> !\nUn Zelda à très spécial, avec son monde si particulier et ses références à d'autres univers de jeux-vidéo comme... Mario !\nBref, souhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 1 and mois == 12:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening** <:LsA:929350885551783948> chez nous, en Europe !\nUn Zelda à très spécial, avec son monde si particulier et ses références à d'autres univers de jeux-vidéo comme... Mario !\nBref, souhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening** <:lsa:1121788870741217301> chez nous, en Europe !\nUn Zelda à très spécial, avec son monde si particulier et ses références à d'autres univers de jeux-vidéo comme... Mario !\nBref, souhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 20 and mois == 9:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening HD** <:LsA:929350885551783948> !\nUn superbe remake de l'opus GameBoy ! Qu'on aime ou non son style artistique, il reste très fidèle au jeu original !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Link's Awakening HD** <:lsa:1121788870741217301> !\nUn superbe remake de l'opus GameBoy ! Qu'on aime ou non son style artistique, il reste très fidèle au jeu original !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
 
     if jour== 21 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Ocarina of Time** <:OOT:929350904518410280> !\nLe tout premier The Legend of Zelda en 3D ! Il est même considéré par beaucoup comme le meilleur jeu de tous les temps !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Ocarina of Time** <:oot:1121788885861675008> !\nLe tout premier The Legend of Zelda en 3D ! Il est même considéré par beaucoup comme le meilleur jeu de tous les temps !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 11 and mois == 12:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Ocarina of Time** <:OOT:929350904518410280> chez nous, en Europe ! Vous avez pu y jouer à sa sortie ?\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Ocarina of Time** <:oot:1121788885861675008> chez nous, en Europe ! Vous avez pu y jouer à sa sortie ?\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 27 and mois == 4:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Majora's Mask** <:MsM:929350924374261800> !\nProbablement le Zelda le plus singulier de la franchise !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Majora's Mask** <:msm:1121788914525548615> !\nProbablement le Zelda le plus singulier de la franchise !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 17 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Majora's Mask** <:MsM:929350924374261800> chez nous, en Europe !\nUn Zelda qui en aura surpris plus d'un par son ambiance si singulière !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Majora's Mask** <:msm:1121788914525548615> chez nous, en Europe !\nUn Zelda qui en aura surpris plus d'un par son ambiance si singulière !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 13 and mois == 2:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Majora's Mask 3D** <:MsM:929350924374261800> !\nUn superbe remake de l'opus N64 qui lui rend parfaitement honneur !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Majora's Mask 3D** <:msm:1121788914525548615> !\nUn superbe remake de l'opus N64 qui lui rend parfaitement honneur !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 27 and mois == 2:
-        await channel.send("Aujourd'hui, ce n'est pas l'anniversaire d'un jeu Zelda... Non, c'est l'anniversaire de 2 jeux Zelda ! **Oracles of Ages <:OOA:929350944464973884> et Oracles of Seasons <:OOS:929350969563684874>** !\nOn leur souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, ce n'est pas l'anniversaire d'un jeu Zelda... Non, c'est l'anniversaire de 2 jeux Zelda ! **Oracles of Ages <:ooa:1121788934121341042> et Oracles of Seasons <:oos:1121788947345965187>** !\nOn leur souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 5 and mois == 10:
-         await channel.send("Aujourd'hui, ce n'est pas l'anniversaire d'un jeu Zelda... Non, c'est l'anniversaire de 2 jeux Zelda ! **Oracles of Ages <:OOA:929350944464973884> et Oracles of Seasons <:OOS:929350969563684874>**, qui sont arrivés ce jour-ci dans nos belles contrées !\nOn leur souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+         await channel.send("Aujourd'hui, ce n'est pas l'anniversaire d'un jeu Zelda... Non, c'est l'anniversaire de 2 jeux Zelda ! **Oracles of Ages <:ooa:1121788934121341042> et Oracles of Seasons <:oos:1121788947345965187>**, qui sont arrivés ce jour-ci dans nos belles contrées !\nOn leur souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 2 and mois == 12:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Four Swords** <:FS:929351038278987848> !\nLe tout premier jeu Zelda en multijoueur !\nIl mérite bien qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Four Swords** <:fs:1121789007467135047> !\nLe tout premier jeu Zelda en multijoueur !\nIl mérite bien qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 28 and mois == 4:
-         await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Four Swords** <:FS:929351038278987848> chez nous, en Europe !\nLe tout premier jeu Zelda en multijoueur !\nIl mérite bien qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+         await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Four Swords** <:fs:1121789007467135047> chez nous, en Europe !\nLe tout premier jeu Zelda en multijoueur !\nIl mérite bien qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 13 and mois == 12:
-        await channel.send("Aujourd'hui, c'est l'annivesaire de **The Legend of Zelda : The Wind Waker** <:TWW:929350993227956234> !\nUn jeu qui en aura conquis plus d'un avec son open-world marin !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'annivesaire de **The Legend of Zelda : The Wind Waker** <:tww:1121788965922549760> !\nUn jeu qui en aura conquis plus d'un avec son open-world marin !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 3 and mois == 5:
-        await channel.send("Aujourd'hui, c'est l'annivesaire de **The Legend of Zelda : The Wind Waker** <:TWW:929350993227956234> chez nous, en Europe !\nQui ici a été conquis par ce jeu et sa magnifique mer ?\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'annivesaire de **The Legend of Zelda : The Wind Waker** <:tww:1121788965922549760> chez nous, en Europe !\nQui ici a été conquis par ce jeu et sa magnifique mer ?\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 20 and mois == 9:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Wind Waker HD** <:TWW:929350993227956234> !\nUn superbe remaster qui aura rendu le jeu encore plus beau visuellement, mais aussi plus agréable avec la voile rapide !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Wind Waker HD** <:tww:1121788965922549760> !\nUn superbe remaster qui aura rendu le jeu encore plus beau visuellement, mais aussi plus agréable avec la voile rapide !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 4 and mois == 10:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Wind Waker HD** <:TWW:929350993227956234> chez nous, en Europe !\nUn superbe remaster qui aura rendu le jeu encore plus beau visuellement, mais aussi plus agréable avec la voile rapide !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Wind Waker HD** <:tww:1121788965922549760> chez nous, en Europe !\nUn superbe remaster qui aura rendu le jeu encore plus beau visuellement, mais aussi plus agréable avec la voile rapide !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 18 and mois == 3:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Four Swords Adventure** <:FSA:929351056612274206> !\nLe deuxième volet multijoueur de la saga, sorti sur Nintendo GameCube !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Four Swords Adventure** <:fsa:1121789028719673454> !\nLe deuxième volet multijoueur de la saga, sorti sur Nintendo GameCube !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 7 and mois == 1:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Four Swords Adventure** <:FSA:929351056612274206> chez nous, en Europe !\nLe deuxième volet multijoueur de la saga, sorti sur Nintendo GameCube !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Four Swords Adventure** <:fsa:1121789028719673454> chez nous, en Europe !\nLe deuxième volet multijoueur de la saga, sorti sur Nintendo GameCube !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 4 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Minish Cap** <:TMC:929351013339652176> !\nLe fameux épisode sur Game Boy Advance, où Link est accompagné d'un bonnet... vivant ! D'ailleurs, on attend toujours le remake Nintendo !\nBref, souhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Minish Cap** <:tmc:1121788983907725444> !\nLe fameux épisode sur Game Boy Advance, où Link est accompagné d'un bonnet... vivant ! D'ailleurs, on attend toujours le remake Nintendo !\nBref, souhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 12 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Minish Cap** <:TMC:929351013339652176> mais cette fois-ci, chez nous, en Europe !\nSouhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : The Minish Cap** <:tmc:1121788983907725444> mais cette fois-ci, chez nous, en Europe !\nSouhaitez-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 19 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Twiligth Princess** <:TP:929351077755756565> !\nPeut-être l'épisode avec lequel vous avez découvert la licence Zelda ! C'est en tout cas un épisode très apprécié !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Twiligth Princess** <:tp:1121789061779169370> !\nPeut-être l'épisode avec lequel vous avez découvert la licence Zelda ! C'est en tout cas un épisode très apprécié !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 8 and mois == 12:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Twiligth Princess** <:TP:929351077755756565> chez nous, en Europe !\nQu'avez-vous pensé de cet opus et de son monde unique : le Crépuscule ? \nQuelle que soit votre réponse, il mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Twiligth Princess** <:tp:1121789061779169370> chez nous, en Europe !\nQu'avez-vous pensé de cet opus et de son monde unique : le Crépuscule ? \nQuelle que soit votre réponse, il mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 4 and mois == 3:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Twiligth Princess HD** <:TP:929351077755756565> !\nUn remaster très sympa qui embelli le jeu pour le rendre au goût du jour !\nSouhaitons-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Twiligth Princess HD** <:tp:1121789061779169370> !\nUn remaster très sympa qui embelli le jeu pour le rendre au goût du jour !\nSouhaitons-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 10 and mois == 3:
-        await channel.send("Aujourd'hui, c'est encore l'anniversaire de **The Legend of Zelda : Twiligth Princess HD** <:TP:929351077755756565>, mais cette fois-ci chez nous, en Europe !\nSouhaitons-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est encore l'anniversaire de **The Legend of Zelda : Twiligth Princess HD** <:tp:1121789061779169370>, mais cette fois-ci chez nous, en Europe !\nSouhaitons-lui un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 23 and mois == 6:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Phantom Hourglass** <:PH:929351100543430727> !\nLe premier épisode DS, qui fait suite directe à The Wind Waker !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Phantom Hourglass** <:ph:1121789085116272762> !\nLe premier épisode DS, qui fait suite directe à The Wind Waker !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 19 and mois == 10:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Phantom Hourglass** <:PH:929351100543430727> chez nous, en Europe !\nLe premier épisode DS, qui fait suite directe à The Wind Waker !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Phantom Hourglass** <:ph:1121789085116272762> chez nous, en Europe !\nLe premier épisode DS, qui fait suite directe à The Wind Waker !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 7 and mois == 12:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Spirit Tracks** <:ST:929351118071402506> !\nLe deuxième épisode sur DS, et la suite à Phantom Hourglass !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Spirit Tracks** <:st:1121789102208057395> !\nLe deuxième épisode sur DS, et la suite à Phantom Hourglass !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 11 and mois == 12:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Spirit Tracks** <:ST:929351118071402506> chez nous, en Europe !\nJe pense que vous êtes un certains nombre à l'avoir reçu pour Noël au vu de la date, non ? 🤭\nEn cette période de fête, on n'oublie pas de lui souhaiter un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Spirit Tracks** <:st:1121789102208057395> chez nous, en Europe !\nJe pense que vous êtes un certains nombre à l'avoir reçu pour Noël au vu de la date, non ? 🤭\nEn cette période de fête, on n'oublie pas de lui souhaiter un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 18 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Skyward Sword** <:SS:946480161279336488> ! \nUn épisode au gameplay très spécial, et qui est surtout le tout début de la chronologie The Legend of Zelda, dont il est d'ailleurs à l'origine !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Skyward Sword** <:ss:1121789139390582876> ! \nUn épisode au gameplay très spécial, et qui est surtout le tout début de la chronologie The Legend of Zelda, dont il est d'ailleurs à l'origine !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 16 and mois == 8:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Skyward Sword HD** <:SS:946480161279336488> !\nUn portage qui corrigera les principaux problèmes de gameplay à cause de la wiimote, grâce aux joycons !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Skyward Sword HD** <:ss:1121789139390582876> !\nUn portage qui corrigera les principaux problèmes de gameplay à cause de la wiimote, grâce aux joycons !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 22 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : A Link Between Worlds** <:ALBW:929351156847771659> !\nLE Zelda solo de la 3DS, qui reprend la même géographie de la map de A Link to the Past !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : A Link Between Worlds** <:albw:1121789190179405975> !\nLE Zelda solo de la 3DS, qui reprend la même géographie de la map de A Link to the Past !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     
     if jour == 22 and mois == 10:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : TriForce Heroes** <:TFH:929351219145752616> !\nLe Zelda multijoueur le plus récent de la franchise, où on pouvait jouer jusqu'à 3 Link dans la même carte ! Un jeu au potentiel de fun très sous-estimé.\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : TriForce Heroes** <:tfh:1121789215919845386> !\nLe Zelda multijoueur le plus récent de la franchise, où on pouvait jouer jusqu'à 3 Link dans la même carte ! Un jeu au potentiel de fun très sous-estimé.\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 23 and mois == 10:
-        await channel.send("Aujourd'hui, c'est encore l'anniversaire de **The Legend of Zelda : TriForce Heroes** <:TFH:929351219145752616>, mais cette fois-ci, chez nous, en Europe !\nIl mérite qu'on lui (re)souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est encore l'anniversaire de **The Legend of Zelda : TriForce Heroes** <:tfh:1121789215919845386>, mais cette fois-ci, chez nous, en Europe !\nIl mérite qu'on lui (re)souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 3 and mois == 3:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Breath of The Wild** <:BOTW:929351233595133983> !\nLe Zelda qui aura totalement cassé les codes que la saga avait adopté depuis A Link to the Past, et également le jeu qui aura mit l'exploration au premier plan !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Breath of The Wild** <:botw:1121789234731307020> !\nLe Zelda qui aura totalement cassé les codes que la saga avait adopté depuis A Link to the Past, et également le jeu qui aura mit l'exploration au premier plan !\nIl mérite qu'on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 14 and mois == 8:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **Hyrule Warriors** <:HW:929351199940038656> !\nLe premier spin-off hack'n'slash de la série ! Un jeu également rempli de fanservice !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **Hyrule Warriors** <:hw:1121789291413123214> !\nLe premier spin-off hack'n'slash de la série ! Un jeu également rempli de fanservice !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     if jour == 19 and mois == 9:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **Hyrule Warriors** <:HW:929351199940038656> chez nous, en Europe !\nQu'avez-vous pensé de ce spin-off de la saga ?\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **Hyrule Warriors** <:hw:1121789291413123214> chez nous, en Europe !\nQu'avez-vous pensé de ce spin-off de la saga ?\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 13 and mois == 6:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **Cadence of Hyrule** <:COH:929351274019819520> !\nUn spin-off Zelda très sympa et basé sur le rythme !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **Cadence of Hyrule** <:coh:1121789338615824454> !\nUn spin-off Zelda très sympa et basé sur le rythme !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 20 and mois == 11:
-        await channel.send("Aujourd'hui, c'est l'anniversaire de **Hyrule Warriors : Age of Calamity** <:AOC:929351254860251137> !\nUn Hyrule Warriors canon à la série Zelda qui se passe 100 ans avant les événements de Breath of the Wild !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
+        await channel.send("Aujourd'hui, c'est l'anniversaire de **Hyrule Warriors : Age of Calamity** <:aoc:1121789303719198781> !\nUn Hyrule Warriors canon à la série Zelda qui se passe 100 ans avant les événements de Breath of the Wild !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂")
     
     if jour == 12 and mois == 5:
-        await channel.send("@everyone\nAujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Tears of the Kingdom !**\nLa suite directe de la dernière révolution de la saga, et le dernier Zelda en date ! Qu'en avez-vous pensé ?!\nQuoiqu'il en soit, on lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
+        await channel.send("@everyone\nAujourd'hui, c'est l'anniversaire de **The Legend of Zelda : Tears of the Kingdom <:totk:1121789258273935403> !**\nLa suite directe de la dernière révolution de la saga, et le dernier Zelda 3D en date !\nOn lui souhaite un 🎂 🎉 **JOYEUX ANNIVERSAIRE !** 🎉 🎂 ")
 
 
 ############################################################QUIZZ#######################################################################
@@ -653,7 +655,7 @@ async def quizz(ctx):
             view = LancerQuizz()
             q.setLancer(True)
             q.setQuizzEnCours(True)
-            embed=discord.Embed(title="Le Quizz LonLon Coffee <:lonloncoffee:945743720173670480>", color=0xC09866)
+            embed=discord.Embed(title="Le Quizz LonLon Coffee <:lonloncoffee:1139562304841711666>", color=0xC09866)
             embed.add_field(name="🟢 Questions faciles\n🟠 Questions moyennes\n🔴 Questions difficiles", value="Pour lancer une partie, cliquez sur le bouton en-dessous. On vous souhaite bonne chance !\nPS : Si vous êtes coincé, cliquez sur ❌", inline=True)
             message = await ctx.send(embed=embed)
             msgLancer = await ctx.send(view=view)
