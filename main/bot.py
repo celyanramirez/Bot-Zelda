@@ -276,6 +276,48 @@ class SelectUserModal(discord.ui.Modal):
     def get_user_id(self):
         return self.user_id
 
+@bot.command()
+@commands.has_permissions(ban_members=True)
+async def guessadd(ctx, user: discord.Member, points: int):
+    # Vérifier si l'utilisateur existe déjà dans le classement
+    cursor.execute('SELECT points FROM leaderboard WHERE user_id = ?', (str(user.id),))
+    result = cursor.fetchone()
+
+    # Ajouter l'utilisateur s'il n'est pas déjà dans le classement
+    if result is None:
+        cursor.execute('INSERT INTO leaderboard (user_id, username, points) VALUES (?, ?, ?)', (str(user.id), user.name, points))
+    else:
+        cursor.execute('UPDATE leaderboard SET points = points + ? WHERE user_id = ?', (points, str(user.id)))
+
+    conn.commit()
+
+    # Confirmation du succès de l'ajout
+    await ctx.send(f"{points} points ajoutés à {user.name} pour le classement GUESS!")
+
+@bot.command()
+@commands.has_permissions(ban_members=True)
+async def guessremove(ctx, user: discord.Member, points: int):
+    # Vérifier si l'utilisateur existe déjà dans le classement
+    cursor.execute('SELECT points FROM leaderboard WHERE user_id = ?', (str(user.id),))
+    result = cursor.fetchone()
+    if result is None:
+        await ctx.send(f"L'utilisateur {user.name} n'a pas de points dans le classement GUESS.")
+        return
+
+    current_points = result[0]
+
+    # Vérification des points pour éviter un score négatif
+    if current_points - points < 0:
+        await ctx.send(f"{user.name} n'a pas assez de points pour cette déduction.")
+        return
+
+    # Retirer les points
+    cursor.execute('UPDATE leaderboard SET points = points - ? WHERE user_id = ?', (points, str(user.id)))
+    conn.commit()
+
+    # Confirmation du succès de la suppression
+    await ctx.send(f"{points} points retirés à {user.name} pour le classement GUESS!")
+
    
 @bot.command()
 @commands.has_permissions(ban_members = True)
